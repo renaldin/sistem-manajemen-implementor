@@ -67,3 +67,13 @@
             })
         </script>
     <?php } ?>
+    <?php if (session()->getFlashdata('info')) { ?>
+        <script>
+            Swal.fire({
+                icon: 'info',
+                title: 'Maaf...',
+                text: '<?= session()->getFlashdata('info') ?>',
+                // footer: "<a href='<?= base_url('forget') ?>'>Lupa Password?</a>"
+            })
+        </script>
+    <?php } ?>

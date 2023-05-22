@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
         <h1>Manage Work Position</h1>

@@ -22,6 +22,9 @@ class Leader extends BaseController
 
         $data = [
             'title' => 'Dashboard',
+            'count_rumahsakit' => $this->ModelLeader->countRumahSakit(),
+            'count_implementor' => $this->ModelLeader->countImplementor(),
+            'count_employe' => $this->ModelLeader->countEmploye(),
             'isi'   => 'leader/v_dashboard'
         ];
 
@@ -72,9 +75,30 @@ class Leader extends BaseController
         $ps_hrd = $this->request->getPost('public_speaking');
         $tj_hrd = $this->request->getPost('tanya_jawab');
         $ns_leader = $this->request->getPost('soal');
+        // hitung jumlah nilai
+        $hitung = $ps_leader + $tj_leader + $ns_leader + $ps_hrd + $tj_hrd + $ns_leader;
+        $hasil = 'Tidak Diterima';
+        if ($hitung >= 10) {
+            $hasil = 'Diterima';
+        }
+
+        // update status
+        $status = [
+            'id_user' => $id,
+            'status' => $hasil
+        ];
+        $this->ModelLeader->updateStatusEmploye($status);
+
+        // get email employe
+        $getEmploye = $this->ModelLeader->getEmployeById($id);
         $data = [
             'title' => 'Hasil Employe Assesment',
             'data'  => $this->ModelLeader->getAll(),
+            'hasil' => [
+                'nilai' => $hitung,
+                'status' => $hasil,
+                'employe' => $getEmploye
+            ],
             'isi'   => 'leader/manage_employe/v_hasil_nilai'
         ];
 
@@ -188,6 +212,12 @@ class Leader extends BaseController
 
     public function tambah_implementor_rs($id_rumah_sakit)
     {
+        if ($this->ModelLeader->cekImplementorInRumahSakit($id_rumah_sakit)) {
+            // jika rumah sakit sudah ada implementor, redirect back
+            session()->setFlashdata('info', "Implementor sudah ada!.");
+            return redirect()->back();
+        }
+
         if ($this->request->getPost()) {
             $data = [
                 'title' => 'Tambah Implementor Rumah Sakit',
@@ -231,12 +261,10 @@ class Leader extends BaseController
                 'tanggal_selesai'   => $this->request->getPost('tanggal_selesai2'),
             ],
         ];
-        // echo $data
-        // echo ($this->request->getPost('email_user1'));
-        // dd($this->request->getPost('email_user1'));
 
-        // insert implementor
+        // insert to implementor dan update status user menjadi implementor
         foreach ($data as $value) {
+            $this->ModelLeader->db->table('user')->where('id_user', $value['id_user'])->update(['status' => 'Implementor']);
             $this->ModelLeader->insertImpelementor($value);
         }
         session()->setFlashdata('pesan', "Implementor Berhasil ditambahkan!.");
@@ -277,10 +305,75 @@ class Leader extends BaseController
             ],
         ];
         if ($this->validate($validasi)) {
+            $data = [
+                'nama_user' => $this->request->getPost('nama_user'),
+                'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
+                'email' => $this->request->getPost('email'),
+                'password' => $this->request->getPost('password'),
+                'role' => 'Karyawan',
+            ];
+            $this->ModelLeader->db->table('user')->insert($data);
+            session()->setFlashdata('pesan', "Data Berhasil Tambah!.");
+            return redirect()->to(base_url('m_employe_assesment'));
         } else {
             // jika tidak valid
             session()->setFlashdata('errors', \config\Services::validation()->getErrors());
             return redirect()->to(base_url('m_employe_assesment'))->withInput();
         }
+    }
+
+    // fungsi kirim email menyusul
+    public function kirim_email($email)
+    {
+        // $email = \Config\Services::email();
+
+        // $fromEmail = 'info.himmipolsub@gmail.com';
+        // $email->setFrom($fromEmail);
+        // $emailUser = $this->request->getPost('email');
+        // $toFrom = $emailUser;
+        // $email->setTo($toFrom);
+        // $subject = 'Kode Verifikasi OTP SIPFOR';
+        // $email->setSubject($subject);
+        // $body = "
+        //     <h3>Kode Verifikasi Email Anda Pada Website SIPFOR :</h3>
+        //     <h1>$angkaRand</h1>
+        //     ";
+        // $message = $body;
+        // $email->setMessage($message);
+        // $email->send();
+    }
+
+    public function cancle_rumah_sakit($id_rumah_sakit)
+    {
+        $data = [
+            'id_rumah_sakit' => $id_rumah_sakit,
+            'status'        => 'Cancle'
+        ];
+        $this->ModelLeader->editRumahSakit($data);
+        session()->setFlashdata('pesan', "Berhasil Cancle Rumah Sakit!.");
+        return redirect()->to(base_url('m_work_position'));
+    }
+
+    public function riwayat_rumah_sakit()
+    {
+        $data = [
+            'title' => 'Riwayat Rumah Sakit',
+            'data'  => $this->ModelLeader->getAllRumahSakit(),
+            'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
+            'isi'   => 'leader/work_position/v_riwayat_rumah_sakit'
+        ];
+
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function uncancle_rumah_sakit($id_rumah_sakit)
+    {
+        $data = [
+            'id_rumah_sakit' => $id_rumah_sakit,
+            'status'        => null
+        ];
+        $this->ModelLeader->editRumahSakit($data);
+        session()->setFlashdata('pesan', "Berhasil Kembali Melakukan Kerja Sama Rumah Sakit!.");
+        return redirect()->to(base_url('m_work_position/riwayat_rumah_sakit'));
     }
 }

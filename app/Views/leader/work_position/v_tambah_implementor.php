@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
         <h1>Manage Work Position</h1>
@@ -26,7 +26,7 @@
                             <select name="id_user" id="impelementor" class="form-select" aria-label="Default select example" required>
                                 <option selected>~ Pilih ~</option>
                                 <?php foreach ($karyawan as $row) {
-                                    if ($row['status'] == 'Diterima') {
+                                    if ($row['status'] == 'Diterima' && $row['status'] != 'Implementor') {
                                 ?>
                                         <option value="<?= $row['id_user'] ?>"><?= $row['nama_user'] ?></option>
                                 <?php }

@@ -7,12 +7,15 @@ use CodeIgniter\Model;
 class ModelLogin extends Model
 {
 
-    public function cekUser($email, $password)
+    public function cekEmail($email)
     {
         return $this->db->table('user')
-            ->where([
-                'email' => $email,
-                'password' => $password
-            ])->get()->getRowArray();
+            ->where('email', $email)->get()->getRowArray();
+    }
+
+    public function cekPassword($password)
+    {
+        return $this->db->table('user')
+            ->where('password', $password)->get()->getRowArray();
     }
 }

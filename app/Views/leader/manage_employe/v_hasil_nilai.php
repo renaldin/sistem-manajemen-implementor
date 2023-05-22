@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
         <h1><?= $title ?></h1>
@@ -16,8 +16,8 @@
 
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Nilai Budi 9. Teresia <b>diterima</b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
-                        <a href="#" class="btn btn-primary">Kirim Email</a>
+                        <h5 class="card-title">Hasil Nilai <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] ?></b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
+                        <a href="<?= base_url('m_employe_assesment/kirim_email/' . $hasil['employe']['email']) ?>" class="btn btn-primary">Kirim Email</a>
                     </div>
                 </div>
 

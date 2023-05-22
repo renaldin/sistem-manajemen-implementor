@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 05:44 AM
+-- Generation Time: May 22, 2023 at 05:13 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -43,7 +43,10 @@ CREATE TABLE `implementor` (
 
 INSERT INTO `implementor` (`id_impelementor`, `id_rumah_sakit`, `id_user`, `email`, `tanggal_mulai`, `tanggal_selesai`, `status`) VALUES
 (1, 1, 2, 'ks11281991@gmail.com', '2023-05-19', '2023-05-19', NULL),
-(2, 1, 3, 'riangergor@gmail.com', '2023-05-19', '2023-05-19', NULL);
+(2, 1, 3, 'riangergor@gmail.com', '2023-05-19', '2023-05-19', NULL),
+(4, 2, 6, 'contohh@gmail.com', '2023-05-22', '2023-05-22', NULL),
+(5, 3, 7, 'karyawan1@gmail.com', '2023-05-22', '2023-05-31', NULL),
+(6, 3, 8, 'karyawan2@gmail.com', '2023-05-22', '2023-05-31', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,8 +68,8 @@ CREATE TABLE `rumah_sakit` (
 
 INSERT INTO `rumah_sakit` (`id_rumah_sakit`, `nama_rumah_sakit`, `alamat_rumah_sakit`, `deskripsi_rumah_sakit`, `status`) VALUES
 (1, 'Sentosa', 'Subang, Ciereng', 'Rumah Sakit Umum', NULL),
-(2, 'Hospital', 'subangg', 'ksdfjsk', NULL),
-(3, 'RSUD Ciereng', 'Ciereng, Subang, Jawa Barat', 'Rumah Sakit Umum', NULL);
+(2, 'Hospital', 'subangg', 'Rumah sakit terdekat dari kabupaten Cibogo', NULL),
+(3, 'RSUD Ciereng', 'Ciereng, Subang, Jawa Barat', 'Rumah Sakit Umum Buka 24 jam', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,8 +93,12 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `email`, `password`, `role`, `status`) VALUES
 (1, 'Alex', 'Laki-laki', 'leader@gmail.com', '123', 'Leader', NULL),
-(2, 'Smith', 'Laki-laki', 'karyawan@gmail.com', '123', 'Karyawan', 'Diterima'),
-(3, 'John', 'Laki-laki', 'john@gmail.com', '123', 'Karyawan', 'Diterima');
+(2, 'Smith', 'Laki-laki', 'karyawan@gmail.com', '123', 'Karyawan', 'Implementor'),
+(3, 'John', 'Laki-laki', 'john@gmail.com', '123', 'Karyawan', 'Implementor'),
+(5, 'Udin', 'Laki-laki', 'udin@gmail.com', '123', 'Karyawan', 'Tidak Diterima'),
+(6, 'contoh', 'Perempuan', 'contoh@gmail.com', '123', 'Karyawan', 'Implementor'),
+(7, 'karyawan1', 'Laki-laki', 'karyawan1@gmail.com', '123', 'Karyawan', 'Implementor'),
+(8, 'karyawan2', 'Perempuan', 'karyawan2@gmail.com', '123', 'Karyawan', 'Implementor');
 
 --
 -- Indexes for dumped tables
@@ -125,7 +132,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `implementor`
 --
 ALTER TABLE `implementor`
-  MODIFY `id_impelementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_impelementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rumah_sakit`
@@ -137,7 +144,7 @@ ALTER TABLE `rumah_sakit`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

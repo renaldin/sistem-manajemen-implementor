@@ -5,17 +5,13 @@
         <nav>
             <ol class="breadcrumb d-flex">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Work Position</li>
-                <div class="ms-auto">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered"><span class="bi bi-plus-lg"></span> Rumah Sakit</button>
-                </div>
+                <li class="breadcrumb-item active"><?= $title ?></li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
         <div class="row">
-
             <!-- Left side columns -->
             <div class="col-lg-8">
                 <div class="row">
@@ -31,7 +27,7 @@
                         </div>
                     <?php  } ?>
                     <?php foreach ($data as $row) {
-                        if ($row['status'] == null) {
+                        if ($row['status'] == 'Cancle') {
                     ?>
                             <!-- Sales Card -->
                             <div class="col-xxl-4 col-md-6">
@@ -45,9 +41,7 @@
                                             </li>
 
                                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Rumah Sakit</a></li>
-                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edit-<?= $row['id_rumah_sakit'] ?>">Edit Rumah Sakit</a></li>
-                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/cancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Cancel Rumah Sakit</a></li>
-                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/' . $row['id_rumah_sakit']) ?>">Tambah Implementor</a></li>
+                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Kembali Kerja Sama</a></li>
                                         </ul>
                                     </div>
 

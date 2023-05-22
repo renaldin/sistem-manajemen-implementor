@@ -11,9 +11,25 @@ class ModelLeader extends Model
         return $this->db->table('user')
             ->where([
                 'role' => 'Karyawan',
-                'status' => null
+                // 'status' => null
             ])
+            ->orderBy('id_user', 'DESC')
             ->get()->getResultArray();
+    }
+
+    public function countRumahSakit()
+    {
+        return $this->db->table('rumah_sakit')->countAllResults();
+    }
+
+    public function countImplementor()
+    {
+        return $this->db->table('implementor')->countAllResults();
+    }
+
+    public function countEmploye()
+    {
+        return $this->db->table('user')->where('status !=', null)->countAllResults();
     }
 
     public function getEmployeById($id)
@@ -59,5 +75,15 @@ class ModelLeader extends Model
             ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit', 'left')
             ->join('user', 'user.id_user = implementor.id_user', 'left')
             ->get()->getResultArray();
+    }
+
+    public function updateStatusEmploye($data)
+    {
+        $this->db->table('user')->where('id_user', $data['id_user'])->update($data);
+    }
+
+    public function cekImplementorInRumahSakit($id_rumah_sakit)
+    {
+        return $this->db->table('implementor')->where('id_rumah_sakit', $id_rumah_sakit)->get()->getRowArray();
     }
 }

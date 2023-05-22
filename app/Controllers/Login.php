@@ -50,26 +50,33 @@ class Login extends BaseController
             $password = $this->request->getPost('password');
 
             // cek user
-            $cek = $this->ModelLogin->cekUser($email, $password);
-            if ($cek) {
-                // jika benar
-                session()->set('log', true);
-                session()->set('id', $cek['id_user']);
-                session()->set('nama', $cek['nama_user']);
-                session()->set('jk', $cek['jenis_kelamin']);
-                session()->set('email', $cek['email']);
-                session()->set('role', $cek['role']);
-                session()->setFlashdata('pesan', "Login $cek[nama_user] berhasil.");
-                return redirect()->to(base_url('dashboard'));
+            $cekEmail = $this->ModelLogin->cekEmail($email);
+            if ($cekEmail) {
+                // jika username benar, cek password
+                $cekPassword = $this->ModelLogin->cekPassword($password);
+                if ($cekPassword) {
+                    session()->set('log', true);
+                    session()->set('id', $cekPassword['id_user']);
+                    session()->set('nama', $cekPassword['nama_user']);
+                    session()->set('jk', $cekPassword['jenis_kelamin']);
+                    session()->set('email', $cekPassword['email']);
+                    session()->set('role', $cekPassword['role']);
+                    session()->setFlashdata('pesan', "Login $cekPassword[nama_user] berhasil.");
+                    return redirect()->to(base_url('dashboard'));
+                } else {
+                    // jika salah
+                    session()->setFlashdata('pesan', 'Login gagal! Password salah.');
+                    return redirect()->back()->withInput();
+                }
             } else {
                 // jika salah
-                session()->setFlashdata('pesan', 'Login gagal! Email atau password salah.');
-                return redirect()->to(base_url('login'));
+                session()->setFlashdata('pesan', 'Login gagal! Email salah.');
+                return redirect()->back()->withInput();
             }
         } else {
             // jika tidak valid
             session()->setFlashdata('errors', \config\Services::validation()->getErrors());
-            return redirect()->to(base_url('login'))->withInput();
+            return redirect()->back()->withInput();
         }
     }
 

@@ -215,18 +215,18 @@
             <!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? '' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? '' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-geo-alt"></i>
                     <span>Manage Work Position</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
                     <li>
                         <a class="<?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position') ?>">
                             <i class="bi bi-circle"></i><span>Manage Rumah Sakit</span>
                         </a>
                     </li>
                     <li>
-                        <a href="icons-remix.html">
+                        <a class="<?= ($title == 'Riwayat Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position/riwayat_rumah_sakit') ?>">
                             <i class="bi bi-circle"></i><span>Riwayat Rumah Sakit</span>
                         </a>
                     </li>

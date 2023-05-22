@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
         <h1><?= $title ?></h1>
@@ -39,11 +39,12 @@
                         <table class="table datatable">
                             <thead>
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Jenis Kelamin</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Opsi</th>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,7 +58,20 @@
                                         <td><?= $row['jenis_kelamin'] ?></td>
                                         <td><?= $row['email'] ?></td>
                                         <td>
-                                            <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm">Input Nilai</a>
+                                            <?php if ($row['status'] ==  null) { ?>
+                                                <span class="badge rounded-pill bg-warning">Belum Dinilai</span>
+                                            <?php } elseif ($row['status'] == 'Diterima') { ?>
+                                                <span class="badge rounded-pill bg-primary"><?= $row['status'] ?></span>
+                                            <?php } elseif ($row['status'] == 'Implementor') { ?>
+                                                <span class="badge rounded-pill bg-success"><?= $row['status'] ?></span>
+                                            <?php } else { ?>
+                                                <span class="badge rounded-pill bg-info"><?= $row['status'] ?></span>
+                                            <?php } ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if ($row['status'] == null) { ?>
+                                                <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm">Input Nilai</a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -102,7 +116,7 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="gridRadios2" value="perempuan">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="gridRadios2" value="Perempuan">
                                 <label class="form-check-label" for="gridRadios2">
                                     Perempuan
                                 </label>
