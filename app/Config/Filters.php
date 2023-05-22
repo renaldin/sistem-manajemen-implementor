@@ -44,6 +44,10 @@ class Filters extends BaseConfig
                 'except' => [
                     '/',
                     '/dashboard',
+                    '/m_employe_assesment',
+                    '/m_employe_assesment/*',
+                    '/m_work_position',
+                    '/m_work_position/*',
                 ]
             ],
             'filterkaryawan' => [

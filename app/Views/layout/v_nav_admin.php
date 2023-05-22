@@ -198,7 +198,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed " href="#">
                     <i class="bi bi-files"></i>
                     <span>Task Management</span>
                 </a>
@@ -207,7 +207,7 @@
 
         <?php if (session()->get('role') == 'Leader') { ?>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link <?= ($title == 'Manage Employe Assesment') ? '' : 'collapsed' ?>" href="<?= base_url('m_employe_assesment') ?>">
                     <i class="bi bi-clipboard2-check"></i>
                     <span>Manage Employe Assessment</span>
                 </a>
@@ -215,10 +215,22 @@
             <!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? '' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-geo-alt"></i>
-                    <span>Manage Work Position</span>
+                    <span>Manage Work Position</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class="<?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position') ?>">
+                            <i class="bi bi-circle"></i><span>Manage Rumah Sakit</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons-remix.html">
+                            <i class="bi bi-circle"></i><span>Riwayat Rumah Sakit</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <!-- End F.A.Q Page Nav -->
 

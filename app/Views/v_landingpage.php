@@ -256,7 +256,7 @@
         </section><!-- End Counts Section -->
 
         <!-- ======= Team Section ======= -->
-        <section id="team" class="team section-bg">
+        <section id="team" class="team section-bg text-center">
             <div class="container">
 
                 <div class="section-title">
@@ -325,16 +325,19 @@
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact">
             <div class="container">
-
-                <div class="section-title">
-                    <span>Contact</span>
-                    <h2>Contact</h2>
-                    <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <div class="section-title">
+                            <span>Contact</span>
+                            <h2>Contact</h2>
+                            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="row">
+                <div class="row justify-content-center">
 
-                    <div class="col-lg-5 d-flex align-items-stretch">
+                    <div class="col-lg-5">
                         <div class="info">
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
@@ -359,7 +362,7 @@
 
                     </div>
 
-                    <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                    <div class="col-lg-5">
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="form-group col-md-6">

@@ -49,32 +49,20 @@ class Login extends BaseController
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
-            // cek pada tabel leader
-            $cekLeader = $this->ModelLogin->cekLeader($email, $password);
-            if ($cekLeader) {
-                // jika benar sebagai leader
+            // cek user
+            $cek = $this->ModelLogin->cekUser($email, $password);
+            if ($cek) {
+                // jika benar
                 session()->set('log', true);
-                session()->set('id', $cekLeader['id_leader']);
-                session()->set('nama', $cekLeader['nama_leader']);
-                session()->set('jk', $cekLeader['jenis_kelamin']);
-                session()->set('email', $cekLeader['email_leader']);
-                session()->set('role', 'Leader');
-                session()->setFlashdata('pesan', "Login $cekLeader[nama_leader] berhasil.");
+                session()->set('id', $cek['id_user']);
+                session()->set('nama', $cek['nama_user']);
+                session()->set('jk', $cek['jenis_kelamin']);
+                session()->set('email', $cek['email']);
+                session()->set('role', $cek['role']);
+                session()->setFlashdata('pesan', "Login $cek[nama_user] berhasil.");
                 return redirect()->to(base_url('dashboard'));
             } else {
-                // jika salah cek sebagai karyawan
-                $cekKaryawan = $this->ModelLogin->cekKaryawan($email, $password);
-                if ($cekKaryawan) {
-                    session()->set('log', true);
-                    session()->set('id', $cekKaryawan['id_karyawan']);
-                    session()->set('nama', $cekKaryawan['nama_karyawan']);
-                    session()->set('jk', $cekKaryawan['jenis_kelamin']);
-                    session()->set('email', $cekKaryawan['email_karyawan']);
-                    session()->set('role', 'Karyawan');
-                    session()->setFlashdata('pesan', "Login $cekKaryawan[nama_karyawan] berhasil.");
-                    return redirect()->to(base_url('liveLocation'));
-                }
-                // jika leader dan karyawan salah
+                // jika salah
                 session()->setFlashdata('pesan', 'Login gagal! Email atau password salah.');
                 return redirect()->to(base_url('login'));
             }

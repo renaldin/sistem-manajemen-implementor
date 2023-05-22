@@ -36,6 +36,17 @@ $routes->post('/cek_login', 'Login::cek_login');
 $routes->get('/logout', 'Login::logout');
 
 $routes->get('/dashboard', 'Leader::index');
+$routes->get('/m_employe_assesment', 'Leader::m_employe_assesment');
+$routes->post('/m_employe_assesment/insert_employe', 'Leader::insert_employe');
+$routes->get('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
+$routes->post('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
+$routes->post('/m_employe_assesment/hasil', 'Leader::hasil');
+$routes->get('/m_work_position', 'Leader::m_work_position');
+$routes->get('/m_work_position/(:num)', 'Leader::tambah_implementor_rs/$1');
+$routes->post('/m_work_position/(:num)', 'Leader::tambah_implementor_rs/$1');
+$routes->post('/m_work_position', 'Leader::insert_work_position');
+$routes->post('/m_work_position/edit', 'Leader::edit_work_position');
+$routes->post('/m_work_position/simpan_implementor/(:num)', 'Leader::simpan_implementor/$1');
 
 $routes->get('/liveLocation', 'Karyawan::live_location');
 
