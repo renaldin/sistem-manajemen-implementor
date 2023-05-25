@@ -19,7 +19,7 @@ class ModelLeader extends Model
 
     public function countRumahSakit()
     {
-        return $this->db->table('rumah_sakit')->countAllResults();
+        return $this->db->table('rumah_sakit')->where('status', null)->countAllResults();
     }
 
     public function countImplementor()

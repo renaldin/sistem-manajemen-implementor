@@ -13,7 +13,7 @@
     <section class="section dashboard">
         <div class="row">
             <!-- Left side columns -->
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="row">
                     <?php
                     $errors = session()->getFlashdata('errors');
@@ -27,45 +27,48 @@
                         </div>
                     <?php  } ?>
                     <?php foreach ($data as $row) {
-                        if ($row['status'] == 'Cancle') {
+                        // if ($row['status'] == 'Cancle') {
                     ?>
-                            <!-- Sales Card -->
-                            <div class="col-xxl-4 col-md-6">
-                                <div class="card info-card sales-card">
+                        <!-- Sales Card -->
+                        <div class="col-xl-3 col-12 col-md-6">
+                            <div class="card info-card sales-card">
 
-                                    <div class="filter" title="Opsi">
-                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                            <li class="dropdown-header text-start">
-                                                <h6>Opsi</h6>
-                                            </li>
+                                <div class="filter" title="Opsi">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Opsi</h6>
+                                        </li>
 
-                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Rumah Sakit</a></li>
-                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Kembali Kerja Sama</a></li>
-                                        </ul>
-                                    </div>
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Rumah Sakit</a></li>
+                                        <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Kembali Kerja Sama</a></li>
+                                    </ul>
+                                </div>
 
-                                    <div class="card-body">
-                                        <h5 class="card-title">Rumah Sakit</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Rumah Sakit</h5>
 
-                                        <div class="d-flex align-items-center">
-                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                <i class="bi bi-file-medical"></i>
-                                            </div>
-                                            <div class="ps-3">
-                                                <h6 class="fs-4"><?= $row['nama_rumah_sakit'] ?></h6>
-                                            </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-file-medical"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6 class="fs-4"><?= $row['nama_rumah_sakit'] ?></h6>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End Sales Card -->
-                    <?php }
+                            </div>
+                        </div><!-- End Sales Card -->
+                    <?php
                     } ?>
 
                 </div>
             </div><!-- End Left side columns -->
 
 
+        </div>
+        <div class="float-end m-2">
+            <?= $pagination->links('rumah_sakit', 'pagination') ?>
         </div>
     </section>
 

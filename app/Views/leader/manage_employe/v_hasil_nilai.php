@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Hasil Nilai <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] ?></b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
-                        <a href="<?= base_url('m_employe_assesment/kirim_email/' . $hasil['employe']['email']) ?>" class="btn btn-primary">Kirim Email</a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim Email</button>
                     </div>
                 </div>
 
@@ -27,3 +27,30 @@
     </section>
 
 </main><!-- End #main -->
+<div class="modal fade" id="kirimEmail" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kirim Email</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<?= base_url('m_employe_assesment/kirim_email') ?>" method="post" class="row g-3">
+                <div class="modal-body">
+                    <input type="hidden" name="email" value="<?= $hasil['employe']['email'] ?>">
+                    <div class="col-12">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Masukan subject email">
+                    </div>
+                    <div class="col-12">
+                        <label for="pesan" class="form-label">Isi Pesan</label>
+                        <textarea class="form-control" placeholder="Masukan pesan email" name="pesan" id="pesan" style="height: 100px;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit">Kirim</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

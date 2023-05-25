@@ -3,8 +3,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="<?= base_url() ?>" class="logo d-flex align-items-center">
-            <!-- <img src="<?= base_url('NiceAdmin') ?>/assets/img/logo.png" alt=""> -->
-            <span class="d-none d-lg-block">SIMI</span>
+            <img src="<?= base_url('assets/img/logo.png') ?>" alt="">
+            <span class="d-none d-lg-block text-green">SIMI</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
@@ -180,8 +180,8 @@
         <?php if (session()->get('role') == 'Leader') { ?>
             <li class="nav-heading">DASHBOARD</li>
             <li class="nav-item">
-                <a class="nav-link <?= ($title == 'Dashboard') ? '' : 'collapsed' ?>" href="<?= base_url('dashboard') ?>">
-                    <i class="bi bi-grid"></i>
+                <a class="nav-link <?= ($title == 'Dashboard') ? 'active' : 'collapsed' ?>" href="<?= base_url('dashboard') ?>">
+                    <i class="bi bi-grid "></i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -192,7 +192,7 @@
 
         <?php if (session()->get('role') == 'Karyawan') { ?>
             <li class="nav-item active ">
-                <a class="nav-link <?= ($title == 'Live Location') ? '' : 'collapsed' ?>" href="<?= base_url('liveLocation') ?>">
+                <a class="nav-link <?= ($title == 'Live Location') ? 'active' : 'collapsed' ?>" href="<?= base_url('liveLocation') ?>">
                     <i class="bi bi-camera"></i>
                     <span>Live Location</span>
                 </a>
@@ -207,7 +207,7 @@
 
         <?php if (session()->get('role') == 'Leader') { ?>
             <li class="nav-item">
-                <a class="nav-link <?= ($title == 'Manage Employe Assesment') ? '' : 'collapsed' ?>" href="<?= base_url('m_employe_assesment') ?>">
+                <a class="nav-link <?= ($title == 'Manage Employe Assesment') ? 'active' : 'collapsed' ?>" href="<?= base_url('m_employe_assesment') ?>">
                     <i class="bi bi-clipboard2-check"></i>
                     <span>Manage Employe Assessment</span>
                 </a>
@@ -215,11 +215,11 @@
             <!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? '' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? 'active' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-geo-alt"></i>
                     <span>Manage Work Position</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
                     <li>
                         <a class="<?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position') ?>">
                             <i class="bi bi-circle"></i><span>Manage Rumah Sakit</span>

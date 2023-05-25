@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ModelLogin;
+use App\Models\ModelUser;
 
 class Login extends BaseController
 {
 
-    private $ModelLogin;
+    private $ModelLogin, $ModelUser;
 
     public function __construct()
     {
         helper('form');
-        $this->ModelLogin = new ModelLogin;
+        $this->ModelUser = new ModelUser();
     }
 
     public function index()
@@ -50,18 +50,19 @@ class Login extends BaseController
             $password = $this->request->getPost('password');
 
             // cek user
-            $cekEmail = $this->ModelLogin->cekEmail($email);
+            $cekEmail = $this->ModelUser->where('email', $email)->get()->getRowArray();
+            // var_dump($cekEmail[0]['password']);
             if ($cekEmail) {
                 // jika username benar, cek password
-                $cekPassword = $this->ModelLogin->cekPassword($password);
-                if ($cekPassword) {
+                // $cekPassword = $this->ModelUser->where('password', $password)->find();
+                if ($cekEmail['password'] == $password) {
                     session()->set('log', true);
-                    session()->set('id', $cekPassword['id_user']);
-                    session()->set('nama', $cekPassword['nama_user']);
-                    session()->set('jk', $cekPassword['jenis_kelamin']);
-                    session()->set('email', $cekPassword['email']);
-                    session()->set('role', $cekPassword['role']);
-                    session()->setFlashdata('pesan', "Login $cekPassword[nama_user] berhasil.");
+                    session()->set('id', $cekEmail['id_user']);
+                    session()->set('nama', $cekEmail['nama_user']);
+                    session()->set('jk', $cekEmail['jenis_kelamin']);
+                    session()->set('email', $cekEmail['email']);
+                    session()->set('role', $cekEmail['role']);
+                    session()->setFlashdata('pesan', "Login $cekEmail[nama_user] berhasil.");
                     return redirect()->to(base_url('dashboard'));
                 } else {
                     // jika salah

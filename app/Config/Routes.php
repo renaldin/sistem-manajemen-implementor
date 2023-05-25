@@ -41,7 +41,7 @@ $routes->post('/m_employe_assesment/insert_employe', 'Leader::insert_employe');
 $routes->get('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
 $routes->post('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
 $routes->post('/m_employe_assesment/hasil', 'Leader::hasil');
-$routes->post('/m_employe_assesment/kirim_email/(:any)', 'Leader::kirim_email/$1');
+$routes->post('/m_employe_assesment/kirim_email', 'Leader::kirim_email');
 
 $routes->get('/m_work_position', 'Leader::m_work_position');
 $routes->get('/m_work_position/(:num)', 'Leader::tambah_implementor_rs/$1');

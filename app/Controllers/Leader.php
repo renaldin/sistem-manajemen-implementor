@@ -3,17 +3,21 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ModelImplementor;
 use App\Models\ModelLeader;
+use App\Models\ModelRumahSakit;
 
 class Leader extends BaseController
 {
 
-    private $ModelLeader;
+    private $ModelLeader, $ModelRumahSakit, $ModelImplementor;
 
     public function __construct()
     {
         helper('form');
         $this->ModelLeader = new ModelLeader();
+        $this->ModelRumahSakit = new ModelRumahSakit();
+        $this->ModelImplementor = new ModelImplementor();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -44,7 +48,34 @@ class Leader extends BaseController
 
     public function nilai_employe($id)
     {
+        $validate = $this->validate([
+            'public_speaking' => [
+                'label' => 'Public Speaking',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Wajib Diisi.',
+                ],
+            ],
+            'tanya_jawab' => [
+                'label' => 'Tanya Jawab',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+            'soal' => [
+                'label' => 'Soal',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+        ]);
         if ($this->request->getPost()) {
+            if (!$validate) {
+                session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+                return redirect()->to(base_url('m_employe_assesment/' . $id));
+            }
             $input_employe = [
                 'public_speaking' => $this->request->getPost('public_speaking'),
                 'tanya_jawab' => $this->request->getPost('tanya_jawab'),
@@ -68,6 +99,33 @@ class Leader extends BaseController
 
     public function hasil()
     {
+        $validate = $this->validate([
+            'public_speaking' => [
+                'label' => 'Public Speaking',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Wajib Diisi.',
+                ],
+            ],
+            'tanya_jawab' => [
+                'label' => 'Tanya Jawab',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+            'soal' => [
+                'label' => 'Soal',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+        ]);
+        if (!$validate) {
+            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+            return redirect()->back()->withInput();
+        }
         $id = $this->request->getPost('id');
         $ps_leader = $this->request->getPost('ps_leader');
         $tj_leader = $this->request->getPost('tj_leader');
@@ -109,8 +167,9 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'Manage Work Position',
-            'data'  => $this->ModelLeader->getAllRumahSakit(),
+            'data'  => $this->ModelRumahSakit->where('status', null)->paginate(8, 'rumah_sakit'),
             'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
+            'pagination' => $this->ModelRumahSakit->pager,
             'isi'   => 'leader/work_position/v_m_work_position'
         ];
 
@@ -322,25 +381,26 @@ class Leader extends BaseController
         }
     }
 
-    // fungsi kirim email menyusul
-    public function kirim_email($email)
+    public function kirim_email()
     {
-        // $email = \Config\Services::email();
+        $email = \Config\Services::email();
 
-        // $fromEmail = 'info.himmipolsub@gmail.com';
-        // $email->setFrom($fromEmail);
-        // $emailUser = $this->request->getPost('email');
-        // $toFrom = $emailUser;
-        // $email->setTo($toFrom);
-        // $subject = 'Kode Verifikasi OTP SIPFOR';
-        // $email->setSubject($subject);
-        // $body = "
-        //     <h3>Kode Verifikasi Email Anda Pada Website SIPFOR :</h3>
-        //     <h1>$angkaRand</h1>
-        //     ";
-        // $message = $body;
-        // $email->setMessage($message);
-        // $email->send();
+        $fromEmail = 'info.himmipolsub@gmail.com';
+        $email->setFrom($fromEmail);
+        $emailUser = $this->request->getPost('email');
+        $toFrom = $emailUser;
+        $email->setTo($toFrom);
+        $subject = $this->request->getPost('subject');
+        $email->setSubject($subject);
+        $pesan = $this->request->getPost('pesan');
+        $body = "
+            <h3>$pesan</h3>
+            ";
+        $message = $body;
+        $email->setMessage($message);
+        $email->send();
+        session()->setFlashdata('pesan', "Kirim Email Berhasil!.");
+        return redirect()->to(base_url('m_employe_assesment'));
     }
 
     public function cancle_rumah_sakit($id_rumah_sakit)
@@ -358,7 +418,8 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'Riwayat Rumah Sakit',
-            'data'  => $this->ModelLeader->getAllRumahSakit(),
+            'data'  => $this->ModelRumahSakit->where('status', 'Cancle')->paginate(8, 'rumah_sakit'),
+            'pagination' => $this->ModelRumahSakit->pager,
             'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
             'isi'   => 'leader/work_position/v_riwayat_rumah_sakit'
         ];

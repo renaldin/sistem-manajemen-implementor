@@ -17,7 +17,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Form Nilai HRD</h5>
-
+                        <?php
+                        $errors = session()->getFlashdata('errors');
+                        if (!empty($errors)) { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <ul>
+                                    <?php foreach ($errors as $key => $value) { ?>
+                                        <li><?= esc($value); ?></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        <?php  } ?>
                         <!-- Vertical Form -->
                         <?= form_open('m_employe_assesment/hasil', ['class' => 'row g-3']) ?>
                         <!-- <form class="row g-3"> -->

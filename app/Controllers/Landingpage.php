@@ -8,6 +8,10 @@ class Landingpage extends BaseController
 {
     public function index()
     {
-        return view('v_landingpage');
+        $data = [
+            'title' => 'Home',
+            'isi'   => 'v_landingpage.php'
+        ];
+        return view('layout/v_wrapper', $data);
     }
 }

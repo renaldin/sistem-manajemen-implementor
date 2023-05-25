@@ -17,7 +17,7 @@
         <div class="row">
 
             <!-- Left side columns -->
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="row">
                     <?php
                     $errors = session()->getFlashdata('errors');
@@ -34,7 +34,7 @@
                         if ($row['status'] == null) {
                     ?>
                             <!-- Sales Card -->
-                            <div class="col-xxl-4 col-md-6">
+                            <div class="col-xl-3 col-md-6">
                                 <div class="card info-card sales-card">
 
                                     <div class="filter" title="Opsi">
@@ -72,6 +72,9 @@
             </div><!-- End Left side columns -->
 
 
+        </div>
+        <div class="float-end m-2">
+            <?= $pagination->links('rumah_sakit', 'pagination') ?>
         </div>
     </section>
 

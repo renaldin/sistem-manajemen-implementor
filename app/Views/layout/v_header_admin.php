@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="<?= base_url('NiceAdmin') ?>/assets/img/favicon.png" rel="icon">
-    <link href="<?= base_url('NiceAdmin') ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="<?= base_url('assets/img/logo.ico') ?>" rel="icon">
+    <!-- <link href="<?= base_url('NiceAdmin') ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -36,13 +36,28 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/sweetalert2.min.css">
     <script src="<?= base_url() ?>/assets/js/sweetalert2.all.min.js"></script>
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Mar 09 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <!-- css custom warna hijau -->
+    <style>
+        .text-green {
+            color: #00bfa6 !important;
+        }
+
+        .active {
+            color: #00bfa6 !important;
+        }
+
+        .active>i {
+            color: #00bfa6 !important;
+        }
+
+        .nav-item>.nav-link:hover {
+            color: #00bfa6 !important;
+        }
+
+        .nav-item>.nav-link:hover>i {
+            color: #00bfa6 !important;
+        }
+    </style>
 </head>
 
 <body>
