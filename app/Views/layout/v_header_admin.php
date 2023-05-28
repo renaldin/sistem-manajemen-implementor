@@ -32,6 +32,8 @@
     <!-- jquery -->
     <script src="<?= base_url() ?>/assets/js/jquery-3.6.4.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js" integrity="sha512-AQMSn1qO6KN85GOfvH6BWJk46LhlvepblftLHzAv1cdIyTWPBKHX+r+NOXVVw6+XQpeW4LJk/GTmoP48FLvblQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Sweet Alert2 -->
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/sweetalert2.min.css">
     <script src="<?= base_url() ?>/assets/js/sweetalert2.all.min.js"></script>

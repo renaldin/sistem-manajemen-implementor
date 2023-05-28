@@ -48,12 +48,17 @@ class Filters extends BaseConfig
                     '/m_employe_assesment/*',
                     '/m_work_position',
                     '/m_work_position/*',
+                    '/m_live_location',
+                    '/m_live_location/*',
+                    '/m_task_management',
+                    '/m_task_management/*',
                 ]
             ],
             'filterkaryawan' => [
                 'except' => [
                     '/',
                     '/liveLocation',
+                    '/liveLocation/*',
                 ]
             ],
         ],

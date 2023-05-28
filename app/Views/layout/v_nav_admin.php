@@ -233,17 +233,28 @@
                 </ul>
             </li>
             <!-- End F.A.Q Page Nav -->
-
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link <?= ($title == 'Manage Live Location' || $title == 'Detail Live Location' || $title == 'Riwayat Live Location') ? 'active' : 'collapsed' ?>" data-bs-target="#menu-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-camera"></i>
-                    <span>Manage Live Location</span>
+                    <span>Manage Live Location</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="menu-nav" class="nav-content collapse <?= ($title == 'Manage Live Location' || $title == 'Detail Live Location' || $title == 'Riwayat Live Location') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class="<?= ($title == 'Manage Live Location' || $title == 'Detail Live Location') ? 'active' : '' ?>" href="<?= base_url('m_live_location') ?>">
+                            <i class="bi bi-circle"></i><span>Live Location</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= ($title == 'Riwayat Live Location') ? 'active' : '' ?>" href="<?= base_url('m_live_location/riwayat_live_location') ?>">
+                            <i class="bi bi-circle"></i><span>Riwayat Live Location</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <!-- End Contact Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="<?= base_url('m_task_management') ?>">
                     <i class="bi bi-files"></i>
                     <span>Manage Task Management</span>
                 </a>

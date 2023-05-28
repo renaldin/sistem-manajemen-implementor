@@ -86,4 +86,38 @@ class ModelLeader extends Model
     {
         return $this->db->table('implementor')->where('id_rumah_sakit', $id_rumah_sakit)->get()->getRowArray();
     }
+
+    public function getAllAbsen()
+    {
+        return $this->db->table('absen')
+            ->join('user', 'user.id_user = absen.id_user')
+            ->where('absen.status', null)->get()->getResultArray();
+    }
+
+    public function getRiwayatAbsen()
+    {
+        return $this->db->table('absen')
+            ->join('user', 'user.id_user = absen.id_user')
+            ->where('absen.status !=', null)->get()->getResultArray();
+    }
+
+    public function getAbsenById($id)
+    {
+        return $this->db->table('absen')
+            ->join('user', 'user.id_user = absen.id_user')
+            ->where('id_absen', $id)->get()->getRowArray();
+    }
+
+    public function updateAbsen($data)
+    {
+        $this->db->table('absen')->where('id_absen', $data['id_absen'])->update($data);
+    }
+
+    public function getImplementor()
+    {
+        return $this->db->table('implementor')
+            ->join('user', 'user.id_user = implementor.id_user')
+            ->where('user.status', 'Implementor')
+            ->get()->getResultArray();
+    }
 }

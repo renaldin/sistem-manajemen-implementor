@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelImplementor extends Model
+class ModelPekerjaan extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'implementor';
-    protected $primaryKey       = 'id_implementor';
+    protected $table            = 'pekerjaan';
+    protected $primaryKey       = 'id_pekerjaan';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_implementor', 'id_rumah_sakit', 'id_user', 'email', 'tanggal_mulai', 'tanggal_selesai', 'status'];
+    protected $allowedFields    = ['id_pekerjaan', 'deskripsi', 'batas_tgl_pekerjaan', 'id_implementor', 'status'];
 
     // Dates
     protected $useTimestamps = false;

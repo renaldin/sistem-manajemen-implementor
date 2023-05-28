@@ -36,6 +36,7 @@ $routes->post('/cek_login', 'Login::cek_login');
 $routes->get('/logout', 'Login::logout');
 
 $routes->get('/dashboard', 'Leader::index');
+
 $routes->get('/m_employe_assesment', 'Leader::m_employe_assesment');
 $routes->post('/m_employe_assesment/insert_employe', 'Leader::insert_employe');
 $routes->get('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
@@ -53,7 +54,20 @@ $routes->get('/m_work_position/cancle_rumah_sakit/(:num)', 'Leader::cancle_rumah
 $routes->get('/m_work_position/riwayat_rumah_sakit', 'Leader::riwayat_rumah_sakit');
 $routes->get('/m_work_position/uncancle_rumah_sakit/(:num)', 'Leader::uncancle_rumah_sakit/$1');
 
+$routes->get('/m_live_location', 'Leader::m_live_location');
+$routes->get('/m_live_location/(:num)', 'Leader::detail_absen/$1');
+$routes->get('/m_live_location/selesai/(:num)', 'Leader::selesaiAbsen/$1');
+$routes->get('/m_live_location/riwayat_live_location', 'Leader::riwayat_live_location');
+
+$routes->get('/m_task_management', 'Leader::m_task_management');
+$routes->get('/m_task_management/getRS/(:num)', 'Leader::get_RS_ajax/$1');
+$routes->post('/m_task_management/insert_task', 'Leader::insert_task');
+
 $routes->get('/liveLocation', 'Karyawan::live_location');
+$routes->get('/liveLocation/(:any)', 'Karyawan::absen/$1');
+$routes->post('/liveLocation/insert_hadir/', 'Karyawan::insert_hadir');
+$routes->post('/liveLocation/insert_tidakhadir/', 'Karyawan::insert_tidakhadir');
+
 
 /*
  * --------------------------------------------------------------------

@@ -5,12 +5,13 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ModelImplementor;
 use App\Models\ModelLeader;
+use App\Models\ModelPekerjaan;
 use App\Models\ModelRumahSakit;
 
 class Leader extends BaseController
 {
 
-    private $ModelLeader, $ModelRumahSakit, $ModelImplementor;
+    private $ModelLeader, $ModelRumahSakit, $ModelImplementor, $ModelPekerjaan;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class Leader extends BaseController
         $this->ModelLeader = new ModelLeader();
         $this->ModelRumahSakit = new ModelRumahSakit();
         $this->ModelImplementor = new ModelImplementor();
+        $this->ModelPekerjaan = new ModelPekerjaan();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -34,6 +36,8 @@ class Leader extends BaseController
 
         return view('layout/v_wrapper_admin', $data);
     }
+
+    // menu manage employe assesment
 
     public function m_employe_assesment()
     {
@@ -162,6 +166,81 @@ class Leader extends BaseController
 
         return view('layout/v_wrapper_admin', $data);
     }
+
+    public function insert_employe()
+    {
+        $validasi = [
+            'nama_user' => [
+                'label' => 'Nama',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Wajib Diisi.',
+                ],
+            ],
+            'jenis_kelamin' => [
+                'label' => 'Jenis Kelamin',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+            'email' => [
+                'label' => 'Email',
+                'rules' => 'required|is_unique[user.email]',
+                'errors' => [
+                    'required' => '{field} wajib diisi.',
+                    'is_unique' => '{field} sudah terpakai. Silahkan gunakan yang lain!.'
+                ],
+            ],
+            'password' => [
+                'label' => 'Password',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+        ];
+        if ($this->validate($validasi)) {
+            $data = [
+                'nama_user' => $this->request->getPost('nama_user'),
+                'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
+                'email' => $this->request->getPost('email'),
+                'password' => $this->request->getPost('password'),
+                'role' => 'Karyawan',
+            ];
+            $this->ModelLeader->db->table('user')->insert($data);
+            session()->setFlashdata('pesan', "Data Berhasil Tambah!.");
+            return redirect()->to(base_url('m_employe_assesment'));
+        } else {
+            // jika tidak valid
+            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+            return redirect()->to(base_url('m_employe_assesment'))->withInput();
+        }
+    }
+
+    public function kirim_email()
+    {
+        $email = \Config\Services::email();
+
+        $fromEmail = 'info.himmipolsub@gmail.com';
+        $email->setFrom($fromEmail);
+        $emailUser = $this->request->getPost('email');
+        $toFrom = $emailUser;
+        $email->setTo($toFrom);
+        $subject = $this->request->getPost('subject');
+        $email->setSubject($subject);
+        $pesan = $this->request->getPost('pesan');
+        $body = "
+            <h3>$pesan</h3>
+            ";
+        $message = $body;
+        $email->setMessage($message);
+        $email->send();
+        session()->setFlashdata('pesan', "Kirim Email Berhasil!.");
+        return redirect()->to(base_url('m_employe_assesment'));
+    }
+
+    // menu manage work position
 
     public function m_work_position()
     {
@@ -330,79 +409,6 @@ class Leader extends BaseController
         return redirect()->to(base_url('m_work_position'));
     }
 
-    public function insert_employe()
-    {
-        $validasi = [
-            'nama_user' => [
-                'label' => 'Nama',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Wajib Diisi.',
-                ],
-            ],
-            'jenis_kelamin' => [
-                'label' => 'Jenis Kelamin',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} wajib diisi.'
-                ],
-            ],
-            'email' => [
-                'label' => 'Email',
-                'rules' => 'required|is_unique[user.email]',
-                'errors' => [
-                    'required' => '{field} wajib diisi.',
-                    'is_unique' => '{field} sudah terpakai. Silahkan gunakan yang lain!.'
-                ],
-            ],
-            'password' => [
-                'label' => 'Password',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} wajib diisi.'
-                ],
-            ],
-        ];
-        if ($this->validate($validasi)) {
-            $data = [
-                'nama_user' => $this->request->getPost('nama_user'),
-                'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
-                'email' => $this->request->getPost('email'),
-                'password' => $this->request->getPost('password'),
-                'role' => 'Karyawan',
-            ];
-            $this->ModelLeader->db->table('user')->insert($data);
-            session()->setFlashdata('pesan', "Data Berhasil Tambah!.");
-            return redirect()->to(base_url('m_employe_assesment'));
-        } else {
-            // jika tidak valid
-            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
-            return redirect()->to(base_url('m_employe_assesment'))->withInput();
-        }
-    }
-
-    public function kirim_email()
-    {
-        $email = \Config\Services::email();
-
-        $fromEmail = 'info.himmipolsub@gmail.com';
-        $email->setFrom($fromEmail);
-        $emailUser = $this->request->getPost('email');
-        $toFrom = $emailUser;
-        $email->setTo($toFrom);
-        $subject = $this->request->getPost('subject');
-        $email->setSubject($subject);
-        $pesan = $this->request->getPost('pesan');
-        $body = "
-            <h3>$pesan</h3>
-            ";
-        $message = $body;
-        $email->setMessage($message);
-        $email->send();
-        session()->setFlashdata('pesan', "Kirim Email Berhasil!.");
-        return redirect()->to(base_url('m_employe_assesment'));
-    }
-
     public function cancle_rumah_sakit($id_rumah_sakit)
     {
         $data = [
@@ -436,5 +442,123 @@ class Leader extends BaseController
         $this->ModelLeader->editRumahSakit($data);
         session()->setFlashdata('pesan', "Berhasil Kembali Melakukan Kerja Sama Rumah Sakit!.");
         return redirect()->to(base_url('m_work_position/riwayat_rumah_sakit'));
+    }
+
+    // menu manage live location
+
+    public function m_live_location()
+    {
+        $data = [
+            'title' => 'Manage Live Location',
+            'data'  => $this->ModelLeader->getAllAbsen(),
+            'isi'   => 'leader/manage_live_location/v_m_live_location'
+        ];
+
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function detail_absen($id)
+    {
+        $cekHadir = $this->ModelLeader->getAbsenById($id);
+        if ($cekHadir['keterangan'] == null) {
+            $data = [
+                'title' => 'Detail Live Location',
+                'data'  => $cekHadir,
+                'isi'   => 'leader/manage_live_location/v_detail_hadir'
+            ];
+        } else {
+            $data = [
+                'title' => 'Detail Live Location',
+                'data'  => $cekHadir,
+                'isi'   => 'leader/manage_live_location/v_detail_tidakhadir'
+            ];
+        }
+
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function selesaiAbsen($id)
+    {
+        $data = [
+            'id_absen' => $id,
+            'status'   => 'Selesai'
+        ];
+        $this->ModelLeader->updateAbsen($data);
+        session()->setFlashdata('pesan', "Berhasil Menyelesaikan Absensi!.");
+        return redirect()->to(base_url('m_live_location'));
+    }
+
+    public function riwayat_live_location()
+    {
+        $data = [
+            'title' => 'Riwayat Live Location',
+            'data'  => $this->ModelLeader->getRiwayatAbsen(),
+            'isi'   => 'leader/manage_live_location/v_riwayat'
+        ];
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    // menu manage task management
+
+    public function m_task_management()
+    {
+        $data = [
+            'title' => 'Manage Task Management',
+            'implementor'  => $this->ModelLeader->getImplementor(),
+            'data'  => $this->ModelPekerjaan
+                ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
+                ->join('user', 'user.id_user = implementor.id_user')
+                ->where('status_pekerjaan !=', 'Selesai')->findAll(),
+            'isi'   => 'leader/manage_task_management/v_m_task_management'
+        ];
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function get_RS_ajax($id)
+    {
+        $rs = $this->ModelImplementor->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')->find($id);
+        echo $rs['nama_rumah_sakit'];
+    }
+
+    public function insert_task()
+    {
+        $validasi = [
+            'nama_implementor' => [
+                'label' => 'Nama Implementor',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Wajib Diisi.',
+                ],
+            ],
+            'batas_tgl_pekerjaan' => [
+                'label' => 'Batas Tanggal Pekerjaan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+            'deskripsi' => [
+                'label' => 'Deskripsi',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.',
+                ],
+            ],
+        ];
+        if ($this->validate($validasi)) {
+            $data = [
+                'deskripsi' => $this->request->getPost('deskripsi'),
+                'batas_tgl_pekerjaan' => $this->request->getPost('batas_tgl_pekerjaan'),
+                'id_implementor' => $this->request->getPost('nama_implementor'),
+                'status_pekerjaan' => 'On Progress',
+            ];
+            $this->ModelPekerjaan->insert($data);
+            session()->setFlashdata('pesan', "Pekerjaan Berhasil Ditambahkan!.");
+            return redirect()->to(base_url('m_task_management'));
+        } else {
+            // jika tidak valid
+            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+            return redirect()->to(base_url('m_task_management'))->withInput();
+        }
     }
 }

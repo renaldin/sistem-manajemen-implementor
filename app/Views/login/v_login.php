@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="<?= base_url() ?>assets/img/favicon.png" rel="icon">
-    <link href="<?= base_url() ?>assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="<?= base_url('assets/img/logo.ico') ?>" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
