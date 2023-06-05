@@ -41,7 +41,7 @@
                                         </li>
 
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Rumah Sakit</a></li>
-                                        <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Kembali Kerja Sama</a></li>
+                                        <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Back to Cooperation</a></li>
                                     </ul>
                                 </div>
 
@@ -176,4 +176,5 @@
             </div>
         </div>
     </div><!-- End Small Modal-->
+
 <?php } ?>

@@ -11,9 +11,12 @@
                 <!-- Default Card -->
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="pt-2">Keterangan</h4>
                         <form action="<?= base_url('liveLocation/insert_tidakhadir') ?>" method="post">
                             <div class="row ">
+                                <div class="col-12 col-md-6 col-lg-6 pt-3">
+                                    <img class="w-100" src="<?= base_url('foto_absensi/' . $data['foto']) ?>" alt="">
+                                </div>
+                                <h4 class="pt-2">Keterangan</h4>
                                 <div class="col-sm-12">
                                     <textarea class="form-control" name="keterangan" style="height: 100px" readonly><?= $data['keterangan'] ?></textarea>
                                 </div>

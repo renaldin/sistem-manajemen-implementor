@@ -35,27 +35,27 @@
                             <label for="public_speaking" class="form-label">Nilai Public Speaking</label>
                             <select name="public_speaking" id="public_speaking" class="form-select">
                                 <option value="">~ Pilih ~</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                <option value="1">Kurang</option>
+                                <option value="2">Cukup</option>
+                                <option value="3">Baik</option>
                             </select>
                         </div>
                         <div class="col-12">
                             <label for="tanya_jawab" class="form-label">Nilai Tanya Jawab</label>
                             <select name="tanya_jawab" id="tanya_jawab" class="form-select">
                                 <option value="">~ Pilih ~</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                <option value="1">Kurang</option>
+                                <option value="2">Cukup</option>
+                                <option value="3">Baik</option>
                             </select>
                         </div>
                         <div class="col-12">
                             <label for="soal" class="form-label">Nilai Soal</label>
                             <select name="soal" id="soal" class="form-select">
                                 <option value="">~ Pilih ~</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                <option value="1">Kurang</option>
+                                <option value="2">Cukup</option>
+                                <option value="3">Baik</option>
                             </select>
                         </div>
                         <div class="d-flex justify-content-between">

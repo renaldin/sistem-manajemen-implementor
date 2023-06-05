@@ -215,38 +215,38 @@
             <!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? 'active' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'History Rumah Sakit') ? 'active' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-geo-alt"></i>
                     <span>Manage Work Position</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'Riwayat Rumah Sakit') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
+                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'History Rumah Sakit') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
                     <li>
                         <a class="<?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position') ?>">
                             <i class="bi bi-circle"></i><span>Manage Rumah Sakit</span>
                         </a>
                     </li>
                     <li>
-                        <a class="<?= ($title == 'Riwayat Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position/riwayat_rumah_sakit') ?>">
-                            <i class="bi bi-circle"></i><span>Riwayat Rumah Sakit</span>
+                        <a class="<?= ($title == 'History Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position/riwayat_rumah_sakit') ?>">
+                            <i class="bi bi-circle"></i><span>History Rumah Sakit</span>
                         </a>
                     </li>
                 </ul>
             </li>
             <!-- End F.A.Q Page Nav -->
             <li class="nav-item">
-                <a class="nav-link <?= ($title == 'Manage Live Location' || $title == 'Detail Live Location' || $title == 'Riwayat Live Location') ? 'active' : 'collapsed' ?>" data-bs-target="#menu-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link <?= ($title == 'Manage Live Location' || $title == 'Detail Live Location' || $title == 'History Live Location') ? 'active' : 'collapsed' ?>" data-bs-target="#menu-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-camera"></i>
                     <span>Manage Live Location</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="menu-nav" class="nav-content collapse <?= ($title == 'Manage Live Location' || $title == 'Detail Live Location' || $title == 'Riwayat Live Location') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
+                <ul id="menu-nav" class="nav-content collapse <?= ($title == 'Manage Live Location' || $title == 'Detail Live Location' || $title == 'History Live Location') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
                     <li>
                         <a class="<?= ($title == 'Manage Live Location' || $title == 'Detail Live Location') ? 'active' : '' ?>" href="<?= base_url('m_live_location') ?>">
                             <i class="bi bi-circle"></i><span>Live Location</span>
                         </a>
                     </li>
                     <li>
-                        <a class="<?= ($title == 'Riwayat Live Location') ? 'active' : '' ?>" href="<?= base_url('m_live_location/riwayat_live_location') ?>">
-                            <i class="bi bi-circle"></i><span>Riwayat Live Location</span>
+                        <a class="<?= ($title == 'History Live Location') ? 'active' : '' ?>" href="<?= base_url('m_live_location/riwayat_live_location') ?>">
+                            <i class="bi bi-circle"></i><span>History Live Location</span>
                         </a>
                     </li>
                 </ul>

@@ -73,7 +73,7 @@
 
             Toast.fire({
                 icon: 'success',
-                title: 'Logout in successfully'
+                title: 'Logout successfully'
             })
         </script>
     <?php } ?>

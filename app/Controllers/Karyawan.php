@@ -95,15 +95,43 @@ class Karyawan extends BaseController
 
     public function insert_tidakhadir()
     {
-        $data = [
-            'tgl_absen' => $this->request->getPost('tgl_absen'),
-            'jam'       => $this->request->getPost('jam'),
-            'keterangan' => $this->request->getPost('keterangan'),
-            'id_user'   => session()->get('id')
+        $validasi = [
+            'keterangan' => [
+                'label' => 'Keterangan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Wajib Diisi.',
+                ],
+            ],
         ];
 
-        $this->ModelKaryawan->insertAbsen($data);
-        session()->setFlashdata('pesan', "Berhasil melakukan absensi!.");
-        return redirect()->to(base_url('liveLocation'));
+        if ($this->validate($validasi)) {
+            $foto = $this->request->getPost('captured_image_data');
+            $folderPath = 'foto_absensi/';
+            $image_parts = explode(";base64,", $foto);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+
+            $nama_gambar = uniqid() . '.jpg';
+
+            $file = $folderPath . $nama_gambar;
+            file_put_contents($file, $image_base64);
+            $data = [
+                'tgl_absen' => $this->request->getPost('tgl_absen'),
+                'koordinat' => $this->request->getPost('koordinat'),
+                'jam'       => $this->request->getPost('jam'),
+                'foto'      => $nama_gambar,
+                'keterangan' => $this->request->getPost('keterangan'),
+                'id_user'   => session()->get('id')
+            ];
+
+            $this->ModelKaryawan->insertAbsen($data);
+            session()->setFlashdata('pesan', "Berhasil melakukan absensi!.");
+            return redirect()->to(base_url('liveLocation'));
+        } else {
+            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+            return redirect()->back()->withInput();
+        }
     }
 }

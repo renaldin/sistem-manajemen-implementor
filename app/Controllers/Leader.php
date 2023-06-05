@@ -7,11 +7,12 @@ use App\Models\ModelImplementor;
 use App\Models\ModelLeader;
 use App\Models\ModelPekerjaan;
 use App\Models\ModelRumahSakit;
+use App\Models\ModelUser;
 
 class Leader extends BaseController
 {
 
-    private $ModelLeader, $ModelRumahSakit, $ModelImplementor, $ModelPekerjaan;
+    private $ModelLeader, $ModelRumahSakit, $ModelImplementor, $ModelPekerjaan, $ModelUser;
 
     public function __construct()
     {
@@ -20,6 +21,7 @@ class Leader extends BaseController
         $this->ModelRumahSakit = new ModelRumahSakit();
         $this->ModelImplementor = new ModelImplementor();
         $this->ModelPekerjaan = new ModelPekerjaan();
+        $this->ModelUser = new ModelUser();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -57,21 +59,21 @@ class Leader extends BaseController
                 'label' => 'Public Speaking',
                 'rules' => 'required',
                 'errors' => [
-                    'required' => '{field} Wajib Diisi.',
+                    'required' => 'Nilai {field} Wajib Diisi.',
                 ],
             ],
             'tanya_jawab' => [
                 'label' => 'Tanya Jawab',
                 'rules' => 'required',
                 'errors' => [
-                    'required' => '{field} wajib diisi.'
+                    'required' => 'Nilai {field} wajib diisi.'
                 ],
             ],
             'soal' => [
                 'label' => 'Soal',
                 'rules' => 'required',
                 'errors' => [
-                    'required' => '{field} wajib diisi.'
+                    'required' => 'Nilai {field} wajib diisi.'
                 ],
             ],
         ]);
@@ -86,14 +88,14 @@ class Leader extends BaseController
                 'soal' => $this->request->getPost('soal'),
             ];
             $data = [
-                'title' => 'Input Nilai Employe',
+                'title' => 'Input Employe Values',
                 'input_employe' => $input_employe,
                 'data'  => $this->ModelLeader->getEmployeById($id),
                 'isi'   => 'leader/manage_employe/v_nilai_hrd'
             ];
         } else {
             $data = [
-                'title' => 'Input Nilai Employe',
+                'title' => 'Input Employe Values',
                 'data'  => $this->ModelLeader->getEmployeById($id),
                 'isi'   => 'leader/manage_employe/v_nilai_employe'
             ];
@@ -108,21 +110,21 @@ class Leader extends BaseController
                 'label' => 'Public Speaking',
                 'rules' => 'required',
                 'errors' => [
-                    'required' => '{field} Wajib Diisi.',
+                    'required' => 'Nilai {field} Wajib Diisi.',
                 ],
             ],
             'tanya_jawab' => [
                 'label' => 'Tanya Jawab',
                 'rules' => 'required',
                 'errors' => [
-                    'required' => '{field} wajib diisi.'
+                    'required' => 'Nilai {field} wajib diisi.'
                 ],
             ],
             'soal' => [
                 'label' => 'Soal',
                 'rules' => 'required',
                 'errors' => [
-                    'required' => '{field} wajib diisi.'
+                    'required' => 'Nilai {field} wajib diisi.'
                 ],
             ],
         ]);
@@ -240,6 +242,13 @@ class Leader extends BaseController
         return redirect()->to(base_url('m_employe_assesment'));
     }
 
+    public function delete_employe($id)
+    {
+        $this->ModelUser->delete($id);
+        session()->setFlashdata('pesan', "Employe Berhasil Dihapus!.");
+        return redirect()->to(base_url('m_employe_assesment'));
+    }
+
     // menu manage work position
 
     public function m_work_position()
@@ -264,9 +273,10 @@ class Leader extends BaseController
         $validasi = [
             'nama_rumah_sakit' => [
                 'label' => 'Nama Rumah Sakit',
-                'rules' => 'required',
+                'rules' => 'required|is_unique[rumah_sakit.nama_rumah_sakit]',
                 'errors' => [
                     'required' => '{field} Wajib Diisi.',
+                    'is_unique' => '{field} Tidak Diperbolehkan sama.',
                 ],
             ],
             'alamat_rumah_sakit' => [
@@ -358,7 +368,7 @@ class Leader extends BaseController
 
         if ($this->request->getPost()) {
             $data = [
-                'title' => 'Tambah Implementor Rumah Sakit',
+                'title' => 'Add Implementor Rumah Sakit',
                 'data'  => $this->ModelLeader->getRumahSakitById($id_rumah_sakit),
                 'data_input' => [
                     'id_user' => $this->request->getPost('id_user'),
@@ -371,7 +381,7 @@ class Leader extends BaseController
             ];
         } else {
             $data = [
-                'title' => 'Tambah Implementor Rumah Sakit',
+                'title' => 'Add Implementor Rumah Sakit',
                 'data'  => $this->ModelLeader->getRumahSakitById($id_rumah_sakit),
                 'karyawan' => $this->ModelLeader->getAllEmploye(),
                 'isi'   => 'leader/work_position/v_tambah_implementor'
@@ -423,7 +433,7 @@ class Leader extends BaseController
     public function riwayat_rumah_sakit()
     {
         $data = [
-            'title' => 'Riwayat Rumah Sakit',
+            'title' => 'History Rumah Sakit',
             'data'  => $this->ModelRumahSakit->where('status', 'Cancle')->paginate(8, 'rumah_sakit'),
             'pagination' => $this->ModelRumahSakit->pager,
             'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
@@ -491,7 +501,7 @@ class Leader extends BaseController
     public function riwayat_live_location()
     {
         $data = [
-            'title' => 'Riwayat Live Location',
+            'title' => 'History Live Location',
             'data'  => $this->ModelLeader->getRiwayatAbsen(),
             'isi'   => 'leader/manage_live_location/v_riwayat'
         ];

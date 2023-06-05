@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('m_work_position') ?>">Manage Work Position</a></li>
-                <li class="breadcrumb-item active">Tambah Implementor</li>
+                <li class="breadcrumb-item active">Add Implementor</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->

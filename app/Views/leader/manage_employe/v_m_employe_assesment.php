@@ -21,7 +21,7 @@
                                 <h5 class="card-title">Data Employe</h5>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#add">Tambah</button>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#add">Create</button>
                             </div>
                         </div>
                         <?php
@@ -70,8 +70,9 @@
                                         </td>
                                         <td class="text-center">
                                             <?php if ($row['status'] == null) { ?>
-                                                <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm">Input Nilai</a>
+                                                <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm">Input Value</a>
                                             <?php } ?>
+                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#del-<?= $row['id_user'] ?>"><i class=" bi bi-trash"></i></button>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -93,7 +94,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Employe</h5>
+                <h5 class="modal-title">Create Employe</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -141,3 +142,26 @@
         </div>
     </div>
 </div>
+<!-- modal hapus -->
+<?php foreach ($data as $row) { ?>
+    <div class="modal fade" id="del-<?= $row['id_user'] ?>" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Employe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Yakin anda ingin menghapus Employe bernama <?= $row['nama_user'] ?> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>

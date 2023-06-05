@@ -45,9 +45,9 @@
                                             </li>
 
                                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Rumah Sakit</a></li>
-                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edit-<?= $row['id_rumah_sakit'] ?>">Edit Rumah Sakit</a></li>
-                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/cancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Cancel Rumah Sakit</a></li>
-                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/' . $row['id_rumah_sakit']) ?>">Tambah Implementor</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edit-<?= $row['id_rumah_sakit'] ?>">Update Rumah Sakit</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#cancle-<?= $row['id_rumah_sakit'] ?>">Cancel Rumah Sakit</a></li>
+                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/' . $row['id_rumah_sakit']) ?>">Add Implementor</a></li>
                                         </ul>
                                     </div>
 
@@ -85,7 +85,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Rumah Sakit</h5>
+                <h5 class="modal-title">Add Rumah Sakit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -119,7 +119,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Rumah Sakit</h5>
+                    <h5 class="modal-title">Update Rumah Sakit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -139,7 +139,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                     <?= form_close() ?>
                 </div>
@@ -177,6 +177,29 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div><!-- End Small Modal-->
+<?php } ?>
+
+<!-- modal cancle -->
+<?php foreach ($data as $row) { ?>
+    <!-- modal cancle -->
+    <div class="modal fade" id="cancle-<?= $row['id_rumah_sakit'] ?>" tabindex="-1">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cancle Rumah Sakit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Yakin ingin membatalkan kerja sama rumah sakit <?= $row['nama_rumah_sakit'] ?> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="<?= base_url('m_work_position/cancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>" class="btn btn-primary">Ya</a>
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
