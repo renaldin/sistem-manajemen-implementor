@@ -59,6 +59,10 @@
         .nav-item>.nav-link:hover>i {
             color: #00bfa6 !important;
         }
+
+        .bg-green {
+            background-color: #00bfa6 !important;
+        }
     </style>
 </head>
 

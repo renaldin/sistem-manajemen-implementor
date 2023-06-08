@@ -35,6 +35,7 @@ $routes->get('/login', 'Login::index');
 $routes->post('/cek_login', 'Login::cek_login');
 $routes->get('/logout', 'Login::logout');
 
+// Route Leader (admin)
 $routes->get('/dashboard', 'Leader::index');
 
 $routes->get('/m_employe_assesment', 'Leader::m_employe_assesment');
@@ -42,7 +43,7 @@ $routes->post('/m_employe_assesment/insert_employe', 'Leader::insert_employe');
 $routes->get('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
 $routes->post('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
 $routes->delete('/m_employe_assesment/(:num)', 'Leader::delete_employe/$1');
-$routes->post('/m_employe_assesment/hasil', 'Leader::hasil');
+$routes->get('/m_employe_assesment/hasil/(:num)', 'Leader::hasil/$1');
 $routes->post('/m_employe_assesment/kirim_email', 'Leader::kirim_email');
 
 $routes->get('/m_work_position', 'Leader::m_work_position');
@@ -63,11 +64,26 @@ $routes->get('/m_live_location/riwayat_live_location', 'Leader::riwayat_live_loc
 $routes->get('/m_task_management', 'Leader::m_task_management');
 $routes->get('/m_task_management/getRS/(:num)', 'Leader::get_RS_ajax/$1');
 $routes->post('/m_task_management/insert_task', 'Leader::insert_task');
+$routes->get('/m_task_management/(:num)/(:any)', 'Leader::detail/$1/$2');
+$routes->post('/m_task_management/edit', 'Leader::ubah_batas_tgl_pekerjaan');
+$routes->get('/m_task_management/selesai/(:num)', 'Leader::selesai_task/$1');
+$routes->get('/m_task_management/riwayat_task', 'Leader::riwayat_task');
 
+// Route Karyawan
 $routes->get('/liveLocation', 'Karyawan::live_location');
 $routes->get('/liveLocation/(:any)', 'Karyawan::absen/$1');
 $routes->post('/liveLocation/insert_hadir/', 'Karyawan::insert_hadir');
 $routes->post('/liveLocation/insert_tidakhadir/', 'Karyawan::insert_tidakhadir');
+
+$routes->get('/task_management', 'Karyawan::task_management');
+$routes->get('/task_management/(:num)', 'Karyawan::detail_task_management/$1');
+$routes->post('/task_management/insert', 'Karyawan::upload_task');
+
+// Route HRD
+$routes->get('/hrd', 'HRD::index');
+$routes->get('/hrd/(:num)', 'HRD::input_nilai/$1');
+$routes->post('/hrd/save_nilai', 'HRD::save_nilai');
+
 
 
 /*

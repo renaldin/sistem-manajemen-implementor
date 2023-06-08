@@ -82,65 +82,40 @@ class Leader extends BaseController
                 session()->setFlashdata('errors', \config\Services::validation()->getErrors());
                 return redirect()->to(base_url('m_employe_assesment/' . $id));
             }
-            $input_employe = [
-                'public_speaking' => $this->request->getPost('public_speaking'),
-                'tanya_jawab' => $this->request->getPost('tanya_jawab'),
-                'soal' => $this->request->getPost('soal'),
-            ];
+
+            $ps = $this->request->getPost('public_speaking');
+            $tj =  $this->request->getPost('tanya_jawab');
+            $s = $this->request->getPost('soal');
+
             $data = [
-                'title' => 'Input Employe Values',
-                'input_employe' => $input_employe,
-                'data'  => $this->ModelLeader->getEmployeById($id),
-                'isi'   => 'leader/manage_employe/v_nilai_hrd'
+                'id_user'       => $id,
+                'nilai_leader'  => $ps + $tj + $s,
             ];
+
+            $this->ModelUser->update($id, $data);
+            session()->setFlashdata('pesan', "Input Nilai Berhasil!.");
+            return redirect()->to(base_url('m_employe_assesment'));
+            // $data = [
+            //     'title' => 'Input Employe Values',
+            //     'input_employe' => $input_employe,
+            //     'data'  => $this->ModelLeader->getEmployeById($id),
+            //     'isi'   => 'leader/manage_employe/v_nilai_hrd'
+            // ];
         } else {
             $data = [
                 'title' => 'Input Employe Values',
                 'data'  => $this->ModelLeader->getEmployeById($id),
-                'isi'   => 'leader/manage_employe/v_nilai_employe'
+                'isi'   => 'leader/manage_employe/v_nilai_leader'
             ];
         }
         return view('layout/v_wrapper_admin', $data);
     }
 
-    public function hasil()
+    public function hasil($id)
     {
-        $validate = $this->validate([
-            'public_speaking' => [
-                'label' => 'Public Speaking',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nilai {field} Wajib Diisi.',
-                ],
-            ],
-            'tanya_jawab' => [
-                'label' => 'Tanya Jawab',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nilai {field} wajib diisi.'
-                ],
-            ],
-            'soal' => [
-                'label' => 'Soal',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nilai {field} wajib diisi.'
-                ],
-            ],
-        ]);
-        if (!$validate) {
-            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
-            return redirect()->back()->withInput();
-        }
-        $id = $this->request->getPost('id');
-        $ps_leader = $this->request->getPost('ps_leader');
-        $tj_leader = $this->request->getPost('tj_leader');
-        $ns_leader = $this->request->getPost('ns_leader');
-        $ps_hrd = $this->request->getPost('public_speaking');
-        $tj_hrd = $this->request->getPost('tanya_jawab');
-        $ns_leader = $this->request->getPost('soal');
         // hitung jumlah nilai
-        $hitung = $ps_leader + $tj_leader + $ns_leader + $ps_hrd + $tj_hrd + $ns_leader;
+        $user = $this->ModelUser->find($id);
+        $hitung = $user['nilai_leader'] + $user['nilai_hrd'];
         $hasil = 'Tidak Diterima';
         if ($hitung >= 10) {
             $hasil = 'Diterima';
@@ -165,7 +140,6 @@ class Leader extends BaseController
             ],
             'isi'   => 'leader/manage_employe/v_hasil_nilai'
         ];
-
         return view('layout/v_wrapper_admin', $data);
     }
 
@@ -518,7 +492,9 @@ class Leader extends BaseController
             'data'  => $this->ModelPekerjaan
                 ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
                 ->join('user', 'user.id_user = implementor.id_user')
-                ->where('status_pekerjaan !=', 'Selesai')->findAll(),
+                ->where('status_pekerjaan !=', 'Done')
+                ->orderBy('id_pekerjaan', 'DESC')
+                ->findAll(),
             'isi'   => 'leader/manage_task_management/v_m_task_management'
         ];
         return view('layout/v_wrapper_admin', $data);
@@ -570,5 +546,66 @@ class Leader extends BaseController
             session()->setFlashdata('errors', \config\Services::validation()->getErrors());
             return redirect()->to(base_url('m_task_management'))->withInput();
         }
+    }
+
+    public function detail($id, $return = null)
+    {
+        $data = [
+            'title'     => 'Detail Task Management',
+            'subtitle'  => 'Detail Pekerjaan',
+            'return'    => $return,
+            'data'      => $this->ModelPekerjaan
+                ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
+                ->join('user', 'user.id_user = implementor.id_user')
+                ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')
+                ->find($id),
+            'isi'       => 'leader/manage_task_management/v_detail'
+        ];
+        // var_dump($data['data']);
+        // die();
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function ubah_batas_tgl_pekerjaan()
+    {
+        $data = [
+            'id_pekerjaan'  => $this->request->getPost('id_pekerjaan'),
+            'batas_tgl_pekerjaan'  => $this->request->getPost('batas_tgl_pekerjaan'),
+        ];
+        $this->ModelPekerjaan->update($this->request->getPost('id_pekerjaan'), $data);
+        session()->setFlashdata('pesan', "Batas Tanggal Pekerjaan Berhasil Diedit!.");
+        return redirect()->to(base_url('m_task_management'));
+    }
+
+    public function selesai_task($id)
+    {
+        $pekerjaan = $this->ModelPekerjaan->find($id);
+        if ($pekerjaan['status_pekerjaan'] != 'Uploaded') {
+            session()->setFlashdata('info', "Task Masih Dalam Progress!.");
+            return redirect()->to(base_url('m_task_management'));
+        }
+        $data = [
+            'id_pekerjaan'      => $id,
+            'status_pekerjaan'  => 'Done'
+        ];
+        $this->ModelPekerjaan->update($id, $data);
+        session()->setFlashdata('pesan', "Berhasil Menyelesaikan Task!.");
+        return redirect()->to(base_url('m_task_management'));
+    }
+
+    public function riwayat_task()
+    {
+        $data = [
+            'title' => 'History Task Management',
+            'implementor'  => $this->ModelLeader->getImplementor(),
+            'data'  => $this->ModelPekerjaan
+                ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
+                ->join('user', 'user.id_user = implementor.id_user')
+                ->where('status_pekerjaan', 'Done')
+                ->orderBy('id_pekerjaan', 'DESC')
+                ->findAll(),
+            'isi'   => 'leader/manage_task_management/v_riwayat'
+        ];
+        return view('layout/v_wrapper_admin', $data);
     }
 }

@@ -43,6 +43,7 @@
                                     <th>Nama</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Email</th>
+                                    <th>Nilai</th>
                                     <th>Status</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -58,21 +59,34 @@
                                         <td><?= $row['jenis_kelamin'] ?></td>
                                         <td><?= $row['email'] ?></td>
                                         <td>
-                                            <?php if ($row['status'] ==  null) { ?>
+                                            <?php if ($row['nilai_leader'] == null && $row['nilai_hrd'] == null) { ?>
+                                                0/2
+                                            <?php } elseif ($row['nilai_leader'] != null && $row['nilai_hrd'] != null) { ?>
+                                                2/2
+                                            <?php } else { ?>
+                                                1/2
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($row['status'] ==  null && $row['nilai_leader'] == null && $row['nilai_hrd'] == null) { ?>
                                                 <span class="badge rounded-pill bg-warning">Belum Dinilai</span>
                                             <?php } elseif ($row['status'] == 'Diterima') { ?>
                                                 <span class="badge rounded-pill bg-primary"><?= $row['status'] ?></span>
                                             <?php } elseif ($row['status'] == 'Implementor') { ?>
                                                 <span class="badge rounded-pill bg-success"><?= $row['status'] ?></span>
                                             <?php } else { ?>
-                                                <span class="badge rounded-pill bg-info"><?= $row['status'] ?></span>
+                                                <span class="badge rounded-pill bg-info">Dinilai</span>
                                             <?php } ?>
                                         </td>
                                         <td class="text-center">
-                                            <?php if ($row['status'] == null) { ?>
+                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#del-<?= $row['id_user'] ?>"><i class=" bi bi-trash"></i></button>
+                                            <?php if ($row['status'] == null && $row['nilai_leader'] == null) { ?>
                                                 <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm">Input Value</a>
                                             <?php } ?>
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#del-<?= $row['id_user'] ?>"><i class=" bi bi-trash"></i></button>
+                                            <?php if ($row['nilai_leader'] != null && $row['nilai_hrd'] != null && $row['status'] == null) { ?>
+                                                <a href="<?= base_url('m_employe_assesment/hasil/' . $row['id_user']) ?>" class="btn btn-success btn-sm bg-green">Hasil</a>
+
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php } ?>

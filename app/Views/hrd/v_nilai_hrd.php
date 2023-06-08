@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Form Nilai Leader Implementor</h5>
+                        <h5 class="card-title">Form Nilai HRD</h5>
                         <?php
                         $errors = session()->getFlashdata('errors');
                         if (!empty($errors)) { ?>
@@ -29,7 +29,8 @@
                             </div>
                         <?php  } ?>
                         <!-- Vertical Form -->
-                        <?= form_open('m_employe_assesment/' . $data['id_user'], ['class' => 'row g-3']) ?>
+                        <?= form_open('hrd/save_nilai', ['class' => 'row g-3']) ?>
+                        <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
                         <!-- <form class="row g-3"> -->
                         <div class="col-12">
                             <label for="public_speaking" class="form-label">Nilai Public Speaking</label>
@@ -58,9 +59,8 @@
                                 <option value="3">Baik</option>
                             </select>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <a href="<?= base_url('m_employe_assesment') ?>" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Kembali</a>
-                            <button type="submit" class="btn btn-primary">Next <i class="bi bi-arrow-right-circle"></i></button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save</button>
                             <!-- <button type="reset" class="btn btn-secondary">Reset</button> -->
                         </div>
                         <!-- </form> -->
