@@ -91,7 +91,8 @@
         var y = document.getElementById("koordinat");
         x.innerHTML = position.coords.latitude + "," + position.coords.longitude;
         y.value = position.coords.latitude + "," + position.coords.longitude;
-        // alert(koor)
+        // var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        // alert(position.coords.latitude + "," + position.coords.longitude);
     }
 
     function takePicture() {

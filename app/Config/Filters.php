@@ -16,13 +16,14 @@ class Filters extends BaseConfig
      * make reading things nicer and simpler.
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
-        'filterleader'  => \App\Filters\FilterLeader::class,
-        'filterkaryawan' => \App\Filters\FilterKaryawan::class,
+        'csrf'              => CSRF::class,
+        'toolbar'           => DebugToolbar::class,
+        'honeypot'          => Honeypot::class,
+        'invalidchars'      => InvalidChars::class,
+        'secureheaders'     => SecureHeaders::class,
+        'filterleader'      => \App\Filters\FilterLeader::class,
+        'filterkaryawan'    => \App\Filters\FilterKaryawan::class,
+        'filterhrd'         => \App\Filters\FilterHRD::class,
     ];
 
     /**
@@ -59,6 +60,15 @@ class Filters extends BaseConfig
                     '/',
                     '/liveLocation',
                     '/liveLocation/*',
+                    '/task_management',
+                    '/task_management/*',
+                ]
+            ],
+            'filterhrd' => [
+                'except' => [
+                    '/',
+                    '/hrd',
+                    '/hrd/*',
                 ]
             ],
         ],

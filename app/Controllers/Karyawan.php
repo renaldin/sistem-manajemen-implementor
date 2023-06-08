@@ -3,16 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ModelImplementor;
 use App\Models\ModelKaryawan;
+use App\Models\ModelPekerjaan;
 
 class Karyawan extends BaseController
 {
 
-    private $ModelKaryawan;
+    private $ModelKaryawan, $ModelPekerjaan, $ModelImplementor;
 
     public function __construct()
     {
         $this->ModelKaryawan = new ModelKaryawan();
+        $this->ModelPekerjaan = new ModelPekerjaan();
+        $this->ModelImplementor = new ModelImplementor();
     }
 
     public function live_location()
@@ -129,6 +133,68 @@ class Karyawan extends BaseController
             $this->ModelKaryawan->insertAbsen($data);
             session()->setFlashdata('pesan', "Berhasil melakukan absensi!.");
             return redirect()->to(base_url('liveLocation'));
+        } else {
+            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function task_management()
+    {
+        $implementor = $this->ModelImplementor->where('id_user', session()->get('id'))->get()->getRowArray();
+        $data = [
+            'title'     => 'Task Management',
+            'data'      => $this->ModelPekerjaan
+                ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
+                ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')
+                ->where('pekerjaan.id_implementor', $implementor['id_implementor'])
+                ->orderBy('id_pekerjaan', 'DESC')
+                ->findAll(),
+            'isi'       => 'karyawan/task_management/v_index'
+        ];
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function detail_task_management($id)
+    {
+        $data = [
+            'title'     => 'Task Management',
+            'subtitle'     => 'Detail Task Management',
+            'data'      => $this->ModelPekerjaan
+                ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
+                ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')
+                ->find($id),
+            'isi'       => 'karyawan/task_management/v_detail'
+        ];
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function upload_task()
+    {
+        $batas = $this->ModelPekerjaan->find($this->request->getPost('id_pekerjaan'));
+        if (date('Y-m-d') > $batas['batas_tgl_pekerjaan']) {
+            session()->setFlashdata('info', "Waktu sudah melewati batas pengumpulan!.");
+            return redirect()->to(base_url('task_management'));
+        }
+        $validasi = [
+            'link' => [
+                'label' => 'Link Upload',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Wajib Diisi.',
+                ],
+            ],
+        ];
+
+        if ($this->validate($validasi)) {
+            $data = [
+                'tgl_pengumpulan'   => $this->request->getPost('tgl_pengumpulan'),
+                'link'              => $this->request->getPost('link'),
+                'status_pekerjaan'  => 'Uploaded'
+            ];
+            $this->ModelPekerjaan->update($this->request->getPost('id_pekerjaan'), $data);
+            session()->setFlashdata('pesan', "Berhasil mengupload tugas!.");
+            return redirect()->to(base_url('task_management'));
         } else {
             session()->setFlashdata('errors', \config\Services::validation()->getErrors());
             return redirect()->back()->withInput();

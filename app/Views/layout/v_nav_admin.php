@@ -198,9 +198,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed " href="#">
+                <a class="nav-link <?= ($title == 'Task Management' || $title == 'Detail Task Management') ? 'active' : 'collapsed' ?>" href="<?= base_url('task_management') ?>">
                     <i class="bi bi-files"></i>
                     <span>Task Management</span>
+                </a>
+            </li>
+        <?php } ?>
+
+        <?php if (session()->get('role') == 'HRD') { ?>
+            <li class="nav-item active ">
+                <a class="nav-link <?= ($title == 'Manage Employee Assesment' || $title == 'Input Nilai Employee') ? 'active' : 'collapsed' ?>" href="<?= base_url('hrd') ?>">
+                    <i class="bi bi-clipboard2-check"></i>
+                    <span>Manage Employe Assesment</span>
                 </a>
             </li>
         <?php } ?>
@@ -254,10 +263,23 @@
             <!-- End Contact Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="<?= base_url('m_task_management') ?>">
+                <a class="nav-link <?= ($title == 'Manage Task Management' || $title == 'Detail Task Management' || $title == 'History Task Management') ? 'active' : 'collapsed' ?>" data-bs-target="#menu_task" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-files"></i>
                     <span>Manage Task Management</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="menu_task" class="nav-content collapse <?= ($title == 'Manage Task Management' || $title == 'Detail Task Management' || $title == 'History Task Management') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class="<?= ($title == 'Manage Task Management') ? 'active' : '' ?>" href="<?= base_url('m_task_management') ?>">
+                            <i class="bi bi-circle"></i><span>Task Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= ($title == 'History Task Management') ? 'active' : '' ?>" href="<?= base_url('m_task_management/riwayat_task') ?>">
+                            <i class="bi bi-circle"></i><span>History Task</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         <?php } ?>
         <!-- End Register Page Nav -->

@@ -55,10 +55,24 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama_user'] ?></td>
                                         <td><?= $row['batas_tgl_pekerjaan'] ?></td>
-                                        <td><span class="badge rounded-pill bg-warning"><?= $row['status_pekerjaan'] ?></span></td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-sm">Selesai</a>
-                                            <a href="#" class="btn btn-info btn-sm">Detail</a>
+                                            <?php if ($row['tgl_pengumpulan'] == null && date('Y-m-d') > $row['batas_tgl_pekerjaan']) { ?>
+                                                <span class="badge rounded-pill bg-danger">Late</span>
+                                            <?php } elseif ($row['status_pekerjaan'] == 'Uploaded') { ?>
+                                                <span class="badge rounded-pill bg-info"><?= $row['status_pekerjaan'] ?></span>
+                                            <?php } elseif ($row['status_pekerjaan'] == 'Done') { ?>
+                                                <span class="badge rounded-pill bg-success">
+                                                    <?= $row['status_pekerjaan'] ?>
+                                                </span>
+                                            <?php } else { ?>
+                                                <span class="badge rounded-pill bg-warning">
+                                                    <?= $row['status_pekerjaan'] ?>
+                                                </span>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_pekerjaan'] ?>" class="btn btn-success btn-sm">Selesai</a>
+                                            <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/task') ?>" class="btn btn-info btn-sm">Detail</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -80,7 +94,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Task Karyawan</h5>
+                <h5 class="modal-title">Create Task Karyawan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -109,13 +123,34 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Tambah</button>
+                    <button type="submit" class="btn btn-success bg-green">Create</button>
                 </div>
                 <?= form_close() ?>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal Selesai -->
+<?php foreach ($data as $row) { ?>
+    <div class="modal fade" id="selesai-<?= $row['id_pekerjaan'] ?>" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Selesai Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Yakin ingin menyelesaikan task <?= $row['nama_user'] ?> ?</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="<?= base_url('m_task_management/selesai/' . $row['id_pekerjaan']) ?>" class="btn btn-success bg-green">Ya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 
 <script>
     function getRS() {

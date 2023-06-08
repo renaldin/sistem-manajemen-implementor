@@ -13,7 +13,7 @@ class ModelPekerjaan extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_pekerjaan', 'deskripsi', 'batas_tgl_pekerjaan', 'id_implementor', 'status'];
+    protected $allowedFields    = ['id_pekerjaan', 'deskripsi', 'batas_tgl_pekerjaan', 'tgl_pengumpulan', 'link', 'id_implementor', 'status_pekerjaan'];
 
     // Dates
     protected $useTimestamps = false;

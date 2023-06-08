@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2023 at 01:46 AM
+-- Generation Time: Jun 08, 2023 at 04:24 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -63,7 +63,8 @@ INSERT INTO `implementor` (`id_implementor`, `id_rumah_sakit`, `id_user`, `email
 (2, 1, 3, 'riangergor@gmail.com', '2023-05-19', '2023-05-19', NULL),
 (4, 2, 6, 'contohh@gmail.com', '2023-05-22', '2023-05-22', NULL),
 (5, 3, 7, 'karyawan1@gmail.com', '2023-05-22', '2023-05-31', NULL),
-(6, 3, 8, 'karyawan2@gmail.com', '2023-05-22', '2023-05-31', NULL);
+(6, 3, 8, 'karyawan2@gmail.com', '2023-05-22', '2023-05-31', NULL),
+(8, 8, 13, 'putri@gmail.com', '2023-06-04', '2023-08-25', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,16 +76,20 @@ CREATE TABLE `pekerjaan` (
   `id_pekerjaan` int(11) NOT NULL,
   `deskripsi` text NOT NULL,
   `batas_tgl_pekerjaan` date NOT NULL,
+  `tgl_pengumpulan` date DEFAULT NULL,
+  `link` text DEFAULT NULL,
   `id_implementor` int(11) NOT NULL,
-  `status_pekerjaan` varchar(255) DEFAULT NULL
+  `status_pekerjaan` enum('On Progress','Uploaded','Done','Late') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pekerjaan`
 --
 
-INSERT INTO `pekerjaan` (`id_pekerjaan`, `deskripsi`, `batas_tgl_pekerjaan`, `id_implementor`, `status_pekerjaan`) VALUES
-(1, 'menambahkan fitur login', '2023-05-29', 1, 'On Progress');
+INSERT INTO `pekerjaan` (`id_pekerjaan`, `deskripsi`, `batas_tgl_pekerjaan`, `tgl_pengumpulan`, `link`, `id_implementor`, `status_pekerjaan`) VALUES
+(2, 'Menambahkan fitur Search', '2023-06-08', '2023-06-08', 'https://www.figma.com/file/F8SAW9XCqnBf7KVIBmcX6J/UI-PA?type=design&node-id=0-1', 1, 'Done'),
+(3, 'Update fitur', '2023-06-15', '2023-06-08', 'https://www.figma.com/file/F8SAW9XCqnBf7KVIBmcX6J/UI-PA?type=design&node-id=0-1', 2, 'Done'),
+(4, 'Update sistem', '2023-06-08', '2023-06-08', 'http://localhost/phpmyadmin/index.php?route=/table/structure/save', 2, 'Done');
 
 -- --------------------------------------------------------
 
@@ -128,10 +133,12 @@ INSERT INTO `rumah_sakit` (`id_rumah_sakit`, `nama_rumah_sakit`, `alamat_rumah_s
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `nama_user` varchar(30) NOT NULL,
-  `jenis_kelamin` varchar(20) NOT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan','','') NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(15) NOT NULL,
+  `nilai_leader` int(11) DEFAULT NULL,
+  `nilai_hrd` int(11) DEFAULT NULL,
+  `role` enum('Leader','Karyawan','HRD','') NOT NULL,
   `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -139,16 +146,17 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `email`, `password`, `role`, `status`) VALUES
-(1, 'Alex', 'Laki-laki', 'leader@gmail.com', '123', 'Leader', NULL),
-(2, 'Smith', 'Laki-laki', 'karyawan@gmail.com', '123', 'Karyawan', 'Implementor'),
-(3, 'John', 'Laki-laki', 'john@gmail.com', '123', 'Karyawan', 'Implementor'),
-(5, 'Udin', 'Laki-laki', 'udin@gmail.com', '123', 'Karyawan', 'Tidak Diterima'),
-(6, 'contoh', 'Perempuan', 'contoh@gmail.com', '123', 'Karyawan', 'Implementor'),
-(7, 'karyawan1', 'Laki-laki', 'karyawan1@gmail.com', '123', 'Karyawan', 'Implementor'),
-(8, 'karyawan2', 'Perempuan', 'karyawan2@gmail.com', '123', 'Karyawan', 'Implementor'),
-(9, 'Coba', 'Laki-laki', 'coba@gmail.com', '123', 'Karyawan', 'Tidak Diterima'),
-(10, 'coba2', 'Perempuan', 'cobaa@gmail.com', '123', 'Karyawan', 'Diterima');
+INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `email`, `password`, `nilai_leader`, `nilai_hrd`, `role`, `status`) VALUES
+(1, 'Alex', 'Laki-laki', 'leader@gmail.com', '123', NULL, NULL, 'Leader', NULL),
+(2, 'Udin', 'Laki-laki', 'karyawan@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
+(3, 'John', 'Laki-laki', 'john@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
+(6, 'contoh', 'Perempuan', 'contoh@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
+(7, 'karyawan1', 'Laki-laki', 'karyawan1@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
+(8, 'karyawan2', 'Perempuan', 'karyawan2@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
+(13, 'Putri', 'Perempuan', 'putri@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
+(14, 'Susanti', 'Perempuan', 'susanti@gmail.com', '123', 6, 6, 'Karyawan', 'Diterima'),
+(15, 'Rendi', 'Laki-laki', 'rendi@gmail.com', '123', NULL, NULL, 'Karyawan', NULL),
+(16, 'Putri', 'Perempuan', 'hrd@gmail.com', '123', NULL, NULL, 'HRD', NULL);
 
 --
 -- Indexes for dumped tables
@@ -196,19 +204,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `implementor`
 --
 ALTER TABLE `implementor`
-  MODIFY `id_implementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_implementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pekerjaan`
 --
 ALTER TABLE `pekerjaan`
-  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rumah_sakit`
@@ -220,7 +228,7 @@ ALTER TABLE `rumah_sakit`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
