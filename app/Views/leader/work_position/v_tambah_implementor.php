@@ -17,14 +17,24 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><?= $title ?> <?= $data['nama_rumah_sakit'] ?></h5>
-
+                        <?php
+                        $errors = session()->getFlashdata('errors');
+                        if (!empty($errors)) { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <ul>
+                                    <?php foreach ($errors as $key => $value) { ?>
+                                        <li><?= esc($value); ?></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        <?php  } ?>
                         <!-- Vertical Form -->
                         <?= form_open('m_work_position/' . $data['id_rumah_sakit'], ['class' => 'row g-3']) ?>
                         <!-- <form class="row g-3"> -->
                         <div class="col-12">
                             <label for="implementor" class="form-label">Implementor 1</label>
                             <select name="id_user" id="impelementor" class="form-select" aria-label="Default select example" required>
-                                <option selected>~ Pilih ~</option>
+                                <option value="" selected>~ Pilih ~</option>
                                 <?php foreach ($karyawan as $row) {
                                     if ($row['status'] == 'Diterima' && $row['status'] != 'Implementor') {
                                 ?>

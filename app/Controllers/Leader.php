@@ -30,6 +30,7 @@ class Leader extends BaseController
 
         $data = [
             'title' => 'Dashboard',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'count_rumahsakit' => $this->ModelLeader->countRumahSakit(),
             'count_implementor' => $this->ModelLeader->countImplementor(),
             'count_employe' => $this->ModelLeader->countEmploye(),
@@ -45,6 +46,7 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'Manage Employe Assesment',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelLeader->getAll(),
             'isi'   => 'leader/manage_employe/v_m_employe_assesment'
         ];
@@ -104,6 +106,7 @@ class Leader extends BaseController
         } else {
             $data = [
                 'title' => 'Input Employe Values',
+                'user'  => $this->ModelUser->find(session()->get('id')),
                 'data'  => $this->ModelLeader->getEmployeById($id),
                 'isi'   => 'leader/manage_employe/v_nilai_leader'
             ];
@@ -132,6 +135,7 @@ class Leader extends BaseController
         $getEmploye = $this->ModelLeader->getEmployeById($id);
         $data = [
             'title' => 'Hasil Employe Assesment',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelLeader->getAll(),
             'hasil' => [
                 'nilai' => $hitung,
@@ -196,9 +200,22 @@ class Leader extends BaseController
 
     public function kirim_email()
     {
+        $validate = $this->validate([
+            'pesan' => [
+                'label' => 'Isi Pesan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Wajib Diisi.',
+                ],
+            ],
+        ]);
+        if (!$validate) {
+            session()->setFlashdata('info', "Isi Pesan Wajib diisi!.");
+            return redirect()->back()->withInput();
+        }
         $email = \Config\Services::email();
 
-        $fromEmail = 'info.himmipolsub@gmail.com';
+        $fromEmail = 'putrifitriani559@gmail.com';
         $email->setFrom($fromEmail);
         $emailUser = $this->request->getPost('email');
         $toFrom = $emailUser;
@@ -229,6 +246,7 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'Manage Work Position',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelRumahSakit->where('status', null)->paginate(8, 'rumah_sakit'),
             'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
             'pagination' => $this->ModelRumahSakit->pager,
@@ -341,8 +359,29 @@ class Leader extends BaseController
         }
 
         if ($this->request->getPost()) {
+            $validate = $this->validate([
+                'id_user' => [
+                    'label' => 'Implementor 1',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+            ]);
+            if (!$validate) {
+                session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+                return redirect()->back()->withInput();
+            }
             $data = [
                 'title' => 'Add Implementor Rumah Sakit',
+                'user'  => $this->ModelUser->find(session()->get('id')),
                 'data'  => $this->ModelLeader->getRumahSakitById($id_rumah_sakit),
                 'data_input' => [
                     'id_user' => $this->request->getPost('id_user'),
@@ -356,6 +395,7 @@ class Leader extends BaseController
         } else {
             $data = [
                 'title' => 'Add Implementor Rumah Sakit',
+                'user'  => $this->ModelUser->find(session()->get('id')),
                 'data'  => $this->ModelLeader->getRumahSakitById($id_rumah_sakit),
                 'karyawan' => $this->ModelLeader->getAllEmploye(),
                 'isi'   => 'leader/work_position/v_tambah_implementor'
@@ -367,6 +407,26 @@ class Leader extends BaseController
 
     public function simpan_implementor($id_rumah_sakit)
     {
+        $validate = $this->validate([
+            'id_user2' => [
+                'label' => 'Implementor 2',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+            'email_user2' => [
+                'label' => 'Email',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} wajib diisi.'
+                ],
+            ],
+        ]);
+        if (!$validate) {
+            session()->setFlashdata('errors', \config\Services::validation()->getErrors());
+            return redirect()->back()->withInput();
+        }
         $data = [
             [
                 'id_rumah_sakit'    => $id_rumah_sakit,
@@ -408,6 +468,7 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'History Rumah Sakit',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelRumahSakit->where('status', 'Cancle')->paginate(8, 'rumah_sakit'),
             'pagination' => $this->ModelRumahSakit->pager,
             'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
@@ -434,6 +495,7 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'Manage Live Location',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelLeader->getAllAbsen(),
             'isi'   => 'leader/manage_live_location/v_m_live_location'
         ];
@@ -447,12 +509,14 @@ class Leader extends BaseController
         if ($cekHadir['keterangan'] == null) {
             $data = [
                 'title' => 'Detail Live Location',
+                'user'  => $this->ModelUser->find(session()->get('id')),
                 'data'  => $cekHadir,
                 'isi'   => 'leader/manage_live_location/v_detail_hadir'
             ];
         } else {
             $data = [
                 'title' => 'Detail Live Location',
+                'user'  => $this->ModelUser->find(session()->get('id')),
                 'data'  => $cekHadir,
                 'isi'   => 'leader/manage_live_location/v_detail_tidakhadir'
             ];
@@ -476,6 +540,7 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'History Live Location',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelLeader->getRiwayatAbsen(),
             'isi'   => 'leader/manage_live_location/v_riwayat'
         ];
@@ -488,6 +553,7 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'Manage Task Management',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'implementor'  => $this->ModelLeader->getImplementor(),
             'data'  => $this->ModelPekerjaan
                 ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
@@ -597,6 +663,7 @@ class Leader extends BaseController
     {
         $data = [
             'title' => 'History Task Management',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'implementor'  => $this->ModelLeader->getImplementor(),
             'data'  => $this->ModelPekerjaan
                 ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')

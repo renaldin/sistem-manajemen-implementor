@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-12">
                         <label for="pesan" class="form-label">Isi Pesan</label>
-                        <textarea class="form-control" placeholder="Masukan pesan email" name="pesan" id="pesan" style="height: 100px;"></textarea>
+                        <textarea class="form-control" placeholder="Masukan pesan email" name="pesan" id="pesan" style="height: 100px;" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -84,6 +84,12 @@ $routes->get('/hrd', 'HRD::index');
 $routes->get('/hrd/(:num)', 'HRD::input_nilai/$1');
 $routes->post('/hrd/save_nilai', 'HRD::save_nilai');
 
+// Route Profile
+$routes->get('/profile', 'Profile::index');
+$routes->get('/profile/edit', 'Profile::edit');
+$routes->get('/profile/change_password', 'Profile::change_password');
+
+
 
 
 /*

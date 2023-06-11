@@ -27,6 +27,7 @@ class HRD extends BaseController
     {
         $data = [
             'title' => 'Manage Employee Assesment',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelLeader->getAll(),
             'isi'   => 'hrd/v_index'
         ];
@@ -38,6 +39,7 @@ class HRD extends BaseController
     {
         $data = [
             'title' => 'Input Nilai Employee',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'data'  => $this->ModelLeader->getEmployeById($id),
             'isi'   => 'hrd/v_nilai_hrd'
         ];

@@ -53,6 +53,8 @@ class Filters extends BaseConfig
                     '/m_live_location/*',
                     '/m_task_management',
                     '/m_task_management/*',
+                    '/profile',
+                    '/profile/*',
                 ]
             ],
             'filterkaryawan' => [
@@ -62,6 +64,8 @@ class Filters extends BaseConfig
                     '/liveLocation/*',
                     '/task_management',
                     '/task_management/*',
+                    '/profile',
+                    '/profile/*',
                 ]
             ],
             'filterhrd' => [
@@ -69,6 +73,8 @@ class Filters extends BaseConfig
                     '/',
                     '/hrd',
                     '/hrd/*',
+                    '/profile',
+                    '/profile/*',
                 ]
             ],
         ],

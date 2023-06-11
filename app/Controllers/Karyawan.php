@@ -6,17 +6,19 @@ use App\Controllers\BaseController;
 use App\Models\ModelImplementor;
 use App\Models\ModelKaryawan;
 use App\Models\ModelPekerjaan;
+use App\Models\ModelUser;
 
 class Karyawan extends BaseController
 {
 
-    private $ModelKaryawan, $ModelPekerjaan, $ModelImplementor;
+    private $ModelKaryawan, $ModelPekerjaan, $ModelImplementor, $ModelUser;
 
     public function __construct()
     {
         $this->ModelKaryawan = new ModelKaryawan();
         $this->ModelPekerjaan = new ModelPekerjaan();
         $this->ModelImplementor = new ModelImplementor();
+        $this->ModelUser = new ModelUser();
     }
 
     public function live_location()
@@ -28,6 +30,7 @@ class Karyawan extends BaseController
             'title'     => 'Live Location',
             'ucapan'    => $this->getUcapan($jam),
             'tanggal'   => date('d/m/Y'),
+            'user'      => $this->ModelUser->find(session()->get('id')),
             'waktu'     => $jam,
             'absen'     => $this->ModelKaryawan->cekAbsen(session()->get('id'), date('Y-m-d')),
             'isi'       => 'karyawan/v_liveLocation'
@@ -53,6 +56,7 @@ class Karyawan extends BaseController
             $data = [
                 'title'     => 'Absen Hadir',
                 'tanggal'   => date('d-m-Y'),
+                'user'      => $this->ModelUser->find(session()->get('id')),
                 'waktu'     => $jam,
                 'date'      => date('Y-m-d'),
                 'isi'       => 'karyawan/absen/v_hadir'
@@ -62,6 +66,7 @@ class Karyawan extends BaseController
             $data = [
                 'title'     => 'Absen Tidak Hadir',
                 'tanggal'   => date('d-m-Y'),
+                'user'      => $this->ModelUser->find(session()->get('id')),
                 'waktu'     => $jam,
                 'date'      => date('Y-m-d'),
                 'isi'       => 'karyawan/absen/v_tidakhadir'
@@ -144,6 +149,7 @@ class Karyawan extends BaseController
         $implementor = $this->ModelImplementor->where('id_user', session()->get('id'))->get()->getRowArray();
         $data = [
             'title'     => 'Task Management',
+            'user'      => $this->ModelUser->find(session()->get('id')),
             'data'      => $this->ModelPekerjaan
                 ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
                 ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')
@@ -160,6 +166,7 @@ class Karyawan extends BaseController
         $data = [
             'title'     => 'Task Management',
             'subtitle'     => 'Detail Task Management',
+            'user'      => $this->ModelUser->find(session()->get('id')),
             'data'      => $this->ModelPekerjaan
                 ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor')
                 ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')
