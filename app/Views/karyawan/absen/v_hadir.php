@@ -46,7 +46,7 @@
                                     </tr>
                                 </table>
                                 <div class="text-center">
-                                    <button class="btn btn-lg text-center btn-success" id="take" onclick="takePicture()"><i class="bi bi-camera fs-4"></i></button>
+                                    <button class="btn btn-lg text-center btn-success bg-green" id="take" onclick="takePicture()"><i class="bi bi-camera fs-4"></i></button>
                                     <button class="btn btn-lg text-center btn-warning d-none" id="repeat" onclick="repeat()"><i class="bi bi-arrow-repeat fs-4"></i></button>
                                 </div>
                                 <div class="text-center">
@@ -55,7 +55,7 @@
                                         <input type="hidden" name="tgl_absen" value="<?= $date ?>">
                                         <input type="hidden" name="jam" value="<?= $waktu ?>">
                                         <input type="hidden" name="koordinat" id="koordinat">
-                                        <button type="submit" class="btn btn-primary d-none mt-3 btn-lg" id="simpan">Simpan</button>
+                                        <button type="submit" class="btn btn-primary d-none mt-3 btn-lg bg-green" id="simpan">Simpan</button>
                                     </form>
                                 </div>
                             </div>

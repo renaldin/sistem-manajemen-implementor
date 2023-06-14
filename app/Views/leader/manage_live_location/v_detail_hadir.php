@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6 pt-3">
-                                <img class="w-100" src="<?= base_url('foto_absensi/' . $data['foto']) ?>" alt="">
+                                <img class="w-100" src="<?= base_url('foto_absensi/' . $absen['foto']) ?>" alt="">
                             </div>
                             <div class="col-12 col-md-6 col-lg-6 p-4 ">
                                 <table class="table">
@@ -23,7 +23,7 @@
                                         </td>
                                         <td>:</td>
                                         <td>
-                                            <p><a target="_blank" href="https://www.google.co.id/maps/place/<?= $data['koordinat'] ?>"><?= $data['koordinat'] ?></a></p>
+                                            <p><a target="_blank" href="https://www.google.co.id/maps/place/<?= $absen['koordinat'] ?>"><?= $absen['koordinat'] ?></a></p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -32,7 +32,7 @@
                                         </td>
                                         <td>:</td>
                                         <td>
-                                            <p><?= date('d-m-Y', strtotime($data['tgl_absen'])) ?></p>
+                                            <p><?= date('d-m-Y', strtotime($absen['tgl_absen'])) ?></p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -41,11 +41,11 @@
                                         </td>
                                         <td>:</td>
                                         <td>
-                                            <p><?= $data['jam'] ?></p>
+                                            <p><?= $absen['jam'] ?></p>
                                         </td>
                                     </tr>
                                 </table>
-                                <a href="<?= base_url('m_live_location') ?>" class="btn btn-success" style="float: right;">Back</a>
+                                <a href="<?= base_url('m_live_location') ?>" class="btn btn-outline-success" style="float: right;">Back</a>
                             </div>
                         </div>
                     </div>

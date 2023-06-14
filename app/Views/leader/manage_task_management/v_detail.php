@@ -37,11 +37,11 @@
                                 </div>
                                 <div class="modal-footer justify-content-evenly pt-3">
                                     <?php if ($return == 'task') { ?>
-                                        <a href="<?= base_url('m_task_management') ?>" class="btn btn-success">Back</a>
+                                        <a href="<?= base_url('m_task_management') ?>" class="btn btn-outline-success">Back</a>
                                     <?php } else { ?>
-                                        <a href="<?= base_url('m_task_management/riwayat_task') ?>" class="btn btn-success">Back</a>
+                                        <a href="<?= base_url('m_task_management/riwayat_task') ?>" class="btn btn-outline-success">Back</a>
                                     <?php } ?>
-                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                    <button type="submit" class="btn btn-primary bg-green">Edit</button>
                                 </div>
                             </form>
                         </div>

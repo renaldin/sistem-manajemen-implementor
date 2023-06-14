@@ -55,7 +55,7 @@
                                         <td><?= $row['tgl_absen'] ?></td>
                                         <td><?= $row['keterangan'] == null ? 'Hadir' : 'Tidak Hadir' ?></td>
                                         <td>
-                                            <a href="<?= base_url('m_live_location/' . $row['id_absen']) ?>" class="btn btn-info btn-sm">Detail</a>
+                                            <a href="<?= base_url('m_live_location/' . $row['id_absen']) ?>" class="btn btn-info btn-sm bg-green">Detail</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

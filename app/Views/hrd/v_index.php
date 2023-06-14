@@ -53,7 +53,7 @@
                                             <td><?= $row['jenis_kelamin'] ?></td>
                                             <td><?= $row['email'] ?></td>
                                             <td class="text-center">
-                                                <a href="<?= base_url('hrd/' . $row['id_user']) ?>" class="btn btn-primary btn-sm">Input Value</a>
+                                                <a href="<?= base_url('hrd/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Input Value</a>
                                             </td>
                                         </tr>
                                 <?php }

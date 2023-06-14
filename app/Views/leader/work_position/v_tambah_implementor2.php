@@ -61,7 +61,7 @@
                             <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai2" value="<?= date('Y-m-d') ?>" required>
                         </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary bg-hijau">Simpan</button>
                             <!-- <button type="reset" class="btn btn-secondary">Reset</button> -->
                         </div>
                         <!-- </form> -->

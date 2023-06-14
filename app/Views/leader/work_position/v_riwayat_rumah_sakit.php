@@ -50,7 +50,7 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-file-medical"></i>
+                                            <i class="bi bi-file-medical text-green"></i>
                                         </div>
                                         <div class="ps-3">
                                             <h6 class="fs-4"><?= $row['nama_rumah_sakit'] ?></h6>
@@ -98,8 +98,8 @@
                     <textarea class="form-control" name="deskripsi_rumah_sakit" style="height: 100px"><?= old('deskripsi_rumah_sakit') ?></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary bg-green">Save</button>
                 </div>
                 <?= form_close() ?>
             </div>
@@ -170,7 +170,7 @@
                     } ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>

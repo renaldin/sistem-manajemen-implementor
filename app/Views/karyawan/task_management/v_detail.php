@@ -47,9 +47,9 @@
                                     <input type="text" class="form-control" id="link" name="link" value="<?= $data['link'] ? $data['link'] : '' ?>" <?= $data['link'] ? 'readonly' : '' ?>>
                                 </div>
                                 <div class="modal-footer justify-content-evenly pt-3">
-                                    <a href="<?= base_url('task_management') ?>" class="btn btn-success">Back</a>
+                                    <a href="<?= base_url('task_management') ?>" class="btn btn-outline-success">Back</a>
                                     <?php if ($data['status_pekerjaan'] == 'On Progress') { ?>
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <button type="submit" class="btn btn-primary bg-green">Save</button>
                                     <?php } ?>
                                 </div>
                             </form>

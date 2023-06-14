@@ -7,7 +7,7 @@
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                 <li class="breadcrumb-item active">Work Position</li>
                 <div class="ms-auto">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered"><span class="bi bi-plus-lg"></span> Rumah Sakit</button>
+                    <button class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#verticalycentered"><span class="bi bi-plus-lg"></span> Rumah Sakit</button>
                 </div>
             </ol>
         </nav>
@@ -56,7 +56,7 @@
 
                                         <div class="d-flex align-items-center">
                                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                <i class="bi bi-file-medical"></i>
+                                                <i class="bi bi-file-medical text-green"></i>
                                             </div>
                                             <div class="ps-3">
                                                 <h6 class="fs-4"><?= $row['nama_rumah_sakit'] ?></h6>
@@ -104,8 +104,8 @@
                     <textarea class="form-control" name="deskripsi_rumah_sakit" style="height: 100px"><?= old('deskripsi_rumah_sakit') ?></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary bg-green">Save</button>
                 </div>
                 <?= form_close() ?>
             </div>
@@ -138,8 +138,8 @@
                         <textarea class="form-control" name="deskripsi_rumah_sakit" style="height: 100px"><?= $row['deskripsi_rumah_sakit'] ?></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary bg-green">Update</button>
                     </div>
                     <?= form_close() ?>
                 </div>
@@ -176,7 +176,7 @@
                     } ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
@@ -198,8 +198,8 @@
                     <p>Yakin ingin membatalkan kerja sama rumah sakit <?= $row['nama_rumah_sakit'] ?> ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="<?= base_url('m_work_position/cancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>" class="btn btn-primary">Ya</a>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                    <a href="<?= base_url('m_work_position/cancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>" class="btn btn-primary bg-green">Ya</a>
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>

@@ -27,7 +27,7 @@
                 </div><!-- End Default Card -->
                 <?php if (!$absen) { ?>
                     <div class="d-flex justify-content-evenly">
-                        <a href="<?= base_url('liveLocation/hadir') ?>" class="btn btn-success btn-lg">Hadir</a>
+                        <a href="<?= base_url('liveLocation/hadir') ?>" class="btn btn-success btn-lg bg-green">Hadir</a>
                         <a href="<?= base_url('liveLocation/tidak_hadir') ?>" class="btn btn-warning btn-lg">Tidak Hadir</a>
                     </div>
                 <?php } ?>

@@ -59,8 +59,9 @@
                                 <option value="3">Baik</option>
                             </select>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                        <div class="d-flex justify-content-between">
+                            <a href="<?= base_url('m_employe_assesment') ?>" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back</a>
+                            <button type="submit" class="btn btn-primary bg-green">Next</button>
                             <!-- <button type="reset" class="btn btn-secondary">Reset</button> -->
                         </div>
                         <!-- </form> -->

@@ -35,13 +35,17 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/sweetalert2.min.css">
     <script src="<?= base_url() ?>assets/js/sweetalert2.all.min.js"></script>
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Mar 09 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <style>
+        .text-green {
+            color: #00bfa6 !important;
+        }
+
+        .bg-green {
+            background-color: #00bfa6 !important;
+            border-color: #00bfa6;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -88,7 +92,7 @@
 
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                    <img src="<?= base_url() ?>assets/img/logo.png" alt="">
+                                    <!-- <img src="<?= base_url() ?>assets/img/logo.png" alt=""> -->
 
                                     <body class="col-12" style="background: url(<?= base_url() ?>assets/img/login.jpg);">
                                         <!-- <span class="d-lg-block">NiceAdmin</span> -->
@@ -100,8 +104,8 @@
                                 <div class="card-body">
 
                                     <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                                        <p class="text-center small">Enter your email & password to login</p>
+                                        <h1 class="card-title text-center pb-0 fs-1 text-green" style="font-weight: bolder !important;">LOGIN</h1>
+                                        <p class="text-center small text-green">Enter your email & password to login</p>
                                     </div>
                                     <?php
                                     $errors = session()->getFlashdata('errors');
@@ -115,42 +119,26 @@
                                         </div>
                                     <?php  } ?>
                                     <?= form_open('cek_login', ['class' => 'row g-3 needs-validation']); ?>
-                                    <div class="col-12">
+                                    <div class="col-12 pb-3">
                                         <label for="yourUsername" class="form-label">Email</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="email" name="email" class="form-control" id="yourUsername" value="<?= old('email') ?>" required>
+                                            <input type="email" name="email" class="form-control" id="yourUsername" value="<?= old('email') ?>" placeholder="Masukan Email" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
+                                    <div class="col-12 pb-3">
                                         <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control" id="yourPassword" value="<?= old('password') ?>" required>
+                                        <input type="password" name="password" class="form-control" id="yourPassword" value="<?= old('password') ?>" placeholder="Masukan Password" required>
                                     </div>
 
-                                    <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                                            <label class="form-check-label" for="rememberMe">Remember me</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Login</button>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
+                                    <div class="col-12 pb-3">
+                                        <button class="btn btn-primary w-100 bg-green" type="submit">Login</button>
                                     </div>
                                     <?= form_close(); ?>
                                 </div>
                             </div>
 
-                            <div class="credits">
-                                <!-- All the links in the footer should remain intact. -->
-                                <!-- You xcan delete the links only if you purchased the pro version. -->
-                                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                            </div>
 
                         </div>
                     </div>

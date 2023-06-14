@@ -105,7 +105,7 @@ class ModelLeader extends Model
     {
         return $this->db->table('absen')
             ->join('user', 'user.id_user = absen.id_user')
-            ->where('id_absen', $id)->get()->getRowArray();
+            ->where('absen.id_absen', $id)->get()->getRowArray();
     }
 
     public function updateAbsen($data)

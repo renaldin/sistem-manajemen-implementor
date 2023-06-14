@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ModelAbsen;
 use App\Models\ModelImplementor;
 use App\Models\ModelLeader;
 use App\Models\ModelPekerjaan;
@@ -12,7 +13,7 @@ use App\Models\ModelUser;
 class Leader extends BaseController
 {
 
-    private $ModelLeader, $ModelRumahSakit, $ModelImplementor, $ModelPekerjaan, $ModelUser;
+    private $ModelLeader, $ModelRumahSakit, $ModelImplementor, $ModelPekerjaan, $ModelUser, $ModelAbsen;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class Leader extends BaseController
         $this->ModelImplementor = new ModelImplementor();
         $this->ModelPekerjaan = new ModelPekerjaan();
         $this->ModelUser = new ModelUser();
+        $this->ModelAbsen = new ModelAbsen();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -505,19 +507,30 @@ class Leader extends BaseController
 
     public function detail_absen($id)
     {
-        $cekHadir = $this->ModelLeader->getAbsenById($id);
-        if ($cekHadir['keterangan'] == null) {
+        // $cekHadir = $this->ModelLeader->getAbsenById($id);
+        $absen = $this->ModelAbsen
+            // ->join('user', 'user.id_user = absen.id_user')
+            // ->where('id_absen', $id)
+            ->find($id);
+        $user = $this->ModelUser->find($absen['id_user']);
+        // echo '<pre>';
+        // var_dump($user);
+        // echo '</pre>';
+        // die();
+        if ($absen['keterangan'] == null) {
             $data = [
                 'title' => 'Detail Live Location',
                 'user'  => $this->ModelUser->find(session()->get('id')),
-                'data'  => $cekHadir,
+                'absen'  => $absen,
+                'user'  => $user,
                 'isi'   => 'leader/manage_live_location/v_detail_hadir'
             ];
         } else {
             $data = [
                 'title' => 'Detail Live Location',
                 'user'  => $this->ModelUser->find(session()->get('id')),
-                'data'  => $cekHadir,
+                'absen'  => $absen,
+                'user'  => $user,
                 'isi'   => 'leader/manage_live_location/v_detail_tidakhadir'
             ];
         }
@@ -618,6 +631,7 @@ class Leader extends BaseController
     {
         $data = [
             'title'     => 'Detail Task Management',
+            'user'  => $this->ModelUser->find(session()->get('id')),
             'subtitle'  => 'Detail Pekerjaan',
             'return'    => $return,
             'data'      => $this->ModelPekerjaan

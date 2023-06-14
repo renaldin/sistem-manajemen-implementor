@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-12 col-md-12 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center">
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-lg text-center btn-success" id="take" onclick="takePicture()"><i class="bi bi-camera fs-4"></i></button>
+                                        <button type="button" class="btn btn-lg text-center btn-success bg-green" id="take" onclick="takePicture()"><i class="bi bi-camera fs-4"></i></button>
                                         <button type="button" class="btn btn-lg text-center btn-warning d-none" id="repeat"><i class="bi bi-arrow-repeat fs-4"></i></button>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                     <textarea class="form-control" id="ket" name="keterangan" style="height: 100px"></textarea>
                                 </div>
                                 <div class="col-12 justify-content-center text-center">
-                                    <button type="submit" class="btn btn-primary d-none mt-3 btn-lg" id="simpan">Absen</button>
+                                    <button type="submit" class="btn btn-primary d-none mt-3 btn-lg bg-green" id="simpan">Absen</button>
                                 </div>
                             </div>
                         </form>

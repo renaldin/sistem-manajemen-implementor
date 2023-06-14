@@ -62,6 +62,7 @@
 
         .bg-green {
             background-color: #00bfa6 !important;
+            border-color: #00bfa6;
         }
     </style>
 </head>

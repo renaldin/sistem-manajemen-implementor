@@ -29,6 +29,10 @@
     <!-- Template Main CSS File -->
     <link href="<?= base_url('NiceAdmin') ?>/assets/css/style.css" rel="stylesheet">
 
+    <!-- aos js -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <!-- css custom navbar -->
     <style>
         /* .menu-nav {
@@ -52,6 +56,11 @@
 
         .text-green {
             color: #00bfa6 !important;
+        }
+
+        .bg-green {
+            background-color: #00bfa6 !important;
+            border-color: #00bfa6;
         }
 
         .active {

@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Hasil Nilai <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] ?></b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim Email</button>
+                        <button type="button" class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim E-mail</button>
                     </div>
                 </div>
 
@@ -47,8 +47,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Kirim</button>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary bg-green" type="submit">Kirim</button>
                 </div>
             </form>
         </div>

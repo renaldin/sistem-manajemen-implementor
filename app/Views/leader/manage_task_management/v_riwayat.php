@@ -58,7 +58,7 @@
                                             <?php } elseif ($row['status_pekerjaan'] == 'Uploaded') { ?>
                                                 <span class="badge rounded-pill bg-info"><?= $row['status_pekerjaan'] ?></span>
                                             <?php } elseif ($row['status_pekerjaan'] == 'Done') { ?>
-                                                <span class="badge rounded-pill bg-success">
+                                                <span class="badge rounded-pill bg-green">
                                                     <?= $row['status_pekerjaan'] ?>
                                                 </span>
                                             <?php } else { ?>
@@ -68,7 +68,7 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/riwayat_task') ?>" class="btn btn-info btn-sm">Detail</a>
+                                            <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/riwayat_task') ?>" class="btn btn-info btn-sm bg-green">Detail</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

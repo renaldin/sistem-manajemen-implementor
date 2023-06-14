@@ -21,7 +21,7 @@
                                 <h5 class="card-title">Data Task</h5>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#add"><i class="bi bi-plus-lg"></i> Task Karyawan</button>
+                                <button class="btn btn-success mt-3 bg-green" data-bs-toggle="modal" data-bs-target="#add"><i class="bi bi-plus-lg"></i> Task Karyawan</button>
                             </div>
                         </div>
                         <?php
@@ -71,8 +71,8 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_pekerjaan'] ?>" class="btn btn-success btn-sm">Selesai</a>
-                                            <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/task') ?>" class="btn btn-info btn-sm">Detail</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_pekerjaan'] ?>" class="btn btn-warning btn-sm">Selesai</a>
+                                            <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/task') ?>" class="btn btn-info btn-sm bg-green">Detail</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -122,7 +122,7 @@
                     <textarea class="form-control" id="deskripsi" name="deskripsi" style="height: 100px"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success bg-green">Create</button>
                 </div>
                 <?= form_close() ?>
@@ -143,7 +143,7 @@
                 <div class="modal-body">
                     <p>Yakin ingin menyelesaikan task <?= $row['nama_user'] ?> ?</p>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
                         <a href="<?= base_url('m_task_management/selesai/' . $row['id_pekerjaan']) ?>" class="btn btn-success bg-green">Ya</a>
                     </div>
                 </div>

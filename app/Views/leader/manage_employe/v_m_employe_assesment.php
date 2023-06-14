@@ -5,7 +5,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url() ?>">Dashboard</a></li>
-                <li class="breadcrumb-item active">Data</li>
+                <li class="breadcrumb-item active"><?= $title ?></li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -21,7 +21,7 @@
                                 <h5 class="card-title">Data Employe</h5>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#add">Create</button>
+                                <button class="btn btn-primary mt-3 bg-green" data-bs-toggle="modal" data-bs-target="#add">Create Employe</button>
                             </div>
                         </div>
                         <?php
@@ -73,7 +73,7 @@
                                             <?php } elseif ($row['status'] == 'Diterima') { ?>
                                                 <span class="badge rounded-pill bg-primary"><?= $row['status'] ?></span>
                                             <?php } elseif ($row['status'] == 'Implementor') { ?>
-                                                <span class="badge rounded-pill bg-success"><?= $row['status'] ?></span>
+                                                <span class="badge rounded-pill bg-success bg-green"><?= $row['status'] ?></span>
                                             <?php } else { ?>
                                                 <span class="badge rounded-pill bg-info">Dinilai</span>
                                             <?php } ?>
@@ -81,7 +81,7 @@
                                         <td class="text-center">
                                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#del-<?= $row['id_user'] ?>"><i class=" bi bi-trash"></i></button>
                                             <?php if ($row['status'] == null && $row['nilai_leader'] == null) { ?>
-                                                <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm">Input Value</a>
+                                                <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Input Value</a>
                                             <?php } ?>
                                             <?php if ($row['nilai_leader'] != null && $row['nilai_hrd'] != null && $row['status'] == null) { ?>
                                                 <a href="<?= base_url('m_employe_assesment/hasil/' . $row['id_user']) ?>" class="btn btn-success btn-sm bg-green">Hasil</a>
