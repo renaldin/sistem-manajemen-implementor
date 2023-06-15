@@ -73,7 +73,7 @@
 
 </main><!-- End #main -->
 <?php foreach ($data as $val) { ?>
-    <div class="modal fade" id="selesai-<?= $row['id_absen'] ?>" tabindex="-1">
+    <div class="modal fade" id="selesai-<?= $val['id_absen'] ?>" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -81,10 +81,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Yakin ingin menyelesaikan absen dari <?= $row['nama_user'] ?> ?</p>
+                    <p>Yakin ingin menyelesaikan absen dari <?= $val['nama_user'] ?> ?</p>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url('m_live_location/selesai/' . $row['id_absen']) ?>" class="btn btn-success bg-green">Ya</a>
+                        <a href="<?= base_url('m_live_location/selesai/' . $val['id_absen']) ?>" class="btn btn-success bg-green">Ya</a>
                     </div>
                 </div>
             </div>
