@@ -61,10 +61,35 @@
                             <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai2" value="<?= date('Y-m-d') ?>" required>
                         </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary bg-hijau">Simpan</button>
+                            <button type="button" class="btn btn-primary bg-hijau" data-bs-toggle="modal" data-bs-target="#kirimEmail">Simpan</button>
                             <!-- <button type="reset" class="btn btn-secondary">Reset</button> -->
                         </div>
                         <!-- </form> -->
+                        <!-- modal kirim email -->
+                        <div class="modal fade" id="kirimEmail" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Kirim Email Untuk kedua Implementor</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-12">
+                                            <label for="subject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Masukan subject email">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="pesan" class="form-label">Isi Pesan</label>
+                                            <textarea class="form-control" placeholder="Masukan pesan email" name="pesan" id="pesan" style="height: 100px;" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary bg-green" type="submit">Kirim</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <?= form_close() ?>
                     </div>
                 </div>

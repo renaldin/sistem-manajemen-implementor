@@ -451,9 +451,55 @@ class Leader extends BaseController
             $this->ModelLeader->db->table('user')->where('id_user', $value['id_user'])->update(['status' => 'Implementor']);
             $this->ModelLeader->insertImpelementor($value);
         }
+
+        $email = \Config\Services::email();
+
+        $emailUser1 = $this->request->getPost('email_user1');
+        $emailUser2 = $this->request->getPost('email_user2');
+
+        $fromEmail = 'putrifitriani559@gmail.com';
+        $email->setFrom($fromEmail);
+        $toFrom = $emailUser1;
+        $email->setTo($toFrom);
+        $subject = $this->request->getPost('subject');
+        $email->setSubject($subject);
+        $pesan = $this->request->getPost('pesan');
+        $body = "
+            <h3>$pesan</h3>
+            ";
+        $message = $body;
+        $email->setMessage($message);
+        $email->send();
+
+        $fromEmail = 'putrifitriani559@gmail.com';
+        $email->setFrom($fromEmail);
+        $toFrom = $emailUser2;
+        $email->setTo($toFrom);
+        $subject = $this->request->getPost('subject');
+        $email->setSubject($subject);
+        $pesan = $this->request->getPost('pesan');
+        $body = "
+            <h3>$pesan</h3>
+            ";
+        $message = $body;
+        $email->setMessage($message);
+        $email->send();
+
         session()->setFlashdata('pesan', "Implementor Berhasil ditambahkan!.");
         return redirect()->to(base_url('m_work_position'));
     }
+
+    // public function kirim_email_implementor($id1, $id2)
+    // {
+
+    //     $data = [
+    //         'title' => 'Kirim Email Implementor',
+    //         'data1'  =>  $this->ModelImplementor->where('id_user', $id1)->first(),
+    //         'data2'  =>  $this->ModelImplementor->where('id_user', $id2)->first(),
+    //         'isi'   => 'leader/work_position/v_kirim_email_imp'
+    //     ];
+    //     return view('layout/v_wrapper_admin', $data);
+    // }
 
     public function cancle_rumah_sakit($id_rumah_sakit)
     {

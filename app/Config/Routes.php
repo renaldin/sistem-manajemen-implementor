@@ -52,6 +52,7 @@ $routes->post('/m_work_position/(:num)', 'Leader::tambah_implementor_rs/$1');
 $routes->post('/m_work_position', 'Leader::insert_work_position');
 $routes->post('/m_work_position/edit', 'Leader::edit_work_position');
 $routes->post('/m_work_position/simpan_implementor/(:num)', 'Leader::simpan_implementor/$1');
+// $routes->post('/m_work_position/kirim_email/(:num)/(:num)', 'Leader::kirim_email_implementor/$1/$2');
 $routes->get('/m_work_position/cancle_rumah_sakit/(:num)', 'Leader::cancle_rumah_sakit/$1');
 $routes->get('/m_work_position/riwayat_rumah_sakit', 'Leader::riwayat_rumah_sakit');
 $routes->get('/m_work_position/uncancle_rumah_sakit/(:num)', 'Leader::uncancle_rumah_sakit/$1');
