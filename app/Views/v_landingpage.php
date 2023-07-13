@@ -142,8 +142,16 @@
                                     <span>-6.2031675,106.85765</span>
                                 </div>
                             </div>
+                            <style>
+                                @media (max-width: 991px) {
+                                    #frame {
+                                        width: 320px;
+                                        height: 280px;
+                                    }
+                                }
+                            </style>
                             <div class="col-md-12 text-center">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.456651449093!2d106.8551086102822!3d-6.203333660741261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5362d4268f1%3A0x3e1ed000345c62c3!2sKesia%20Indonesia!5e0!3m2!1sen!2sus!4v1686749525004!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.456651449093!2d106.8551086102822!3d-6.203333660741261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5362d4268f1%3A0x3e1ed000345c62c3!2sKesia%20Indonesia!5e0!3m2!1sen!2sus!4v1686749525004!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="frame"></iframe>
                                 <!-- <iframe src="https://www.google.com/maps/place/Downtown+Conference+Center/@40.710059,-74.006138,14z/data=!4m6!3m5!1s0x89c25a22a3bda30d:0xb89d1fe6bc499443!8m2!3d40.7100586!4d-74.0061377!16s%2Fg%2F1tfm2cg6?hl=en-US&entry=ttu" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe> -->
                             </div>
 

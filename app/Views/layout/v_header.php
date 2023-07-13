@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>SIMI - Kesia.id</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -81,4 +81,4 @@
     </style>
 </head>
 
-<body>
+<body style="overflow-x: hidden;width: 100%;height: 100%;margin: 0;position: absolute;top: 0;left: 0;">
