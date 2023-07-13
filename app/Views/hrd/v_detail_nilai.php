@@ -16,11 +16,11 @@
 
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Hasil Nilai <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] ?></b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
-                        <!-- <button type="button" class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim E-mail</button> -->
-                        <div class="text-end">
+                        <h5 class="card-title">Hasil Nilai <b><?= $data['nama_user'] ?> <?= $data['nilai_leader'] + $data['nilai_hrd'] ?><?= $data['nilai_leader'] + $data['nilai_hrd'] < 10 ? '( Kurang dan Tidak Diterima)' : '( Diterima)' ?></b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
+                        <button type="button" class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim E-mail</button>
+                        <!-- <div class="text-end">
                             <a href="<?= base_url('m_employe_assesment') ?>" class="btn btn-outline-success">Back</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -38,8 +38,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="<?= base_url('m_employe_assesment/kirim_email') ?>" method="post" class="row g-3">
+                <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
+                <input type="hidden" name="email" value="<?= $data['email'] ?>">
                 <div class="modal-body">
-                    <input type="hidden" name="email" value="<?= $hasil['employe']['email'] ?>">
                     <div class="col-12">
                         <label for="subject" class="form-label">Subject</label>
                         <input type="text" class="form-control" id="subject" name="subject" placeholder="Masukan subject email">

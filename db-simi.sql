@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 04:24 PM
+-- Generation Time: Jul 13, 2023 at 04:58 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -59,12 +59,41 @@ CREATE TABLE `implementor` (
 --
 
 INSERT INTO `implementor` (`id_implementor`, `id_rumah_sakit`, `id_user`, `email`, `tanggal_mulai`, `tanggal_selesai`, `status`) VALUES
-(1, 1, 2, 'ks11281991@gmail.com', '2023-05-19', '2023-05-19', NULL),
-(2, 1, 3, 'riangergor@gmail.com', '2023-05-19', '2023-05-19', NULL),
-(4, 2, 6, 'contohh@gmail.com', '2023-05-22', '2023-05-22', NULL),
-(5, 3, 7, 'karyawan1@gmail.com', '2023-05-22', '2023-05-31', NULL),
-(6, 3, 8, 'karyawan2@gmail.com', '2023-05-22', '2023-05-31', NULL),
-(8, 8, 13, 'putri@gmail.com', '2023-06-04', '2023-08-25', NULL);
+(15, 1, 22, 'cobaemail@gmail.com', '2023-07-25', '2023-09-25', NULL),
+(16, 1, 23, 'tesemail@gmail.com', '2023-07-25', '2023-09-25', NULL),
+(17, 2, 24, 'titikkoma219@gmail.com', '2023-07-12', '2023-09-12', NULL),
+(18, 2, 25, 'eventt@gmail.com', '2023-07-12', '2023-09-12', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nilai`
+--
+
+CREATE TABLE `nilai` (
+  `id_nilai` int(11) NOT NULL,
+  `leader_public_speaking` int(11) DEFAULT NULL,
+  `leader_tanya_jawab` int(11) DEFAULT NULL,
+  `leader_soal` int(11) DEFAULT NULL,
+  `hrd_public_speaking` int(11) DEFAULT NULL,
+  `hrd_tanya_jawab` int(11) DEFAULT NULL,
+  `hrd_soal` int(11) DEFAULT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `nilai`
+--
+
+INSERT INTO `nilai` (`id_nilai`, `leader_public_speaking`, `leader_tanya_jawab`, `leader_soal`, `hrd_public_speaking`, `hrd_tanya_jawab`, `hrd_soal`, `id_user`) VALUES
+(1, 2, 2, 2, 2, 1, 3, 22),
+(2, 2, 2, 3, 3, 3, 1, 23),
+(3, 2, 2, 2, 1, 2, 2, 24),
+(4, 3, 2, 2, 3, 3, 2, 25),
+(5, 2, 2, 2, 2, 2, 2, 26),
+(6, 1, 1, 1, 2, 2, 3, 27),
+(8, 1, 1, 1, 1, 1, 1, 29),
+(9, 1, 1, 1, 1, 1, 1, 30);
 
 -- --------------------------------------------------------
 
@@ -81,15 +110,6 @@ CREATE TABLE `pekerjaan` (
   `id_implementor` int(11) NOT NULL,
   `status_pekerjaan` enum('On Progress','Uploaded','Done','Late') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pekerjaan`
---
-
-INSERT INTO `pekerjaan` (`id_pekerjaan`, `deskripsi`, `batas_tgl_pekerjaan`, `tgl_pengumpulan`, `link`, `id_implementor`, `status_pekerjaan`) VALUES
-(2, 'Menambahkan fitur Search', '2023-06-08', '2023-06-08', 'https://www.figma.com/file/F8SAW9XCqnBf7KVIBmcX6J/UI-PA?type=design&node-id=0-1', 1, 'Done'),
-(3, 'Update fitur', '2023-06-15', '2023-06-08', 'https://www.figma.com/file/F8SAW9XCqnBf7KVIBmcX6J/UI-PA?type=design&node-id=0-1', 2, 'Done'),
-(4, 'Update sistem', '2023-06-08', '2023-06-08', 'http://localhost/phpmyadmin/index.php?route=/table/structure/save', 2, 'Done');
 
 -- --------------------------------------------------------
 
@@ -115,7 +135,7 @@ INSERT INTO `rumah_sakit` (`id_rumah_sakit`, `nama_rumah_sakit`, `alamat_rumah_s
 (3, 'RSUD Ciereng', 'Ciereng, Subang, Jawa Barat', 'Rumah Sakit Umum Buka 24 jam', NULL),
 (4, 'Oliva Tania Utami M.M.', 'Ds. Banal No. 812, Payakumbuh 34663, Sulsel', 'Prabumulih', NULL),
 (5, 'Kayun Prasasta', 'Gg. BKR No. 261, Probolinggo 16931, Sumut', 'Pangkal Pinang', NULL),
-(6, 'Margana Pangestu Dongoran S.E.I', 'Gg. Babah No. 269, Depok 40465, DKI', 'Tomohon', 'Cancle'),
+(6, 'Margana Pangestu', 'Gg. Babah No. 269, Depok 40465, DKI', 'Tomohon', NULL),
 (7, 'Hesti Palastri', 'Ds. Sutami No. 252, Tidore Kepulauan 33308, Aceh', 'Kendari', NULL),
 (8, 'Bancar Simanjuntak', 'Kpg. Warga No. 341, Pematangsiantar 89115, Pabar', 'Tual', NULL),
 (9, 'Aditya Suryono M.Ak', 'Psr. Gatot Subroto No. 861, Yogyakarta 59152, Jatim', 'Depok', 'Cancle'),
@@ -133,12 +153,14 @@ INSERT INTO `rumah_sakit` (`id_rumah_sakit`, `nama_rumah_sakit`, `alamat_rumah_s
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `nama_user` varchar(30) NOT NULL,
-  `jenis_kelamin` enum('Laki-laki','Perempuan','','') NOT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `nilai_leader` int(11) DEFAULT NULL,
   `nilai_hrd` int(11) DEFAULT NULL,
   `role` enum('Leader','Karyawan','HRD','') NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `send_email` tinyint(1) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -146,17 +168,17 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `email`, `password`, `nilai_leader`, `nilai_hrd`, `role`, `status`) VALUES
-(1, 'Alex', 'Laki-laki', 'leader@gmail.com', '123', NULL, NULL, 'Leader', NULL),
-(2, 'Udin', 'Laki-laki', 'karyawan@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
-(3, 'John', 'Laki-laki', 'john@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
-(6, 'contoh', 'Perempuan', 'contoh@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
-(7, 'karyawan1', 'Laki-laki', 'karyawan1@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
-(8, 'karyawan2', 'Perempuan', 'karyawan2@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
-(13, 'Putri', 'Perempuan', 'putri@gmail.com', '123', 6, 6, 'Karyawan', 'Implementor'),
-(14, 'Susanti', 'Perempuan', 'susanti@gmail.com', '123', 6, 6, 'Karyawan', 'Diterima'),
-(15, 'Rendi', 'Laki-laki', 'rendi@gmail.com', '123', NULL, NULL, 'Karyawan', NULL),
-(16, 'Putri', 'Perempuan', 'hrd@gmail.com', '123', NULL, NULL, 'HRD', NULL);
+INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `email`, `password`, `nilai_leader`, `nilai_hrd`, `role`, `foto`, `send_email`, `status`) VALUES
+(1, 'Alexander', 'Laki-laki', 'leader@gmail.com', '123', NULL, NULL, 'Leader', NULL, NULL, NULL),
+(16, 'Putri', 'Perempuan', 'hrd@gmail.com', '123', NULL, NULL, 'HRD', NULL, NULL, NULL),
+(22, 'coba karyawan', 'Laki-laki', 'karyawancoba@gmail.com', '123', 6, 6, 'Karyawan', NULL, 1, 'Implementor'),
+(23, 'karyawan dua', 'Perempuan', 'karyawandua@gmail.com', '123', 7, 7, 'Karyawan', NULL, 1, 'Implementor'),
+(24, 'Antono', 'Laki-laki', 'antono@gmail.com', '123', 6, 5, 'Karyawan', NULL, 1, 'Implementor'),
+(25, 'Sumanto', 'Laki-laki', 'sumanto@gmail.com', '123', 7, 8, 'Karyawan', NULL, 1, 'Implementor'),
+(26, 'karyawan coba', 'Laki-laki', 'karyawancontoh@gmail.com', '123', 6, 6, 'Karyawan', NULL, NULL, 'Diterima'),
+(27, 'Putri', 'Perempuan', 'putri@gmail.com', '123', 3, 7, 'Karyawan', NULL, 1, 'Diterima'),
+(29, 'cobaaaa', 'Laki-laki', 'coba@gmail.com', '123', 3, 3, 'Karyawan', NULL, 1, 'Tidak Diterima'),
+(30, 'coba tidak diterima', 'Laki-laki', 'dfd@gmail.com', '123', 3, 3, 'Karyawan', NULL, 1, 'Tidak Diterima');
 
 --
 -- Indexes for dumped tables
@@ -175,6 +197,13 @@ ALTER TABLE `absen`
 ALTER TABLE `implementor`
   ADD PRIMARY KEY (`id_implementor`),
   ADD KEY `id_rumah_sakit` (`id_rumah_sakit`,`id_user`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `nilai`
+--
+ALTER TABLE `nilai`
+  ADD PRIMARY KEY (`id_nilai`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -204,31 +233,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `implementor`
 --
 ALTER TABLE `implementor`
-  MODIFY `id_implementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_implementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `nilai`
+--
+ALTER TABLE `nilai`
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pekerjaan`
 --
 ALTER TABLE `pekerjaan`
-  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rumah_sakit`
 --
 ALTER TABLE `rumah_sakit`
-  MODIFY `id_rumah_sakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_rumah_sakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -246,6 +281,12 @@ ALTER TABLE `absen`
 ALTER TABLE `implementor`
   ADD CONSTRAINT `implementor_ibfk_1` FOREIGN KEY (`id_rumah_sakit`) REFERENCES `rumah_sakit` (`id_rumah_sakit`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `implementor_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nilai`
+--
+ALTER TABLE `nilai`
+  ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pekerjaan`

@@ -7,11 +7,12 @@ use App\Models\ModelImplementor;
 use App\Models\ModelKaryawan;
 use App\Models\ModelPekerjaan;
 use App\Models\ModelLeader;
+use App\Models\ModelNilai;
 use App\Models\ModelUser;
 
 class HRD extends BaseController
 {
-    private $ModelKaryawan, $ModelPekerjaan, $ModelImplementor, $ModelLeader, $ModelUser;
+    private $ModelKaryawan, $ModelPekerjaan, $ModelImplementor, $ModelLeader, $ModelUser, $ModelNilai;
 
     public function __construct()
     {
@@ -21,6 +22,7 @@ class HRD extends BaseController
         $this->ModelPekerjaan = new ModelPekerjaan();
         $this->ModelImplementor = new ModelImplementor();
         $this->ModelUser = new ModelUser();
+        $this->ModelNilai = new ModelNilai();
     }
 
     public function index()
@@ -87,7 +89,44 @@ class HRD extends BaseController
         ];
 
         $this->ModelUser->update($this->request->getPost('id_user'), $data);
+        $data_nilai = $this->ModelNilai->where('id_user', $this->request->getPost('id_user'))->first();
+        $this->ModelNilai->update($data_nilai['id_nilai'], [
+            'hrd_public_speaking' => $ps,
+            'hrd_tanya_jawab'    => $tj,
+            'hrd_soal'           => $s
+        ]);
         session()->setFlashdata('pesan', "Input Nilai Berhasil!.");
         return redirect()->to(base_url('hrd'));
+    }
+
+    public function detail($id_user)
+    {
+        $karyawan = $this->ModelLeader->getEmployeById($id_user);
+
+        if ($karyawan['status'] == null) {
+            session()->setFlashdata('info', "Leader Belum Menghitung Hasil!.");
+            return redirect()->to(base_url('hrd'));
+        }
+
+        $data = [
+            'title' => 'Detail Nilai Karyawan',
+            'user'  => $this->ModelUser->find(session()->get('id')),
+            'data'  => $karyawan,
+            'isi'   => 'hrd/v_detail_nilai'
+        ];
+
+        return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function riwayat_employee()
+    {
+        $data = [
+            'title' => 'History Employee',
+            'user'  => $this->ModelUser->find(session()->get('id')),
+            'data'  => $this->ModelUser->join('nilai', 'nilai.id_user = user.id_user')->where('send_email', '1')->orderBy('user.id_user', 'DESC')->findAll(),
+            'isi'   => 'hrd/v_riwayat'
+        ];
+
+        return view('layout/v_wrapper_admin', $data);
     }
 }

@@ -12,14 +12,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-12 col-md-12 col-lg-6">
+                            <div class="col-12 col-md-12 col-lg-7">
                                 <div id="my_camera"></div>
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 p-4 ">
+                            <div class="col-12 col-md-12 col-lg-5 p-4 ">
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <h4>Titik Koordinat </h4>
+                                            <p><b>Titik Koordinat</b></p>
                                         </td>
                                         <td>:</td>
                                         <td>
@@ -28,7 +28,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h5>Tanggal </h5>
+                                            <p><b>Tanggal</b></p>
                                         </td>
                                         <td>:</td>
                                         <td>
@@ -37,7 +37,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h5>Jam</h5>
+                                            <p><b>Jam</b></p>
                                         </td>
                                         <td>:</td>
                                         <td>

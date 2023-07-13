@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelUser extends Model
+class ModelNilai extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'user';
-    protected $primaryKey       = 'id_user';
+    protected $table            = 'nilai';
+    protected $primaryKey       = 'id_nilai';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_user', 'nama_user', 'jenis_kelamin', 'email', 'password', 'nilai_leader', 'nilai_hrd', 'role', 'foto', 'send_email', 'status'];
+    protected $allowedFields    = ['id_nilai', 'leader_public_speaking', 'leader_tanya_jawab', 'leader_soal', 'hrd_public_speaking', 'hrd_tanya_jawab', 'hrd_soal', 'id_user'];
 
     // Dates
     protected $useTimestamps = false;

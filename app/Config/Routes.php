@@ -84,6 +84,8 @@ $routes->post('/task_management/insert', 'Karyawan::upload_task');
 $routes->get('/hrd', 'HRD::index');
 $routes->get('/hrd/(:num)', 'HRD::input_nilai/$1');
 $routes->post('/hrd/save_nilai', 'HRD::save_nilai');
+$routes->post('/hrd/detail/(:num)', 'HRD::detail/$1');
+$routes->post('/hrd/riwayat_employee', 'HRD::riwayat_employee');
 
 // Route Profile
 $routes->get('/profile', 'Profile::index');

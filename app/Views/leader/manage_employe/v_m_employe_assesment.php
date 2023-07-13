@@ -74,6 +74,8 @@
                                                 <span class="badge rounded-pill bg-primary"><?= $row['status'] ?></span>
                                             <?php } elseif ($row['status'] == 'Implementor') { ?>
                                                 <span class="badge rounded-pill bg-success bg-green"><?= $row['status'] ?></span>
+                                            <?php } elseif ($row['status'] == 'Tidak Diterima') { ?>
+                                                <span class="badge rounded-pill bg-danger"><?= $row['status'] ?></span>
                                             <?php } else { ?>
                                                 <span class="badge rounded-pill bg-info">Dinilai</span>
                                             <?php } ?>
@@ -82,10 +84,12 @@
                                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#del-<?= $row['id_user'] ?>"><i class=" bi bi-trash"></i></button>
                                             <?php if ($row['status'] == null && $row['nilai_leader'] == null) { ?>
                                                 <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Input Value</a>
+                                            <?php } elseif ($row['status'] != null) { ?>
+                                                <button class="btn btn-primary btn-sm bg-green" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
                                             <?php } ?>
                                             <?php if ($row['nilai_leader'] != null && $row['nilai_hrd'] != null && $row['status'] == null) { ?>
                                                 <a href="<?= base_url('m_employe_assesment/hasil/' . $row['id_user']) ?>" class="btn btn-success btn-sm bg-green">Hasil</a>
-
+                                            <?php } else { ?>
                                             <?php } ?>
                                         </td>
                                     </tr>
@@ -173,6 +177,53 @@
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+<!-- modal detail -->
+<?php foreach ($data as $row) { ?>
+    <div class="modal fade" id="detail-<?= $row['id_user'] ?>" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Employee Appraisal Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Name : <?= $row['nama_user'] ?></p>
+                    <p>Email : <?= $row['email'] ?></p>
+                    <hr>
+                    <p><b>Implementor Leader Value</b></p>
+                    <?php if ($row['leader_public_speaking']) { ?>
+                        <p>Nilai Public Speaking : <?= $row['leader_public_speaking'] == 1 ? 'Kurang' : ($row['leader_public_speaking'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                        <p>Nilai Tanya Jawab : <?= $row['leader_tanya_jawab'] == 1 ? 'Kurang' : ($row['leader_tanya_jawab'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                        <p>Nilai Soal : <?= $row['leader_soal'] == 1 ? 'Kurang' : ($row['leader_soal'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                    <?php } else { ?>
+                        <p>Leader Belum Melakukan Penilaian</p>
+                    <?php } ?>
+                    <hr>
+                    <p><b>Implementor HRD Value</b></p>
+                    <?php if ($row['hrd_public_speaking']) { ?>
+                        <p>Nilai Public Speaking : <?= $row['hrd_public_speaking'] == 1 ? 'Kurang' : ($row['hrd_public_speaking'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                        <p>Nilai Tanya Jawab : <?= $row['hrd_tanya_jawab'] == 1 ? 'Kurang' : ($row['hrd_tanya_jawab'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                        <p>Nilai Soal : <?= $row['hrd_soal'] == 1 ? 'Kurang' : ($row['hrd_soal'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                    <?php } else { ?>
+                        <p>HRD Belum Melakukan Penilaian</p>
+                    <?php } ?>
+                    <hr>
+                    <?php if ($row['leader_public_speaking'] != null && $row['hrd_public_speaking'] != null && $row['status'] != null) { ?>
+                        <p>Nilai <?= $row['nama_user'] ?> : <?= $row['nilai_leader'] + $row['nilai_hrd'] ?> <?= $row['nilai_leader'] + $row['nilai_hrd'] >= 10 ? '(Baik) diterima sebagai karyawan Implementor pada PT Inovasi Kesehatan Indonesia' : '(Kurang) tidak diterima sebagai karyawan Implementor pada PT Inovasi Kesehatan Indonesia' ?></p>
+                    <?php } else { ?>
+                        <p>Nilai Sementara <?= $row['nama_user'] . ' : ' . $row['nilai_leader'] + $row['nilai_hrd'] ?></p>
+                    <?php } ?>
+                </div>
+                <div class="modal-footer">
+                    <form action="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Back</button>
                     </form>
                 </div>
             </div>

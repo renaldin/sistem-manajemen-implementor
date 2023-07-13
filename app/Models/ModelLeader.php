@@ -9,11 +9,12 @@ class ModelLeader extends Model
     public function getAll()
     {
         return $this->db->table('user')
+            ->join('nilai', 'nilai.id_user = user.id_user')
             ->where([
                 'role' => 'Karyawan',
                 // 'status' => null
             ])
-            ->orderBy('id_user', 'DESC')
+            ->orderBy('user.id_user', 'DESC')
             ->get()->getResultArray();
     }
 

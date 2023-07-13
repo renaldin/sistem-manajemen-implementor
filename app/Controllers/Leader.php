@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ModelAbsen;
 use App\Models\ModelImplementor;
 use App\Models\ModelLeader;
+use App\Models\ModelNilai;
 use App\Models\ModelPekerjaan;
 use App\Models\ModelRumahSakit;
 use App\Models\ModelUser;
@@ -13,7 +14,7 @@ use App\Models\ModelUser;
 class Leader extends BaseController
 {
 
-    private $ModelLeader, $ModelRumahSakit, $ModelImplementor, $ModelPekerjaan, $ModelUser, $ModelAbsen;
+    private $ModelLeader, $ModelRumahSakit, $ModelImplementor, $ModelPekerjaan, $ModelUser, $ModelAbsen, $ModelNilai;
 
     public function __construct()
     {
@@ -24,6 +25,7 @@ class Leader extends BaseController
         $this->ModelPekerjaan = new ModelPekerjaan();
         $this->ModelUser = new ModelUser();
         $this->ModelAbsen = new ModelAbsen();
+        $this->ModelNilai = new ModelNilai();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -97,6 +99,12 @@ class Leader extends BaseController
             ];
 
             $this->ModelUser->update($id, $data);
+            $data_nilai = $this->ModelNilai->where('id_user', $id)->first();
+            $this->ModelNilai->update($data_nilai['id_nilai'], [
+                'leader_public_speaking' => $ps,
+                'leader_tanya_jawab'    => $tj,
+                'leader_soal'           => $s
+            ]);
             session()->setFlashdata('pesan', "Input Nilai Berhasil!.");
             return redirect()->to(base_url('m_employe_assesment'));
             // $data = [
@@ -154,9 +162,10 @@ class Leader extends BaseController
         $validasi = [
             'nama_user' => [
                 'label' => 'Nama',
-                'rules' => 'required',
+                'rules' => 'required|alpha_space',
                 'errors' => [
-                    'required' => '{field} Wajib Diisi.',
+                    'required'      => '{field} Wajib Diisi.',
+                    'alpha_space'   => '{field} Tidak Boleh Mengandung Angka.',
                 ],
             ],
             'jenis_kelamin' => [
@@ -191,6 +200,8 @@ class Leader extends BaseController
                 'role' => 'Karyawan',
             ];
             $this->ModelLeader->db->table('user')->insert($data);
+            $data_terakhir = $this->ModelUser->orderBy('id_user', 'DESC')->first();
+            $this->ModelNilai->insert(['id_user' => $data_terakhir['id_user']]);
             session()->setFlashdata('pesan', "Data Berhasil Tambah!.");
             return redirect()->to(base_url('m_employe_assesment'));
         } else {
@@ -231,6 +242,7 @@ class Leader extends BaseController
         $message = $body;
         $email->setMessage($message);
         $email->send();
+        $this->ModelUser->update($this->request->getPost('id_user'), ['send_email' => '1']);
         session()->setFlashdata('pesan', "Kirim Email Berhasil!.");
         return redirect()->to(base_url('m_employe_assesment'));
     }
@@ -267,10 +279,11 @@ class Leader extends BaseController
         $validasi = [
             'nama_rumah_sakit' => [
                 'label' => 'Nama Rumah Sakit',
-                'rules' => 'required|is_unique[rumah_sakit.nama_rumah_sakit]',
+                'rules' => 'required|is_unique[rumah_sakit.nama_rumah_sakit]|alpha_space',
                 'errors' => [
                     'required' => '{field} Wajib Diisi.',
                     'is_unique' => '{field} Tidak Diperbolehkan sama.',
+                    'alpha_space' => '{field} Tidak Boleh Berisi Angka.',
                 ],
             ],
             'alamat_rumah_sakit' => [
@@ -381,6 +394,12 @@ class Leader extends BaseController
                 session()->setFlashdata('errors', \config\Services::validation()->getErrors());
                 return redirect()->back()->withInput();
             }
+
+            if ($this->request->getPost('tanggal_mulai') > $this->request->getPost('tanggal_selesai')) {
+                session()->setFlashdata('info', "Tanggal Selesai Harus Melewati Tanggal Mulai!.");
+                return redirect()->back()->withInput();
+            }
+
             $data = [
                 'title' => 'Add Implementor Rumah Sakit',
                 'user'  => $this->ModelUser->find(session()->get('id')),
@@ -429,6 +448,12 @@ class Leader extends BaseController
             session()->setFlashdata('errors', \config\Services::validation()->getErrors());
             return redirect()->back()->withInput();
         }
+
+        if ($this->request->getPost('tanggal_mulai2') > $this->request->getPost('tanggal_selesai2')) {
+            session()->setFlashdata('info', "Tanggal Selesai Harus Melewati Tanggal Mulai!.");
+            return redirect()->back()->withInput();
+        }
+
         $data = [
             [
                 'id_rumah_sakit'    => $id_rumah_sakit,

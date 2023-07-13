@@ -110,10 +110,26 @@
 
         <?php if (session()->get('role') == 'HRD') { ?>
             <li class="nav-item active ">
-                <a class="nav-link <?= ($title == 'Manage Employee Assesment' || $title == 'Input Nilai Employee') ? 'active' : 'collapsed' ?>" href="<?= base_url('hrd') ?>">
+                <!-- <a class="nav-link <?= ($title == 'Manage Employee Assesment' || $title == 'Input Nilai Employee') ? 'active' : 'collapsed' ?>" href="<?= base_url('hrd') ?>">
                     <i class="bi bi-clipboard2-check"></i>
                     <span>Manage Employe Assesment</span>
+                </a> -->
+                <a class="nav-link <?= ($title == 'Manage Employee Assesment' || $title == 'Detail Nilai Employee' || $title == 'History Employee') ? 'active' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-clipboard2-check"></i>
+                    <span>Manage Employe Assesment</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Employee Assesment' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'History Employee') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class="<?= ($title == 'Manage Employee Assesment') ? 'active' : '' ?>" href="<?= base_url('hrd') ?>">
+                            <i class="bi bi-circle"></i><span>Employee Assesment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= ($title == 'History Employee') ? 'active' : '' ?>" href="<?= base_url('hrd/riwayat_employee') ?>">
+                            <i class="bi bi-circle"></i><span>History Employee</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         <?php } ?>
 
