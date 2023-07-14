@@ -37,10 +37,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Implementor</th>
-                                    <th>Tanggal</th>
+                                    <th>Implementer Name</th>
+                                    <th>Date</th>
                                     <th>Status</th>
-                                    <th>Opsi</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -40,12 +40,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
                                     <th>Email</th>
-                                    <th>Nilai</th>
+                                    <th>Appraisal</th>
                                     <th>Status</th>
-                                    <th>Opsi</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>

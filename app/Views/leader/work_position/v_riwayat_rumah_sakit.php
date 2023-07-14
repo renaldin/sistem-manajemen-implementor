@@ -50,7 +50,14 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-file-medical text-green"></i>
+                                            <?php
+                                            $count = 0;
+                                            foreach ($implementor as $value) {
+                                                if ($value['id_rumah_sakit'] == $row['id_rumah_sakit']) {
+                                                    $count = $count + 1;
+                                                }
+                                            } ?>
+                                            <span class="text-green"><b><?= $count ?></b></span>
                                         </div>
                                         <div class="ps-3">
                                             <h6 class="fs-4"><?= $row['nama_rumah_sakit'] ?></h6>
@@ -165,7 +172,7 @@
                     <?php foreach ($implementor as $value) {
                         if ($value['id_rumah_sakit'] == $row['id_rumah_sakit']) { ?>
                             <b><?= $value['nama_user'] ?></b>
-                            <p>Tanggal : <?= $value['tanggal_mulai'] ?> - <?= $value['tanggal_selesai'] ?></p>
+                            <p>Tanggal : <?= $value['tanggal_mulai'] ?> hingga <?= $value['tanggal_selesai'] ?></p>
                     <?php }
                     } ?>
                 </div>
