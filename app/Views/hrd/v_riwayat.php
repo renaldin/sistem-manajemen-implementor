@@ -37,10 +37,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Implementor</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th>Implementer Name</th>
+                                    <th>Gender</th>
                                     <th>Email</th>
-                                    <th>Opsi</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,7 +51,7 @@
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama_user'] ?></td>
-                                        <td><?= $row['jenis_kelamin'] ?></td>
+                                        <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
                                         <td><?= $row['email'] ?></td>
                                         <td>
                                             <button class="btn btn-primary btn-sm bg-green" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
@@ -84,28 +84,28 @@
                     <p>Name : <?= $row['nama_user'] ?></p>
                     <p>Email : <?= $row['email'] ?></p>
                     <hr>
-                    <p><b>Implementor Leader Value</b></p>
+                    <p><b>Implementer Value of Leader</b></p>
                     <?php if ($row['leader_public_speaking']) { ?>
-                        <p>Nilai Public Speaking : <?= $row['leader_public_speaking'] == 1 ? 'Kurang' : ($row['leader_public_speaking'] == 2 ? 'Cukup' : 'Baik')  ?></p>
-                        <p>Nilai Tanya Jawab : <?= $row['leader_tanya_jawab'] == 1 ? 'Kurang' : ($row['leader_tanya_jawab'] == 2 ? 'Cukup' : 'Baik')  ?></p>
-                        <p>Nilai Soal : <?= $row['leader_soal'] == 1 ? 'Kurang' : ($row['leader_soal'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                        <p>Value Public Speaking : <?= $row['leader_public_speaking'] == 1 ? 'Less' : ($row['leader_public_speaking'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
+                        <p>Value Debriefing : <?= $row['leader_tanya_jawab'] == 1 ? 'Less' : ($row['leader_tanya_jawab'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
+                        <p>Value Question : <?= $row['leader_soal'] == 1 ? 'Less' : ($row['leader_soal'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
                     <?php } else { ?>
-                        <p>Leader Belum Melakukan Penilaian</p>
+                        <p>Leader haven't made an assessment yet</p>
                     <?php } ?>
                     <hr>
-                    <p><b>Implementor HRD Value</b></p>
+                    <p><b>Implementer Value of HRD</b></p>
                     <?php if ($row['hrd_public_speaking']) { ?>
-                        <p>Nilai Public Speaking : <?= $row['hrd_public_speaking'] == 1 ? 'Kurang' : ($row['hrd_public_speaking'] == 2 ? 'Cukup' : 'Baik')  ?></p>
-                        <p>Nilai Tanya Jawab : <?= $row['hrd_tanya_jawab'] == 1 ? 'Kurang' : ($row['hrd_tanya_jawab'] == 2 ? 'Cukup' : 'Baik')  ?></p>
-                        <p>Nilai Soal : <?= $row['hrd_soal'] == 1 ? 'Kurang' : ($row['hrd_soal'] == 2 ? 'Cukup' : 'Baik')  ?></p>
+                        <p>Value Public Speaking : <?= $row['hrd_public_speaking'] == 1 ? 'Less' : ($row['hrd_public_speaking'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
+                        <p>Value Debriefing : <?= $row['hrd_tanya_jawab'] == 1 ? 'Less' : ($row['hrd_tanya_jawab'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
+                        <p>Value Question : <?= $row['hrd_soal'] == 1 ? 'Less' : ($row['hrd_soal'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
                     <?php } else { ?>
-                        <p>HRD Belum Melakukan Penilaian</p>
+                        <p>HRD haven't made an assessment yet</p>
                     <?php } ?>
                     <hr>
                     <?php if ($row['leader_public_speaking'] != null && $row['hrd_public_speaking'] != null && $row['status'] != null) { ?>
-                        <p>Nilai <?= $row['nama_user'] ?> : <?= $row['nilai_leader'] + $row['nilai_hrd'] ?> <?= $row['nilai_leader'] + $row['nilai_hrd'] >= 10 ? '(Baik) diterima sebagai karyawan Implementor pada PT Inovasi Kesehatan Indonesia' : '(Kurang) tidak diterima sebagai karyawan Implementor pada PT Inovasi Kesehatan Indonesia' ?></p>
+                        <p>Value <?= $row['nama_user'] ?> : <?= $row['nilai_leader'] + $row['nilai_hrd'] ?> <?= $row['nilai_leader'] + $row['nilai_hrd'] >= 10 ? '(Good) accepted as an Implementer employee at PT Inovasi Kesehatan Indonesia' : '(Less) not accepted as an Implementer employee at PT Inovasi Kesehatan Indonesia' ?></p>
                     <?php } else { ?>
-                        <p>Nilai Sementara <?= $row['nama_user'] . ' : ' . $row['nilai_leader'] + $row['nilai_hrd'] ?></p>
+                        <p>Value Sementara <?= $row['nama_user'] . ' : ' . $row['nilai_leader'] + $row['nilai_hrd'] ?></p>
                     <?php } ?>
                 </div>
                 <div class="modal-footer">

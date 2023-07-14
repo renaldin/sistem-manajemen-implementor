@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-                            Selamat Datang <?= session()->get('nama') ?>, <?= session()->get('role') ?>
+                            Wellcome <?= session()->get('nama') ?>, <?= session()->get('role') ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         <div class="row">
@@ -35,10 +35,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
                                     <th>Email</th>
-                                    <th>Opsi</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,11 +50,11 @@
                                         <tr>
                                             <td><?= $no++ ?></td>
                                             <td><?= $row['nama_user'] ?></td>
-                                            <td><?= $row['jenis_kelamin'] ?></td>
+                                            <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
                                             <td><?= $row['email'] ?></td>
                                             <td class="text-center">
                                                 <?php if ($row['nilai_hrd'] == null) { ?>
-                                                    <a href="<?= base_url('hrd/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Input Value</a>
+                                                    <a href="<?= base_url('hrd/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Input Appraisal</a>
                                                 <?php } elseif ($row['nilai_hrd'] != null && $row['nilai_leader'] != null) { ?>
                                                     <a href="<?= base_url('hrd/detail/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Detail</a>
                                                 <?php } ?>

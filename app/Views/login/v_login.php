@@ -123,13 +123,13 @@
                                         <label for="yourUsername" class="form-label">Email</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="email" name="email" class="form-control" id="yourUsername" value="<?= old('email') ?>" placeholder="Masukan Email" required>
+                                            <input type="email" name="email" class="form-control" id="yourUsername" value="<?= old('email') ?>" placeholder="Input Email" required>
                                         </div>
                                     </div>
 
                                     <div class="col-12 pb-3">
                                         <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control" id="yourPassword" value="<?= old('password') ?>" placeholder="Masukan Password" required>
+                                        <input type="password" name="password" class="form-control" id="yourPassword" value="<?= old('password') ?>" placeholder="Input Password" required>
                                     </div>
 
                                     <div class="col-12 pb-3">

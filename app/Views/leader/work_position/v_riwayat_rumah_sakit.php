@@ -1,11 +1,11 @@
 <main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
-        <h1><?= $title ?></h1>
+        <h1>Hospitals History</h1>
         <nav>
             <ol class="breadcrumb d-flex">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active"><?= $title ?></li>
+                <li class="breadcrumb-item active">Hospitals History</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -37,16 +37,16 @@
                                     <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                         <li class="dropdown-header text-start">
-                                            <h6>Opsi</h6>
+                                            <h6>Option</h6>
                                         </li>
 
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Rumah Sakit</a></li>
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Hospital</a></li>
                                         <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Back to Cooperation</a></li>
                                     </ul>
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Rumah Sakit</h5>
+                                    <h5 class="card-title">Hospital</h5>
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -86,22 +86,22 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Rumah Sakit</h5>
+                <h5 class="modal-title">Add Hospital</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <?= form_open('m_work_position', ['class' => 'row g-3']) ?>
                 <!-- <form class="row g-3"> -->
                 <div class="col-12">
-                    <label for="nama_rumah_sakit" class="form-label">Nama Rumah Sakit</label>
+                    <label for="nama_rumah_sakit" class="form-label">Hospital Name</label>
                     <input type="text" class="form-control" id="nama_rumah_sakit" name="nama_rumah_sakit" value="<?= old('nama_rumah_sakit') ?>">
                 </div>
                 <div class="col-12">
-                    <label for="alamat_rumah_sakit" class="form-label">Alamat Rumah Sakit</label>
+                    <label for="alamat_rumah_sakit" class="form-label">Hospital Address</label>
                     <input type="text" class="form-control" id="alamat_rumah_sakit" name="alamat_rumah_sakit" value="<?= old('alamat_rumah_sakit') ?>">
                 </div>
                 <div class="col-12">
-                    <label for="deskripsi_rumah_sakit" class="form-label">Deskripsi Rumah Sakit</label>
+                    <label for="deskripsi_rumah_sakit" class="form-label">Hospital Description</label>
                     <textarea class="form-control" name="deskripsi_rumah_sakit" style="height: 100px"><?= old('deskripsi_rumah_sakit') ?></textarea>
                 </div>
                 <div class="modal-footer">
@@ -120,22 +120,22 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Rumah Sakit</h5>
+                    <h5 class="modal-title">Update Hospital</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <?= form_open('m_work_position/edit', ['class' => 'row g-3']) ?>
                     <input type="hidden" name="id_rumah_sakit" value="<?= $row['id_rumah_sakit'] ?>">
                     <div class="col-12">
-                        <label for="nama_rumah_sakit" class="form-label">Nama Rumah Sakit</label>
+                        <label for="nama_rumah_sakit" class="form-label">Hospital Name</label>
                         <input type="text" class="form-control" id="nama_rumah_sakit" name="nama_rumah_sakit" value="<?= $row['nama_rumah_sakit'] ?>">
                     </div>
                     <div class="col-12">
-                        <label for="alamat_rumah_sakit" class="form-label">Alamat Rumah Sakit</label>
+                        <label for="alamat_rumah_sakit" class="form-label">Hospital Address</label>
                         <input type="text" class="form-control" id="alamat_rumah_sakit" name="alamat_rumah_sakit" value="<?= $row['alamat_rumah_sakit'] ?>">
                     </div>
                     <div class="col-12">
-                        <label for="deskripsi_rumah_sakit" class="form-label">Deskripsi Rumah Sakit</label>
+                        <label for="deskripsi_rumah_sakit" class="form-label">Hospital Description</label>
                         <textarea class="form-control" name="deskripsi_rumah_sakit" style="height: 100px"><?= $row['deskripsi_rumah_sakit'] ?></textarea>
                     </div>
                     <div class="modal-footer">
@@ -155,24 +155,24 @@
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Detail Rumah Sakit</h5>
+                    <h5 class="modal-title">Detail Hospital</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Nama Rumah Sakit :</p>
+                    <p>Hospital Name :</p>
                     <p><?= $row['nama_rumah_sakit'] ?></p>
                     <hr>
-                    <p>Alamat Rumah Sakit :</p>
+                    <p>Hospital Address :</p>
                     <p><?= $row['alamat_rumah_sakit'] ?></p>
                     <hr>
-                    <p>Deskripsi Rumah Sakit :</p>
+                    <p>Hospital Description :</p>
                     <p><?= $row['deskripsi_rumah_sakit'] ?></p>
                     <hr>
-                    <p>Implementor :</p>
+                    <p>Implementers :</p>
                     <?php foreach ($implementor as $value) {
                         if ($value['id_rumah_sakit'] == $row['id_rumah_sakit']) { ?>
                             <b><?= $value['nama_user'] ?></b>
-                            <p>Tanggal : <?= $value['tanggal_mulai'] ?> hingga <?= $value['tanggal_selesai'] ?></p>
+                            <p>Date : <?= $value['tanggal_mulai'] ?> to <?= $value['tanggal_selesai'] ?></p>
                     <?php }
                     } ?>
                 </div>

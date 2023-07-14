@@ -150,12 +150,12 @@
                 <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit' || $title == 'History Rumah Sakit') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
                     <li>
                         <a class="<?= ($title == 'Manage Work Position' || $title == 'Tambah Implementor Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position') ?>">
-                            <i class="bi bi-circle"></i><span>Manage Rumah Sakit</span>
+                            <i class="bi bi-circle"></i><span>Manage Hospitals</span>
                         </a>
                     </li>
                     <li>
                         <a class="<?= ($title == 'History Rumah Sakit') ? 'active' : '' ?>" href="<?= base_url('m_work_position/riwayat_rumah_sakit') ?>">
-                            <i class="bi bi-circle"></i><span>History Rumah Sakit</span>
+                            <i class="bi bi-circle"></i><span>Hospitals History</span>
                         </a>
                     </li>
                 </ul>

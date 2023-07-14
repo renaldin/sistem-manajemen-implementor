@@ -19,7 +19,7 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <h5>Koordinat</h5>
+                                            <h5>Coordinate</h5>
                                         </td>
                                         <td>:</td>
                                         <td>
@@ -28,7 +28,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h5>Tanggal</h5>
+                                            <h5>Date</h5>
                                         </td>
                                         <td>:</td>
                                         <td>
@@ -37,7 +37,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h5>Jam</h5>
+                                            <h5>Hour</h5>
                                         </td>
                                         <td>:</td>
                                         <td>

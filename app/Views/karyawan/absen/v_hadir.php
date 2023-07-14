@@ -1,7 +1,7 @@
 <main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
-        <h1><?= $title ?></h1>
+        <h1>Attending Absent</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -19,7 +19,7 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <p><b>Titik Koordinat</b></p>
+                                            <p><b>Coordinate</b></p>
                                         </td>
                                         <td>:</td>
                                         <td>
@@ -28,7 +28,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p><b>Tanggal</b></p>
+                                            <p><b>Date</b></p>
                                         </td>
                                         <td>:</td>
                                         <td>
@@ -37,7 +37,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p><b>Jam</b></p>
+                                            <p><b>Hour</b></p>
                                         </td>
                                         <td>:</td>
                                         <td>
@@ -55,7 +55,7 @@
                                         <input type="hidden" name="tgl_absen" value="<?= $date ?>">
                                         <input type="hidden" name="jam" value="<?= $waktu ?>">
                                         <input type="hidden" name="koordinat" id="koordinat">
-                                        <button type="submit" class="btn btn-primary d-none mt-3 btn-lg bg-green" id="simpan">Simpan</button>
+                                        <button type="submit" class="btn btn-primary d-none mt-3 btn-lg bg-green" id="simpan">Save</button>
                                     </form>
                                 </div>
                             </div>

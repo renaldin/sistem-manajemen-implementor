@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('m_work_position') ?>">Manage Work Position</a></li>
-                <li class="breadcrumb-item active">Add Implementor</li>
+                <li class="breadcrumb-item active">Add Implementer</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $title ?> <?= $data['nama_rumah_sakit'] ?></h5>
+                        <h5 class="card-title">Add Implementers to <?= $data['nama_rumah_sakit'] ?> Hospital</h5>
                         <?php
                         $errors = session()->getFlashdata('errors');
                         if (!empty($errors)) { ?>
@@ -32,9 +32,9 @@
                         <?= form_open('m_work_position/' . $data['id_rumah_sakit'], ['class' => 'row g-3']) ?>
                         <!-- <form class="row g-3"> -->
                         <div class="col-12">
-                            <label for="implementor" class="form-label">Implementor 1</label>
+                            <label for="implementor" class="form-label">Implementer 1</label>
                             <select name="id_user" id="impelementor" class="form-select" aria-label="Default select example" required>
-                                <option value="" selected>~ Pilih ~</option>
+                                <option value="" selected>~ Choose ~</option>
                                 <?php foreach ($karyawan as $row) {
                                     if ($row['status'] == 'Diterima' && $row['status'] != 'Implementor') {
                                 ?>
@@ -48,11 +48,11 @@
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="col-12">
-                            <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+                            <label for="tanggal_mulai" class="form-label">Start Date</label>
                             <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="<?= date('Y-m-d') ?>" required>
                         </div>
                         <div class="col-12">
-                            <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
+                            <label for="tanggal_selesai" class="form-label">End Date</label>
                             <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" value="<?= date('Y-m-d') ?>" required>
                         </div>
                         <div class="text-end">

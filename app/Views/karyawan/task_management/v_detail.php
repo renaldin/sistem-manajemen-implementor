@@ -25,21 +25,21 @@
                         <?php  } ?>
                         <div class="row">
                             <div class="col-12 mb-2">
-                                <label for="nama_implementor" class="form-label">Deskripsi Pekerjaan</label>
+                                <label for="nama_implementor" class="form-label">Work Description</label>
                                 <textarea class="form-control" id="deskripsi" name="deskripsi" style="height: 100px" readonly><?= $data['deskripsi'] ?></textarea>
                             </div>
                             <div class="col-12 mb-2">
-                                <label for="rumah_sakit" class="form-label">Nama Rumah Sakit</label>
+                                <label for="rumah_sakit" class="form-label">Hospital Name</label>
                                 <input type="text" class="form-control" id="rumah_sakit" name="rumah_sakit" value="<?= $data['nama_rumah_sakit'] ?>" readonly>
                             </div>
                             <div class=" col-12 mb-2">
-                                <label for="batas_tgl_pekerjaan" class="form-label">Batas Tanggal Pekerjaan</label>
+                                <label for="batas_tgl_pekerjaan" class="form-label">Due Date</label>
                                 <input type="date" class="form-control" id="batas_tgl_pekerjaan" name="batas_tgl_pekerjaan" value="<?= $data['batas_tgl_pekerjaan'] ?>" readonly>
                             </div>
                             <form action="<?= base_url('task_management/insert') ?>" method="post">
                                 <input type="hidden" name="id_pekerjaan" value="<?= $data['id_pekerjaan'] ?>">
                                 <div class="col-12 mb-2">
-                                    <label for="tgl_pengumpulan" class="form-label">Tanggal Pengumpulan</label>
+                                    <label for="tgl_pengumpulan" class="form-label">Date Submit</label>
                                     <input type="date" class="form-control" id="tgl_pengumpulan" name="tgl_pengumpulan" value="<?= $data['tgl_pengumpulan'] ? $data['tgl_pengumpulan'] : date('Y-m-d') ?>" readonly>
                                 </div>
                                 <div class="col-12 mb-2 d-block">

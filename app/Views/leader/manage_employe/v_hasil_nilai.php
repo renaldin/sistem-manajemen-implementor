@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('m_employe_assesment') ?>">Manage Employe</a></li>
-                <li class="breadcrumb-item active">Input Nilai</li>
+                <li class="breadcrumb-item active">Input Appraisal</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Hasil Nilai <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] ?></b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
+                        <h5 class="card-title">Appraisal result <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] == 'Diterima' ? 'Accepted' : 'Not Accepted' ?></b> as an Implementer employee at PT Inovasi Kesehatan Indonesia</h5>
                         <!-- <button type="button" class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim E-mail</button> -->
                         <div class="text-end">
                             <a href="<?= base_url('m_employe_assesment') ?>" class="btn btn-outline-success">Back</a>
@@ -42,11 +42,11 @@
                     <input type="hidden" name="email" value="<?= $hasil['employe']['email'] ?>">
                     <div class="col-12">
                         <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Masukan subject email">
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Input subject email">
                     </div>
                     <div class="col-12">
                         <label for="pesan" class="form-label">Isi Pesan</label>
-                        <textarea class="form-control" placeholder="Masukan pesan email" name="pesan" id="pesan" style="height: 100px;" required></textarea>
+                        <textarea class="form-control" placeholder="Input pesan email" name="pesan" id="pesan" style="height: 100px;" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

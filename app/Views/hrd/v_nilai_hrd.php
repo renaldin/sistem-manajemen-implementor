@@ -1,12 +1,12 @@
 <main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
-        <h1><?= $title ?></h1>
+        <h1>Input Appraisal Employee</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('m_employe_assesment') ?>">Manage Employe</a></li>
-                <li class="breadcrumb-item active">Input Nilai</li>
+                <li class="breadcrumb-item active">Input Appraisal</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Form Nilai HRD</h5>
+                        <h5 class="card-title">Form Appraisal HRD</h5>
                         <?php
                         $errors = session()->getFlashdata('errors');
                         if (!empty($errors)) { ?>
@@ -33,30 +33,30 @@
                         <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
                         <!-- <form class="row g-3"> -->
                         <div class="col-12">
-                            <label for="public_speaking" class="form-label">Nilai Public Speaking</label>
+                            <label for="public_speaking" class="form-label">Value Public Speaking</label>
                             <select name="public_speaking" id="public_speaking" class="form-select">
-                                <option value="">~ Pilih ~</option>
-                                <option value="1">Kurang</option>
-                                <option value="2">Cukup</option>
-                                <option value="3">Baik</option>
+                                <option value="">~ Choose ~</option>
+                                <option value="1">Less</option>
+                                <option value="2">Satisfactory</option>
+                                <option value="3">Good</option>
                             </select>
                         </div>
                         <div class="col-12">
-                            <label for="tanya_jawab" class="form-label">Nilai Tanya Jawab</label>
+                            <label for="tanya_jawab" class="form-label">Value Debriefing</label>
                             <select name="tanya_jawab" id="tanya_jawab" class="form-select">
-                                <option value="">~ Pilih ~</option>
-                                <option value="1">Kurang</option>
-                                <option value="2">Cukup</option>
-                                <option value="3">Baik</option>
+                                <option value="">~ Choose ~</option>
+                                <option value="1">Less</option>
+                                <option value="2">Satisfactory</option>
+                                <option value="3">Good</option>
                             </select>
                         </div>
                         <div class="col-12">
-                            <label for="soal" class="form-label">Nilai Soal</label>
+                            <label for="soal" class="form-label">Value Question</label>
                             <select name="soal" id="soal" class="form-select">
-                                <option value="">~ Pilih ~</option>
-                                <option value="1">Kurang</option>
-                                <option value="2">Cukup</option>
-                                <option value="3">Baik</option>
+                                <option value="">~ Choose ~</option>
+                                <option value="1">Less</option>
+                                <option value="2">Satisfactory</option>
+                                <option value="3">Good</option>
                             </select>
                         </div>
                         <div class="d-flex justify-content-between">

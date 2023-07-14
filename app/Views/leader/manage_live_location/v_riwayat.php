@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h5 class="card-title">Riwayat</h5>
+                                <h5 class="card-title">Histories</h5>
                             </div>
                         </div>
                         <?php
@@ -53,7 +53,7 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama_user'] ?></td>
                                         <td><?= $row['tgl_absen'] ?></td>
-                                        <td><?= $row['keterangan'] == null ? 'Hadir' : 'Tidak Hadir' ?></td>
+                                        <td><?= $row['keterangan'] == null ? 'Attend' : 'Not Attend' ?></td>
                                         <td>
                                             <a href="<?= base_url('m_live_location/' . $row['id_absen']) ?>" class="btn btn-info btn-sm bg-green">Detail</a>
                                         </td>

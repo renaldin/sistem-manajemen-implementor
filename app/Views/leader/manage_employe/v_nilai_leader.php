@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Form Nilai Leader Implementor</h5>
+                        <h5 class="card-title">Form Appraisal Leader Implementor</h5>
                         <?php
                         $errors = session()->getFlashdata('errors');
                         if (!empty($errors)) { ?>
@@ -32,30 +32,30 @@
                         <?= form_open('m_employe_assesment/' . $data['id_user'], ['class' => 'row g-3']) ?>
                         <!-- <form class="row g-3"> -->
                         <div class="col-12">
-                            <label for="public_speaking" class="form-label">Nilai Public Speaking</label>
+                            <label for="public_speaking" class="form-label">Value Public Speaking</label>
                             <select name="public_speaking" id="public_speaking" class="form-select">
-                                <option value="">~ Pilih ~</option>
-                                <option value="1">Kurang</option>
-                                <option value="2">Cukup</option>
-                                <option value="3">Baik</option>
+                                <option value="">~ Choose ~</option>
+                                <option value="1">Less</option>
+                                <option value="2">Satisfactory</option>
+                                <option value="3">Good</option>
                             </select>
                         </div>
                         <div class="col-12">
-                            <label for="tanya_jawab" class="form-label">Nilai Tanya Jawab</label>
+                            <label for="tanya_jawab" class="form-label">Value Debriefing</label>
                             <select name="tanya_jawab" id="tanya_jawab" class="form-select">
-                                <option value="">~ Pilih ~</option>
-                                <option value="1">Kurang</option>
-                                <option value="2">Cukup</option>
-                                <option value="3">Baik</option>
+                                <option value="">~ Choose ~</option>
+                                <option value="1">Less</option>
+                                <option value="2">Satisfactory</option>
+                                <option value="3">Good</option>
                             </select>
                         </div>
                         <div class="col-12">
-                            <label for="soal" class="form-label">Nilai Soal</label>
+                            <label for="soal" class="form-label">Value Question</label>
                             <select name="soal" id="soal" class="form-select">
-                                <option value="">~ Pilih ~</option>
-                                <option value="1">Kurang</option>
-                                <option value="2">Cukup</option>
-                                <option value="3">Baik</option>
+                                <option value="">~ Choose ~</option>
+                                <option value="1">Less</option>
+                                <option value="2">Satisfactory</option>
+                                <option value="3">Good</option>
                             </select>
                         </div>
                         <div class="d-flex justify-content-between">

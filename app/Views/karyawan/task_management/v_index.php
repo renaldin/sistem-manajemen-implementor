@@ -37,11 +37,11 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Deskripsi Pekerjaan</th>
-                                    <th>Nama Rumah Sakit</th>
-                                    <th>Batas Tanggal</th>
+                                    <th>Work Description</th>
+                                    <th>Hospital Name</th>
+                                    <th>Due Date</th>
                                     <th>Status</th>
-                                    <th>Opsi</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,9 +56,9 @@
                                         <td><?= $row['batas_tgl_pekerjaan'] ?></td>
                                         <td>
                                             <?php if ($row['status_pekerjaan'] == 'On Progress') { ?>
-                                                <span class="badge rounded-pill bg-warning">Belum</span>
+                                                <span class="badge rounded-pill bg-warning">Not Submit</span>
                                             <?php } else { ?>
-                                                <span class="badge rounded-pill bg-success">Selesai</span>
+                                                <span class="badge rounded-pill bg-success">Sumbitted</span>
                                             <?php } ?>
                                         </td>
                                         <td>

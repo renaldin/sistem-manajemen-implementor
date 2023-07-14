@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('m_employe_assesment') ?>">Manage Employe</a></li>
-                <li class="breadcrumb-item active">Input Nilai</li>
+                <li class="breadcrumb-item active">Input Appraisal</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -16,8 +16,8 @@
 
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Hasil Nilai <b><?= $data['nama_user'] ?> <?= $data['nilai_leader'] + $data['nilai_hrd'] ?><?= $data['nilai_leader'] + $data['nilai_hrd'] < 10 ? '( Kurang dan Tidak Diterima)' : '( Diterima)' ?></b> menjadi Implementor di PT Inovasi Kesehatan Indonesia</h5>
-                        <button type="button" class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim E-mail</button>
+                        <h5 class="card-title">Appraisal result <b><?= $data['nama_user'] ?> <?= $data['nilai_leader'] + $data['nilai_hrd'] ?><?= $data['nilai_leader'] + $data['nilai_hrd'] < 10 ? '( Less and Not Accepted)' : '( Accepted)' ?></b> as an Implementer employee at PT Inovasi Kesehatan Indonesia</h5>
+                        <button type="button" class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#kirimEmail">Send E-mail</button>
                         <!-- <div class="text-end">
                             <a href="<?= base_url('m_employe_assesment') ?>" class="btn btn-outline-success">Back</a>
                         </div> -->
@@ -34,7 +34,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Kirim Email</h5>
+                <h5 class="modal-title">Send Email</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="<?= base_url('m_employe_assesment/kirim_email') ?>" method="post" class="row g-3">
@@ -43,16 +43,16 @@
                 <div class="modal-body">
                     <div class="col-12">
                         <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Masukan subject email">
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Input subject email">
                     </div>
                     <div class="col-12">
-                        <label for="pesan" class="form-label">Isi Pesan</label>
-                        <textarea class="form-control" placeholder="Masukan pesan email" name="pesan" id="pesan" style="height: 100px;" required></textarea>
+                        <label for="pesan" class="form-label">Message</label>
+                        <textarea class="form-control" placeholder="Input pesan email" name="pesan" id="pesan" style="height: 100px;" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary bg-green" type="submit">Kirim</button>
+                    <button class="btn btn-primary bg-green" type="submit">Send</button>
                 </div>
             </form>
         </div>

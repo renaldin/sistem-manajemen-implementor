@@ -21,7 +21,7 @@
                                 <h5 class="card-title">Data Task</h5>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-success mt-3 bg-green" data-bs-toggle="modal" data-bs-target="#add"><i class="bi bi-plus-lg"></i> Task Karyawan</button>
+                                <button class="btn btn-success mt-3 bg-green" data-bs-toggle="modal" data-bs-target="#add"><i class="bi bi-plus-lg"></i> Create Task</button>
                             </div>
                         </div>
                         <?php
@@ -71,7 +71,7 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_pekerjaan'] ?>" class="btn btn-warning btn-sm">Selesai</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_pekerjaan'] ?>" class="btn btn-warning btn-sm">Finished</a>
                                             <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/task') ?>" class="btn btn-info btn-sm bg-green">Detail</a>
                                         </td>
                                     </tr>
@@ -101,7 +101,7 @@
                 <?= form_open('m_task_management/insert_task', ['class' => 'row g-3']) ?>
                 <!-- <form class="row g-3"> -->
                 <div class="col-12">
-                    <label for="nama_implementor" class="form-label">Nama Implementor</label>
+                    <label for="nama_implementor" class="form-label">Implementer Name</label>
                     <select name="nama_implementor" id="nama_implementor" class="form-select" onchange="getRS()">
                         <option value="">~ Pilih ~</option>
                         <?php foreach ($implementor as $row) { ?>
@@ -110,15 +110,15 @@
                     </select>
                 </div>
                 <div class="col-12">
-                    <label for="rumah_sakit" class="form-label">Nama Rumah Sakit</label>
+                    <label for="rumah_sakit" class="form-label">Hospital Name</label>
                     <input type="text" class="form-control" id="rumah_sakit" name="rumah_sakit" readonly>
                 </div>
                 <div class=" col-12">
-                    <label for="batas_tgl_pekerjaan" class="form-label">Batas Tanggal Pekerjaan</label>
+                    <label for="batas_tgl_pekerjaan" class="form-label">Due Date</label>
                     <input type="date" class="form-control" id="batas_tgl_pekerjaan" name="batas_tgl_pekerjaan" value="<?= date('Y-m-d') ?>">
                 </div>
                 <div class="col-12">
-                    <label for="deskripsi" class="form-label">Deskripsi Pekerjaan</label>
+                    <label for="deskripsi" class="form-label">Work Description</label>
                     <textarea class="form-control" id="deskripsi" name="deskripsi" style="height: 100px"></textarea>
                 </div>
                 <div class="modal-footer">
@@ -137,14 +137,14 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Selesai Task</h5>
+                    <h5 class="modal-title">Finished Task</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Yakin ingin menyelesaikan task <?= $row['nama_user'] ?> ?</p>
+                    <p>Are you sure you want to complete <?= $row['nama_user'] ?> Task ?</p>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url('m_task_management/selesai/' . $row['id_pekerjaan']) ?>" class="btn btn-success bg-green">Ya</a>
+                        <a href="<?= base_url('m_task_management/selesai/' . $row['id_pekerjaan']) ?>" class="btn btn-success bg-green">Yes</a>
                     </div>
                 </div>
             </div>

@@ -42,10 +42,10 @@ class Karyawan extends BaseController
     public function getUcapan($jam)
     {
 
-        if ($jam >= '05:00' && $jam <= '09:59') return 'Pagi';
-        if ($jam >= '10:00' && $jam <= '14:59') return 'Siang';
-        if ($jam >= '15:00' && $jam <= '17:59') return 'Sore';
-        return 'Malam';
+        if ($jam >= '05:00' && $jam <= '09:59') return 'Morning';
+        if ($jam >= '10:00' && $jam <= '14:59') return 'Evening';
+        if ($jam >= '15:00' && $jam <= '17:59') return 'Afternoon';
+        return 'Night';
     }
 
     public function absen($ket)
@@ -147,6 +147,14 @@ class Karyawan extends BaseController
     public function task_management()
     {
         $implementor = $this->ModelImplementor->where('id_user', session()->get('id'))->get()->getRowArray();
+
+        if ($implementor == null) {
+            session()->setFlashdata('info', "Anda Belum Menjadi Implementor!.");
+            return redirect()->back();
+        }
+
+        // var_dump(session()->get('id'));
+        // die();
         $data = [
             'title'     => 'Task Management',
             'user'      => $this->ModelUser->find(session()->get('id')),

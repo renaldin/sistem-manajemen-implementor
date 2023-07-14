@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h5 class="card-title">Riwayat Task</h5>
+                                <h5 class="card-title">History Task</h5>
                             </div>
                         </div>
                         <?php

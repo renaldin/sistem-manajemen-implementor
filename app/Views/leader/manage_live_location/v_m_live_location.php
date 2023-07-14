@@ -53,9 +53,9 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama_user'] ?></td>
                                         <td><?= $row['tgl_absen'] ?></td>
-                                        <td><?= $row['keterangan'] == null ? 'Hadir' : 'Tidak Hadir' ?></td>
+                                        <td><?= $row['keterangan'] == null ? 'Attend' : 'Not Attend' ?></td>
                                         <td>
-                                            <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_absen'] ?>">Selesai</a>
+                                            <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_absen'] ?>">Finished</a>
                                             <a href="<?= base_url('m_live_location/' . $row['id_absen']) ?>" class="btn btn-info btn-sm bg-green">Detail</a>
                                         </td>
                                     </tr>
@@ -77,14 +77,14 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Selesai Absen</h5>
+                    <h5 class="modal-title">Finished Attend</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Yakin ingin menyelesaikan absen dari <?= $val['nama_user'] ?> ?</p>
+                    <p>Are you sure you want to complete the attended from <?= $val['nama_user'] ?> ?</p>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url('m_live_location/selesai/' . $val['id_absen']) ?>" class="btn btn-success bg-green">Ya</a>
+                        <a href="<?= base_url('m_live_location/selesai/' . $val['id_absen']) ?>" class="btn btn-success bg-green">Yes</a>
                     </div>
                 </div>
             </div>

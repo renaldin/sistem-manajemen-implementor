@@ -1,7 +1,7 @@
 <main id="main" class="main" style="min-height: 590px;">
 
     <div class="pagetitle">
-        <h1><?= $title ?></h1>
+        <h1>Not Attending Absent</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -37,7 +37,7 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                                <h4>Titik Koordinat </h4>
+                                                <h4>Coordinate </h4>
                                             </td>
                                             <td>:</td>
                                             <td>
@@ -46,7 +46,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h5>Tanggal </h5>
+                                                <h5>Date </h5>
                                             </td>
                                             <td>:</td>
                                             <td>
@@ -55,7 +55,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h5>Jam</h5>
+                                                <h5>Hour</h5>
                                             </td>
                                             <td>:</td>
                                             <td>
@@ -73,11 +73,11 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <label for="ket">Keterangan :</label>
+                                    <label for="ket">Description :</label>
                                     <textarea class="form-control" id="ket" name="keterangan" style="height: 100px"></textarea>
                                 </div>
                                 <div class="col-12 justify-content-center text-center">
-                                    <button type="submit" class="btn btn-primary d-none mt-3 btn-lg bg-green" id="simpan">Absen</button>
+                                    <button type="submit" class="btn btn-primary d-none mt-3 btn-lg bg-green" id="simpan">Attend</button>
                                 </div>
                             </div>
                         </form>
