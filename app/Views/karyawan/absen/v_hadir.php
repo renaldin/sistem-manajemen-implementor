@@ -13,38 +13,40 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-7">
-                                <div id="my_camera"></div>
+                                <div id="my_camera" style="width: 100px !important;"></div>
                             </div>
                             <div class="col-12 col-md-12 col-lg-5 p-4 ">
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <p><b>Coordinate</b></p>
-                                        </td>
-                                        <td>:</td>
-                                        <td>
-                                            <p id="lokasi"></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><b>Date</b></p>
-                                        </td>
-                                        <td>:</td>
-                                        <td>
-                                            <p><?= $tanggal ?></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><b>Hour</b></p>
-                                        </td>
-                                        <td>:</td>
-                                        <td>
-                                            <p><?= $waktu ?></p>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div class="responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <p><b>Coordinate</b></p>
+                                            </td>
+                                            <td>:</td>
+                                            <td>
+                                                <p id="lokasi"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p><b>Date</b></p>
+                                            </td>
+                                            <td>:</td>
+                                            <td>
+                                                <p><?= $tanggal ?></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p><b>Hour</b></p>
+                                            </td>
+                                            <td>:</td>
+                                            <td>
+                                                <p><?= $waktu ?></p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                                 <div class="text-center">
                                     <button class="btn btn-lg text-center btn-success bg-green" id="take" onclick="takePicture()"><i class="bi bi-camera fs-4"></i></button>
                                     <button class="btn btn-lg text-center btn-warning d-none" id="repeat" onclick="repeat()"><i class="bi bi-arrow-repeat fs-4"></i></button>
@@ -72,13 +74,24 @@
 </main><!-- End #main -->
 
 <script>
-    Webcam.set({
-        width: 540,
-        height: 480,
-        image_format: 'jpeg',
-        jpeg_quality: 90,
+    var x = window.matchMedia("(max-width: 700px)")
+    if (x.matches) { // If media query matches
+        Webcam.set({
+            width: 300,
+            height: 250,
+            image_format: 'jpeg',
+            jpeg_quality: 90,
 
-    });
+        });
+    } else {
+        Webcam.set({
+            width: 540,
+            height: 480,
+            image_format: 'jpeg',
+            jpeg_quality: 90,
+
+        });
+    }
     Webcam.attach('#my_camera');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -98,8 +111,13 @@
     function takePicture() {
         Webcam.snap(function(data_uri) {
             // display results in page
-            document.getElementById('my_camera').innerHTML =
-                '<img class="after_capture_frame" src="' + data_uri + '" style="width:540px; height:400px; margin-top:35px;"/>';
+            if (x.matches) { // If media query matches
+                document.getElementById('my_camera').innerHTML =
+                    '<img class="after_capture_frame" src="' + data_uri + '" style="width:300px; height:220px; margin-top:35px;"/>';
+            } else {
+                document.getElementById('my_camera').innerHTML =
+                    '<img class="after_capture_frame" src="' + data_uri + '" style="width:540px; height:400px; margin-top:35px;"/>';
+            }
             $("#captured_image_data").val(data_uri);
             var base64data = $("#captured_image_data").val();
             // alert(base64data);

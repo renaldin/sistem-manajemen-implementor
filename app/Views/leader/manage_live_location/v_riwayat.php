@@ -33,34 +33,37 @@
                             </div>
                         <?php  } ?>
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Implementer Name</th>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Option</th>
-                                </tr>
-
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($data as $row) {
-                                ?>
+                        <div class="responsive">
+                            <table class="table datatable">
+                                <thead>
                                     <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $row['nama_user'] ?></td>
-                                        <td><?= $row['tgl_absen'] ?></td>
-                                        <td><?= $row['keterangan'] == null ? 'Attend' : 'Not Attend' ?></td>
-                                        <td>
-                                            <a href="<?= base_url('m_live_location/' . $row['id_absen']) ?>" class="btn btn-info btn-sm bg-green">Detail</a>
-                                        </td>
+                                        <th>No</th>
+                                        <th>Implementer Name</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Option</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data as $row) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $row['nama_user'] ?></td>
+                                            <td><?= $row['tgl_absen'] ?></td>
+                                            <td><?= $row['keterangan'] == null ? 'Attend' : 'Not Attend' ?></td>
+                                            <td>
+                                                <a href="<?= base_url('m_live_location/' . $row['id_absen']) ?>" class="btn btn-info btn-sm bg-green">Detail</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+
+                        </div>
                         <!-- End Table with stripped rows -->
 
                     </div>

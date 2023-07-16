@@ -36,48 +36,50 @@
                             </div>
                         <?php  } ?>
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Implementer Name</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($data as $row) {
-                                ?>
+                        <div class="responsive">
+                            <table class="table datatable">
+                                <thead>
                                     <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $row['nama_user'] ?></td>
-                                        <td><?= $row['batas_tgl_pekerjaan'] ?></td>
-                                        <td>
-                                            <?php if ($row['tgl_pengumpulan'] == null && date('Y-m-d') > $row['batas_tgl_pekerjaan']) { ?>
-                                                <span class="badge rounded-pill bg-danger">Late</span>
-                                            <?php } elseif ($row['status_pekerjaan'] == 'Uploaded') { ?>
-                                                <span class="badge rounded-pill bg-info"><?= $row['status_pekerjaan'] ?></span>
-                                            <?php } elseif ($row['status_pekerjaan'] == 'Done') { ?>
-                                                <span class="badge rounded-pill bg-success">
-                                                    <?= $row['status_pekerjaan'] ?>
-                                                </span>
-                                            <?php } else { ?>
-                                                <span class="badge rounded-pill bg-warning">
-                                                    <?= $row['status_pekerjaan'] ?>
-                                                </span>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_pekerjaan'] ?>" class="btn btn-warning btn-sm">Finished</a>
-                                            <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/task') ?>" class="btn btn-info btn-sm bg-green">Detail</a>
-                                        </td>
+                                        <th>No</th>
+                                        <th>Implementer Name</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Option</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data as $row) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $row['nama_user'] ?></td>
+                                            <td><?= $row['batas_tgl_pekerjaan'] ?></td>
+                                            <td>
+                                                <?php if ($row['tgl_pengumpulan'] == null && date('Y-m-d') > $row['batas_tgl_pekerjaan']) { ?>
+                                                    <span class="badge rounded-pill bg-danger">Late</span>
+                                                <?php } elseif ($row['status_pekerjaan'] == 'Uploaded') { ?>
+                                                    <span class="badge rounded-pill bg-info"><?= $row['status_pekerjaan'] ?></span>
+                                                <?php } elseif ($row['status_pekerjaan'] == 'Done') { ?>
+                                                    <span class="badge rounded-pill bg-success">
+                                                        <?= $row['status_pekerjaan'] ?>
+                                                    </span>
+                                                <?php } else { ?>
+                                                    <span class="badge rounded-pill bg-warning">
+                                                        <?= $row['status_pekerjaan'] ?>
+                                                    </span>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#selesai-<?= $row['id_pekerjaan'] ?>" class="btn btn-warning btn-sm mb-1">Finished</a>
+                                                <a href="<?= base_url('m_task_management/' . $row['id_pekerjaan'] . '/task') ?>" class="btn btn-info btn-sm bg-green mb-1">Detail</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- End Table with stripped rows -->
 
                     </div>

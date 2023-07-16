@@ -81,4 +81,5 @@
     </style>
 </head>
 
-<body style="overflow-x: hidden;width: 100%;height: 100%;margin: 0;position: absolute;top: 0;left: 0;">
+<body style="overflow-x: hidden;width: 100%;height: 100%;margin: 0;position: absolute;top: 0;left: 0; background-color: #ffffff
+;">

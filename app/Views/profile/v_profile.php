@@ -44,7 +44,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Update Profile</button>
                             </li>
 
                             <li class="nav-item">
@@ -75,8 +75,8 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Jenis Kelamin</div>
-                                    <div class="col-lg-9 col-md-8"><?= $user['jenis_kelamin'] ?></div>
+                                    <div class="col-lg-3 col-md-4 label">Gender</div>
+                                    <div class="col-lg-9 col-md-8"><?= $user['jenis_kelamin'] == "Laki-laki" ? 'Male' : 'Female' ?></div>
                                 </div>
 
                                 <div class="row">
@@ -85,7 +85,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Job</div>
+                                    <div class="col-lg-3 col-md-4 label">Position</div>
                                     <div class="col-lg-9 col-md-8"><?= $user['role'] ?></div>
                                 </div>
 
@@ -112,18 +112,18 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">Jenis Kelamin</label>
+                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">Gender</label>
                                         <div class="col-md-8 col-lg-9">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin" id="lk" value="Laki-laki" <?= $user['jenis_kelamin'] == 'Laki-laki' ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="lk">
-                                                    Laki-laki
+                                                    Male
                                                 </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin" id="p" value="Perempuan" <?= $user['jenis_kelamin'] == 'Perempuan' ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="p">
-                                                    Perempuan
+                                                    Female
                                                 </label>
                                             </div>
                                         </div>

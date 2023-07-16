@@ -64,6 +64,12 @@
             background-color: #00bfa6 !important;
             border-color: #00bfa6;
         }
+
+        @media (max-width: 991px) {
+            .responsive {
+                overflow-y: scroll;
+            }
+        }
     </style>
 </head>
 

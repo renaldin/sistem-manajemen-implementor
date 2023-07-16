@@ -33,33 +33,35 @@
                             </div>
                         <?php  } ?>
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Implementer Name</th>
-                                    <th>Gender</th>
-                                    <th>Email</th>
-                                    <th>Option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($data as $row) {
-                                ?>
+                        <div class="responsive">
+                            <table class="table datatable">
+                                <thead>
                                     <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $row['nama_user'] ?></td>
-                                        <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
-                                        <td><?= $row['email'] ?></td>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm bg-green" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
-                                        </td>
+                                        <th>No</th>
+                                        <th>Implementer Name</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>Option</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data as $row) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $row['nama_user'] ?></td>
+                                            <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
+                                            <td><?= $row['email'] ?></td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm bg-green" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- End Table with stripped rows -->
 
                     </div>

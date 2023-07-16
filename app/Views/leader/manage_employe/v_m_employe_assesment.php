@@ -36,66 +36,69 @@
                             </div>
                         <?php  } ?>
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Gender</th>
-                                    <th>Email</th>
-                                    <th>Appraisal</th>
-                                    <th>Status</th>
-                                    <th>Option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($data as $row) {
-                                ?>
+                        <div class="responsive">
+                            <table class="table datatable">
+                                <thead>
                                     <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $row['nama_user'] ?></td>
-                                        <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
-                                        <td><?= $row['email'] ?></td>
-                                        <td>
-                                            <?php if ($row['nilai_leader'] == null && $row['nilai_hrd'] == null) { ?>
-                                                0/2
-                                            <?php } elseif ($row['nilai_leader'] != null && $row['nilai_hrd'] != null) { ?>
-                                                2/2
-                                            <?php } else { ?>
-                                                1/2
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($row['status'] ==  null && $row['nilai_leader']    == null && $row['nilai_hrd'] == null) { ?>
-                                                <span class="badge rounded-pill bg-warning">Not Rated Yet</span>
-                                            <?php } elseif ($row['status'] == 'Diterima') { ?>
-                                                <span class="badge rounded-pill bg-primary">Accepted</span>
-                                            <?php } elseif ($row['status'] == 'Implementor') { ?>
-                                                <span class="badge rounded-pill bg-success bg-green">Implementer</span>
-                                            <?php } elseif ($row['status'] == 'Tidak Diterima') { ?>
-                                                <span class="badge rounded-pill bg-danger">Not Accepted</span>
-                                            <?php } else { ?>
-                                                <span class="badge rounded-pill bg-info">Rated</span>
-                                            <?php } ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#del-<?= $row['id_user'] ?>"><i class=" bi bi-trash"></i></button>
-                                            <?php if ($row['status'] == null && $row['nilai_leader'] == null) { ?>
-                                                <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Input Appraisal</a>
-                                            <?php } elseif ($row['status'] != null) { ?>
-                                                <button class="btn btn-primary btn-sm bg-green" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
-                                            <?php } ?>
-                                            <?php if ($row['nilai_leader'] != null && $row['nilai_hrd'] != null && $row['status'] == null) { ?>
-                                                <a href="<?= base_url('m_employe_assesment/hasil/' . $row['id_user']) ?>" class="btn btn-success btn-sm bg-green">Hasil</a>
-                                            <?php } else { ?>
-                                            <?php } ?>
-                                        </td>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>Appraisal</th>
+                                        <th>Status</th>
+                                        <th>Option</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data as $row) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++ ?></td>
+                                            <td><?= $row['nama_user'] ?></td>
+                                            <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
+                                            <td><?= $row['email'] ?></td>
+                                            <td>
+                                                <?php if ($row['nilai_leader'] == null && $row['nilai_hrd'] == null) { ?>
+                                                    0/2
+                                                <?php } elseif ($row['nilai_leader'] != null && $row['nilai_hrd'] != null) { ?>
+                                                    2/2
+                                                <?php } else { ?>
+                                                    1/2
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($row['status'] ==  null && $row['nilai_leader']    == null && $row['nilai_hrd'] == null) { ?>
+                                                    <span class="badge rounded-pill bg-warning">Not Rated Yet</span>
+                                                <?php } elseif ($row['status'] == 'Diterima') { ?>
+                                                    <span class="badge rounded-pill bg-primary">Accepted</span>
+                                                <?php } elseif ($row['status'] == 'Implementor') { ?>
+                                                    <span class="badge rounded-pill bg-success bg-green">Implementer</span>
+                                                <?php } elseif ($row['status'] == 'Tidak Diterima') { ?>
+                                                    <span class="badge rounded-pill bg-danger">Not Accepted</span>
+                                                <?php } else { ?>
+                                                    <span class="badge rounded-pill bg-info">Rated</span>
+                                                <?php } ?>
+                                            </td>
+                                            <td style="text-align: center !important;">
+                                                <button class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#del-<?= $row['id_user'] ?>"><i class=" bi bi-trash"></i></button>
+                                                <?php if ($row['status'] == null && $row['nilai_leader'] == null) { ?>
+                                                    <a href="<?= base_url('m_employe_assesment/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green mb-1">Input Appraisal</a>
+                                                <?php } elseif ($row['status'] != null) { ?>
+                                                    <button class="btn btn-primary btn-sm bg-green mb-1" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
+                                                <?php } ?>
+                                                <?php if ($row['nilai_leader'] != null && $row['nilai_hrd'] != null && $row['status'] == null) { ?>
+                                                    <a href="<?= base_url('m_employe_assesment/hasil/' . $row['id_user']) ?>" class="btn btn-success btn-sm bg-green mb-1">Hasil</a>
+                                                <?php } else { ?>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+
+                        </div>
                         <!-- End Table with stripped rows -->
 
                     </div>

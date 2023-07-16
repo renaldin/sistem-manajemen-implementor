@@ -34,35 +34,37 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 col-lg-12 col-xl-12 p-4 ">
-                                    <table class="table">
-                                        <tr>
-                                            <td>
-                                                <h4>Coordinate </h4>
-                                            </td>
-                                            <td>:</td>
-                                            <td>
-                                                <p id="lokasi"></p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5>Date </h5>
-                                            </td>
-                                            <td>:</td>
-                                            <td>
-                                                <p><?= $tanggal ?></p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5>Hour</h5>
-                                            </td>
-                                            <td>:</td>
-                                            <td>
-                                                <p><?= $waktu ?></p>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <div class="responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td>
+                                                    <h4>Coordinate </h4>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <p id="lokasi"></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h5>Date </h5>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <p><?= $tanggal ?></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h5>Hour</h5>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <p><?= $waktu ?></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
 
                                     <div class="text-center">
                                         <input type="hidden" name="captured_image_data" id="captured_image_data">
@@ -94,13 +96,24 @@
 </main><!-- End #main -->
 
 <script>
-    Webcam.set({
-        width: 540,
-        height: 480,
-        image_format: 'jpeg',
-        jpeg_quality: 90,
+    var x = window.matchMedia("(max-width: 700px)")
+    if (x.matches) { // If media query matches
+        Webcam.set({
+            width: 300,
+            height: 250,
+            image_format: 'jpeg',
+            jpeg_quality: 90,
 
-    });
+        });
+    } else {
+        Webcam.set({
+            width: 540,
+            height: 480,
+            image_format: 'jpeg',
+            jpeg_quality: 90,
+
+        });
+    }
     Webcam.attach('#my_camera');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -119,8 +132,13 @@
     function takePicture() {
         Webcam.snap(function(data_uri) {
             // display results in page
-            document.getElementById('my_camera').innerHTML =
-                '<img class="after_capture_frame" src="' + data_uri + '" style="width:540px; height:400px; margin-top:35px;"/>';
+            if (x.matches) { // If media query matches
+                document.getElementById('my_camera').innerHTML =
+                    '<img class="after_capture_frame" src="' + data_uri + '" style="width:300px; height:220px; margin-top:35px;margin-top:12px;"/>';
+            } else {
+                document.getElementById('my_camera').innerHTML =
+                    '<img class="after_capture_frame" src="' + data_uri + '" style="width:540px; height:400px; margin-top:35px;"/>';
+            }
             $("#captured_image_data").val(data_uri);
             var base64data = $("#captured_image_data").val();
             // alert(base64data);

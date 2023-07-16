@@ -31,39 +31,41 @@
                             </div>
                         <?php  } ?>
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Gender</th>
-                                    <th>Email</th>
-                                    <th>Option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($data as $row) {
-                                    if ($row['nilai_hrd'] == null || $row['status'] == null || $row['send_email'] != true) {
-                                ?>
-                                        <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= $row['nama_user'] ?></td>
-                                            <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
-                                            <td><?= $row['email'] ?></td>
-                                            <td class="text-center">
-                                                <?php if ($row['nilai_hrd'] == null) { ?>
-                                                    <a href="<?= base_url('hrd/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Input Appraisal</a>
-                                                <?php } elseif ($row['nilai_hrd'] != null && $row['nilai_leader'] != null) { ?>
-                                                    <a href="<?= base_url('hrd/detail/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green">Detail</a>
-                                                <?php } ?>
-                                            </td>
-                                        </tr>
-                                <?php }
-                                } ?>
-                            </tbody>
-                        </table>
+                        <div class="responsive">
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>Option</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data as $row) {
+                                        if ($row['nilai_hrd'] == null || $row['status'] == null || $row['send_email'] != true) {
+                                    ?>
+                                            <tr>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $row['nama_user'] ?></td>
+                                                <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
+                                                <td><?= $row['email'] ?></td>
+                                                <td class="text-center">
+                                                    <?php if ($row['nilai_hrd'] == null) { ?>
+                                                        <a href="<?= base_url('hrd/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green mb-1">Input Appraisal</a>
+                                                    <?php } elseif ($row['nilai_hrd'] != null && $row['nilai_leader'] != null) { ?>
+                                                        <a href="<?= base_url('hrd/detail/' . $row['id_user']) ?>" class="btn btn-primary btn-sm bg-green mb-1">Detail</a>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div><!-- End Default Card -->
             </div>

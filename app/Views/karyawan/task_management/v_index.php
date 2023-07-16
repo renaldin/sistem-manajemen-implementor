@@ -33,41 +33,43 @@
                             </div>
                         <?php  } ?>
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Work Description</th>
-                                    <th>Hospital Name</th>
-                                    <th>Due Date</th>
-                                    <th>Status</th>
-                                    <th>Option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($data as $row) {
-                                ?>
+                        <div class="responsive">
+                            <table class="table datatable">
+                                <thead>
                                     <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $row['deskripsi'] ?></td>
-                                        <td><?= $row['nama_rumah_sakit'] ?></td>
-                                        <td><?= $row['batas_tgl_pekerjaan'] ?></td>
-                                        <td>
-                                            <?php if ($row['status_pekerjaan'] == 'On Progress') { ?>
-                                                <span class="badge rounded-pill bg-warning">Not Submit</span>
-                                            <?php } else { ?>
-                                                <span class="badge rounded-pill bg-success">Sumbitted</span>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <a href="<?= base_url('task_management/' . $row['id_pekerjaan']) ?>" class="btn btn-info btn-sm bg-green">Detail</a>
-                                        </td>
+                                        <th>No</th>
+                                        <th>Work Description</th>
+                                        <th>Hospital Name</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Option</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data as $row) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $row['deskripsi'] ?></td>
+                                            <td><?= $row['nama_rumah_sakit'] ?></td>
+                                            <td><?= $row['batas_tgl_pekerjaan'] ?></td>
+                                            <td>
+                                                <?php if ($row['status_pekerjaan'] == 'On Progress') { ?>
+                                                    <span class="badge rounded-pill bg-warning">Not Submit</span>
+                                                <?php } else { ?>
+                                                    <span class="badge rounded-pill bg-success">Sumbitted</span>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?= base_url('task_management/' . $row['id_pekerjaan']) ?>" class="btn btn-info btn-sm bg-green">Detail</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- End Table with stripped rows -->
 
                     </div>
