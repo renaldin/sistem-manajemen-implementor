@@ -400,6 +400,16 @@ class Leader extends BaseController
                 return redirect()->back()->withInput();
             }
 
+            if ($this->request->getPost('tanggal_mulai') < date('Y-m-d')) {
+                session()->setFlashdata('info', "Tanggal Mulai Sudah Terlewat!.");
+                return redirect()->back()->withInput();
+            }
+
+            if ($this->request->getPost('tanggal_selesai') < date('Y-m-d')) {
+                session()->setFlashdata('info', "Tanggal Selesai Sudah Terlewat!.");
+                return redirect()->back()->withInput();
+            }
+
             $data = [
                 'title' => 'Add Implementor Rumah Sakit',
                 'user'  => $this->ModelUser->find(session()->get('id')),
@@ -451,6 +461,16 @@ class Leader extends BaseController
 
         if ($this->request->getPost('tanggal_mulai2') > $this->request->getPost('tanggal_selesai2')) {
             session()->setFlashdata('info', "Tanggal Selesai Harus Melewati Tanggal Mulai!.");
+            return redirect()->back()->withInput();
+        }
+
+        if ($this->request->getPost('tanggal_mulai2') < date('Y-m-d')) {
+            session()->setFlashdata('info', "Tanggal Mulai Sudah Terlewat!.");
+            return redirect()->back()->withInput();
+        }
+
+        if ($this->request->getPost('tanggal_selesai2') < date('Y-m-d')) {
+            session()->setFlashdata('info', "Tanggal Selesai Sudah Terlewat!.");
             return redirect()->back()->withInput();
         }
 
