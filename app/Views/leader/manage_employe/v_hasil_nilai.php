@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Appraisal result <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] == 'Diterima' ? 'Accepted' : 'Not Accepted' ?></b> as an Implementer employee at PT Inovasi Kesehatan Indonesia</h5>
+                        <h5 class="card-title">Appraisal result <b><?= $hasil['nilai'] ?></b>. <?= $hasil['employe']['nama_user'] ?> <b><?= $hasil['status'] == 'Diterima' ? 'Accepted' : 'Not Accepted' ?></b> as an Implementor employee at PT Inovasi Kesehatan Indonesia</h5>
                         <!-- <button type="button" class="btn btn-primary bg-green" data-bs-toggle="modal" data-bs-target="#kirimEmail">Kirim E-mail</button> -->
                         <div class="text-end">
                             <a href="<?= base_url('m_employe_assesment') ?>" class="btn btn-outline-success">Back</a>

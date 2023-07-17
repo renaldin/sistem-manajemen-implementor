@@ -168,7 +168,7 @@
                     <p>Hospital Description :</p>
                     <p><?= $row['deskripsi_rumah_sakit'] ?></p>
                     <hr>
-                    <p>Implementers :</p>
+                    <p>Implementor :</p>
                     <?php foreach ($implementor as $value) {
                         if ($value['id_rumah_sakit'] == $row['id_rumah_sakit']) { ?>
                             <b><?= $value['nama_user'] ?></b>

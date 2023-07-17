@@ -41,7 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Implementer Name</th>
+                                        <th>Implementor Name</th>
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Option</th>
@@ -96,14 +96,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Task Karyawan</h5>
+                <h5 class="modal-title">Create Task Implementor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <?= form_open('m_task_management/insert_task', ['class' => 'row g-3']) ?>
                 <!-- <form class="row g-3"> -->
                 <div class="col-12">
-                    <label for="nama_implementor" class="form-label">Implementer Name</label>
+                    <label for="nama_implementor" class="form-label">Implementor Name</label>
                     <select name="nama_implementor" id="nama_implementor" class="form-select" onchange="getRS()">
                         <option value="">~ Pilih ~</option>
                         <?php foreach ($implementor as $row) { ?>

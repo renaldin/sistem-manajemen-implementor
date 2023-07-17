@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('m_work_position') ?>">Manage Work Position</a></li>
-                <li class="breadcrumb-item active">Add Implementer</li>
+                <li class="breadcrumb-item active">Add Implementor</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -37,7 +37,7 @@
                         <input type="hidden" name="tanggal_selesai1" value="<?= $data_input['tanggal_selesai'] ?>">
 
                         <div class="col-12">
-                            <label for="implementor" class="form-label">Implementer 2</label>
+                            <label for="implementor" class="form-label">Implementor 2</label>
                             <select name="id_user2" id="impelementor" class="form-select" aria-label="Default select example" required>
                                 <option value="" selected>~ Choose ~</option>
                                 <?php foreach ($karyawan as $row) {
@@ -70,7 +70,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Send Email For both Implementers</h5>
+                                        <h5 class="modal-title">Send Email For both Implementor</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

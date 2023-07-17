@@ -38,7 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Implementer Name</th>
+                                        <th>Implementor Name</th>
                                         <th>Date</th>
                                         <th>Description</th>
                                         <th>Option</th>

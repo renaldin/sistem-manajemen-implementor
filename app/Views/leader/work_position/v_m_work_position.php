@@ -47,7 +47,7 @@
                                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Hospital</a></li>
                                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edit-<?= $row['id_rumah_sakit'] ?>">Update Hospital</a></li>
                                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#cancle-<?= $row['id_rumah_sakit'] ?>">Cancel Hospital</a></li>
-                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/' . $row['id_rumah_sakit']) ?>">Add Implementer</a></li>
+                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/' . $row['id_rumah_sakit']) ?>">Add Implementor</a></li>
                                         </ul>
                                     </div>
 
@@ -174,7 +174,7 @@
                     <p>Hospital Description :</p>
                     <p><?= $row['deskripsi_rumah_sakit'] ?></p>
                     <hr>
-                    <p>Implementer :</p>
+                    <p>Implementor :</p>
                     <?php foreach ($implementor as $value) {
                         if ($value['id_rumah_sakit'] == $row['id_rumah_sakit']) { ?>
                             <b><?= $value['nama_user'] ?></b>

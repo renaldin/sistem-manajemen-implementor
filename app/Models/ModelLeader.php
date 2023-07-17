@@ -117,8 +117,13 @@ class ModelLeader extends Model
     public function getImplementor()
     {
         return $this->db->table('implementor')
+            ->select(['implementor.id_implementor', 'user.nama_user', 'rumah_sakit.status'])
             ->join('user', 'user.id_user = implementor.id_user')
-            ->where('user.status', 'Implementor')
+            ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')
+            ->where([
+                'user.status' => 'Implementor',
+                'rumah_sakit.status' => null
+            ])
             ->get()->getResultArray();
     }
 }

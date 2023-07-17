@@ -702,6 +702,14 @@ class Leader extends BaseController
             ],
         ];
         if ($this->validate($validasi)) {
+
+            $implementor = $this->ModelImplementor->find($this->request->getPost('nama_implementor'));
+
+            if ($this->request->getPost('batas_tgl_pekerjaan') < $implementor['tanggal_mulai'] || $this->request->getPost('batas_tgl_pekerjaan') > $implementor['tanggal_selesai']) {
+                session()->setFlashdata('info', "Tanggal Batas Pekerjaan Tidak Boleh Kurang dari $implementor[tanggal_mulai] dan lebih dari $implementor[tanggal_selesai]!.");
+                return redirect()->back()->withInput();
+            }
+
             $data = [
                 'deskripsi' => $this->request->getPost('deskripsi'),
                 'batas_tgl_pekerjaan' => $this->request->getPost('batas_tgl_pekerjaan'),

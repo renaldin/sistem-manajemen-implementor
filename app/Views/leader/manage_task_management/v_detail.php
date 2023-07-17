@@ -14,7 +14,7 @@
                         <h5 class="text-center p-2">Detail Task</h5>
                         <div class="row">
                             <div class="col-12 mb-2">
-                                <label for="nama_implementor" class="form-label">Implementer Name</label>
+                                <label for="nama_implementor" class="form-label">Implementor Name</label>
                                 <input type="text" class="form-control" id="nama_implementor" name="nama_implementor" value="<?= $data['nama_user'] ?>" readonly>
                             </div>
                             <div class="col-12 mb-2">

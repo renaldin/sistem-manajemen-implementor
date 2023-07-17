@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('m_work_position') ?>">Manage Work Position</a></li>
-                <li class="breadcrumb-item active">Add Implementer</li>
+                <li class="breadcrumb-item active">Add Implementor</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Add Implementers to <?= $data['nama_rumah_sakit'] ?> Hospital</h5>
+                        <h5 class="card-title">Add Implementor to <?= $data['nama_rumah_sakit'] ?> Hospital</h5>
                         <?php
                         $errors = session()->getFlashdata('errors');
                         if (!empty($errors)) { ?>
@@ -32,7 +32,7 @@
                         <?= form_open('m_work_position/' . $data['id_rumah_sakit'], ['class' => 'row g-3']) ?>
                         <!-- <form class="row g-3"> -->
                         <div class="col-12">
-                            <label for="implementor" class="form-label">Implementer 1</label>
+                            <label for="implementor" class="form-label">Implementor 1</label>
                             <select name="id_user" id="impelementor" class="form-select" aria-label="Default select example" required>
                                 <option value="" selected>~ Choose ~</option>
                                 <?php foreach ($karyawan as $row) {

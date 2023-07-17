@@ -38,7 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Implementer Name</th>
+                                        <th>Implementor Name</th>
                                         <th>Gender</th>
                                         <th>Email</th>
                                         <th>Option</th>
@@ -86,7 +86,7 @@
                     <p>Name : <?= $row['nama_user'] ?></p>
                     <p>Email : <?= $row['email'] ?></p>
                     <hr>
-                    <p><b>Implementer Value of Leader</b></p>
+                    <p><b>Implementor Value of Leader</b></p>
                     <?php if ($row['leader_public_speaking']) { ?>
                         <p>Value Public Speaking : <?= $row['leader_public_speaking'] == 1 ? 'Less' : ($row['leader_public_speaking'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
                         <p>Value Debriefing : <?= $row['leader_tanya_jawab'] == 1 ? 'Less' : ($row['leader_tanya_jawab'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
@@ -95,7 +95,7 @@
                         <p>Leader haven't made an assessment yet</p>
                     <?php } ?>
                     <hr>
-                    <p><b>Implementer Value of HRD</b></p>
+                    <p><b>Implementor Value of HRD</b></p>
                     <?php if ($row['hrd_public_speaking']) { ?>
                         <p>Value Public Speaking : <?= $row['hrd_public_speaking'] == 1 ? 'Less' : ($row['hrd_public_speaking'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
                         <p>Value Debriefing : <?= $row['hrd_tanya_jawab'] == 1 ? 'Less' : ($row['hrd_tanya_jawab'] == 2 ? 'Satisfactory' : 'Good')  ?></p>
@@ -105,7 +105,7 @@
                     <?php } ?>
                     <hr>
                     <?php if ($row['leader_public_speaking'] != null && $row['hrd_public_speaking'] != null && $row['status'] != null) { ?>
-                        <p>Value <?= $row['nama_user'] ?> : <?= $row['nilai_leader'] + $row['nilai_hrd'] ?> <?= $row['nilai_leader'] + $row['nilai_hrd'] >= 10 ? '(Good) accepted as an Implementer employee at PT Inovasi Kesehatan Indonesia' : '(Less) not accepted as an Implementer employee at PT Inovasi Kesehatan Indonesia' ?></p>
+                        <p>Value <?= $row['nama_user'] ?> : <?= $row['nilai_leader'] + $row['nilai_hrd'] ?> <?= $row['nilai_leader'] + $row['nilai_hrd'] >= 10 ? '(Good) accepted as an Implementor employee at PT Inovasi Kesehatan Indonesia' : '(Less) not accepted as an Implementor employee at PT Inovasi Kesehatan Indonesia' ?></p>
                     <?php } else { ?>
                         <p>Value Sementara <?= $row['nama_user'] . ' : ' . $row['nilai_leader'] + $row['nilai_hrd'] ?></p>
                     <?php } ?>
