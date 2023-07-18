@@ -31,7 +31,7 @@
                     ?>
                         <!-- Sales Card -->
                         <div class="col-xl-3 col-12 col-md-6">
-                            <div class="card info-card sales-card">
+                            <div class="card info-card sales-card" style="min-height: 11.3rem;">
 
                                 <div class="filter" title="Opsi">
                                     <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -41,7 +41,9 @@
                                         </li>
 
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_rumah_sakit'] ?>">Detail Hospital</a></li>
-                                        <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Back to Cooperation</a></li>
+                                        <?php if ($row['status'] != 'Cancle') { ?>
+                                            <li><a class="dropdown-item" href="<?= base_url('m_work_position/uncancle_rumah_sakit/' . $row['id_rumah_sakit']) ?>">Back to Cooperation</a></li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
 

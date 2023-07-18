@@ -60,9 +60,19 @@ class ModelLeader extends Model
 
     public function getAllEmploye()
     {
+        // echo '<pre>';
         return $this->db->table('user')
-            ->where('role', 'Karyawan')
+            ->select(['user.*', 'implementor.tanggal_selesai', 'rumah_sakit.status as status_rumah_sakit'])
+            ->join('implementor', 'implementor.id_user = user.id_user', 'left')
+            ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit', 'left')
+            ->where([
+                'role' => 'Karyawan',
+                'user.status !='   => null,
+                'user.status !='    => 'Tidak Diterima'
+            ])
             ->get()->getResultArray();
+        // echo '</pre>';
+        // die();
     }
 
     public function insertImpelementor($data)
@@ -125,5 +135,10 @@ class ModelLeader extends Model
                 'rumah_sakit.status' => null
             ])
             ->get()->getResultArray();
+    }
+
+    public function update_implementor($data)
+    {
+        $this->db->table('implementor')->where('id_user', $data['id_user'])->update($data);
     }
 }

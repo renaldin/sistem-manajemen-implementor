@@ -41,10 +41,12 @@
                             <select name="id_user2" id="impelementor" class="form-select" aria-label="Default select example" required>
                                 <option value="" selected>~ Choose ~</option>
                                 <?php foreach ($karyawan as $row) {
-                                    if ($row['status'] == 'Diterima' && $row['id_user'] != $data_input['id_user']) {
+                                    if (date('Y-m-d') >= $row['tanggal_selesai'] || $row['status'] == null || $row['status_rumah_sakit'] == 'Cancle') {
+                                        if ($row['id_user'] != $data_input['id_user']) {
                                 ?>
-                                        <option value="<?= $row['id_user'] ?>"><?= $row['nama_user'] ?></option>
+                                            <option value="<?= $row['id_user'] ?>"><?= $row['nama_user'] ?></option>
                                 <?php }
+                                    }
                                 } ?>
                             </select>
                         </div>

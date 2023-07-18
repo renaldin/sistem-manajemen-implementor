@@ -13,7 +13,7 @@ class ModelRumahSakit extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_rumah_sakit', 'nama_rumah_sakit', 'alamat_rumah_sakit', 'deskripsi_rumah_sakit', 'status'];
+    protected $allowedFields    = ['id_rumah_sakit', 'nama_rumah_sakit', 'alamat_rumah_sakit', 'deskripsi_rumah_sakit', 'tgl_mulai_kerjasama', 'tgl_akhir_kerjasama', 'status'];
 
     // Dates
     protected $useTimestamps = false;

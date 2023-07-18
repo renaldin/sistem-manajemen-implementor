@@ -31,11 +31,11 @@
                         </div>
                     <?php  } ?>
                     <?php foreach ($data as $row) {
-                        if ($row['status'] == null) {
+                        if (date('Y-m-d') <= $row['tgl_akhir_kerjasama'] || $row['tgl_mulai_kerjasama'] == null) {
                     ?>
                             <!-- Sales Card -->
                             <div class="col-xl-3 col-md-6">
-                                <div class="card info-card sales-card" style="height: 10rem;">
+                                <div class="card info-card sales-card" style="min-height: 11rem;">
 
                                     <div class="filter" title="Opsi">
                                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -79,9 +79,6 @@
             </div><!-- End Left side columns -->
 
 
-        </div>
-        <div class="float-end m-2">
-            <?= $pagination->links('rumah_sakit', 'pagination') ?>
         </div>
     </section>
 

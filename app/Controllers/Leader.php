@@ -261,11 +261,21 @@ class Leader extends BaseController
         $data = [
             'title' => 'Manage Work Position',
             'user'  => $this->ModelUser->find(session()->get('id')),
-            'data'  => $this->ModelRumahSakit->where('status', null)->paginate(8, 'rumah_sakit'),
+            'data'  => $this->ModelRumahSakit
+                ->where([
+                    'rumah_sakit.status' => null,
+                ])
+                ->findAll(),
             'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
             'pagination' => $this->ModelRumahSakit->pager,
             'isi'   => 'leader/work_position/v_m_work_position'
         ];
+
+        // echo '<pre>';
+        // var_dump($data['data']);
+        // // echo date('Y-m-d');
+        // echo '</pre>';
+        // die();
 
         return view('layout/v_wrapper_admin', $data);
     }
@@ -276,31 +286,65 @@ class Leader extends BaseController
         $alamat_rumah_sakit = $this->request->getPost('alamat_rumah_sakit');
         $deskripsi_rumah_sakit = $this->request->getPost('deskripsi_rumah_sakit');
 
-        $validasi = [
-            'nama_rumah_sakit' => [
-                'label' => 'Nama Rumah Sakit',
-                'rules' => 'required|is_unique[rumah_sakit.nama_rumah_sakit]|alpha_space',
-                'errors' => [
-                    'required' => '{field} Wajib Diisi.',
-                    'is_unique' => '{field} Tidak Diperbolehkan sama.',
-                    'alpha_space' => '{field} Tidak Boleh Berisi Angka.',
+        $cek_nama_rs = $this->ModelRumahSakit->where([
+            'nama_rumah_sakit' => $this->request->getPost('nama_rumah_sakit'),
+            'status'    => 'Cancle'
+        ])->first();
+
+        if ($cek_nama_rs) {
+            $validasi = [
+                'nama_rumah_sakit' => [
+                    'label' => 'Nama Rumah Sakit',
+                    'rules' => 'required|alpha_space',
+                    'errors' => [
+                        'required' => '{field} Wajib Diisi.',
+                        'is_unique' => '{field} Tidak Diperbolehkan sama.',
+                        'alpha_space' => '{field} Tidak Boleh Berisi Angka.',
+                    ],
                 ],
-            ],
-            'alamat_rumah_sakit' => [
-                'label' => 'Alamat Rumah Sakit',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} wajib diisi.'
+                'alamat_rumah_sakit' => [
+                    'label' => 'Alamat Rumah Sakit',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
                 ],
-            ],
-            'deskripsi_rumah_sakit' => [
-                'label' => 'Deskripsi Rumah Sakit',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} wajib diisi.'
+                'deskripsi_rumah_sakit' => [
+                    'label' => 'Deskripsi Rumah Sakit',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
                 ],
-            ],
-        ];
+            ];
+        } else {
+            $validasi = [
+                'nama_rumah_sakit' => [
+                    'label' => 'Nama Rumah Sakit',
+                    'rules' => 'required|is_unique[rumah_sakit.nama_rumah_sakit]|alpha_space',
+                    'errors' => [
+                        'required' => '{field} Wajib Diisi.',
+                        'is_unique' => '{field} Tidak Diperbolehkan sama.',
+                        'alpha_space' => '{field} Tidak Boleh Berisi Angka.',
+                    ],
+                ],
+                'alamat_rumah_sakit' => [
+                    'label' => 'Alamat Rumah Sakit',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'deskripsi_rumah_sakit' => [
+                    'label' => 'Deskripsi Rumah Sakit',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+            ];
+        }
+
 
         if ($this->validate($validasi)) {
             $data = [
@@ -494,8 +538,19 @@ class Leader extends BaseController
         // insert to implementor dan update status user menjadi implementor
         foreach ($data as $value) {
             $this->ModelLeader->db->table('user')->where('id_user', $value['id_user'])->update(['status' => 'Implementor']);
-            $this->ModelLeader->insertImpelementor($value);
+            $cek_implementor = $this->ModelImplementor->where('id_user', $value['id_user'])->first();
+            if ($cek_implementor) {
+                $this->ModelLeader->update_implementor($value);
+            } else {
+                $this->ModelLeader->insertImpelementor($value);
+            }
         }
+
+        // update tanggal mulai dan akhir kerja sama di tabel rumah sakit
+        $this->ModelRumahSakit->update($id_rumah_sakit, [
+            'tgl_mulai_kerjasama' => $this->request->getPost('tanggal_mulai1'),
+            'tgl_akhir_kerjasama' => $this->request->getPost('tanggal_selesai1'),
+        ]);
 
         $email = \Config\Services::email();
 
@@ -562,7 +617,7 @@ class Leader extends BaseController
         $data = [
             'title' => 'History Rumah Sakit',
             'user'  => $this->ModelUser->find(session()->get('id')),
-            'data'  => $this->ModelRumahSakit->where('status', 'Cancle')->paginate(8, 'rumah_sakit'),
+            'data'  => $this->ModelRumahSakit->where('status', 'Cancle')->orWhere('tgl_akhir_kerjasama <', date('Y-m-d'))->paginate(8, 'rumah_sakit'),
             'pagination' => $this->ModelRumahSakit->pager,
             'implementor' => $this->ModelLeader->getAllImplementorWithRumahSakit(),
             'isi'   => 'leader/work_position/v_riwayat_rumah_sakit'

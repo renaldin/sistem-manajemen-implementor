@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 04:58 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Host: localhost:3306
+-- Generation Time: Jul 18, 2023 at 08:41 AM
+-- Server version: 10.6.14-MariaDB-cll-lve
+-- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db-simi`
+-- Database: `u7437287_simi`
 --
 
 -- --------------------------------------------------------
@@ -59,10 +59,10 @@ CREATE TABLE `implementor` (
 --
 
 INSERT INTO `implementor` (`id_implementor`, `id_rumah_sakit`, `id_user`, `email`, `tanggal_mulai`, `tanggal_selesai`, `status`) VALUES
-(15, 1, 22, 'cobaemail@gmail.com', '2023-07-25', '2023-09-25', NULL),
-(16, 1, 23, 'tesemail@gmail.com', '2023-07-25', '2023-09-25', NULL),
-(17, 2, 24, 'titikkoma219@gmail.com', '2023-07-12', '2023-09-12', NULL),
-(18, 2, 25, 'eventt@gmail.com', '2023-07-12', '2023-09-12', NULL);
+(23, 1, 31, 'putray@gmail.com', '2023-07-17', '2023-07-18', NULL),
+(24, 2, 32, 'fitri@gmail.com', '2023-07-18', '2023-07-20', NULL),
+(25, 2, 33, 'afdal@gmail.com', '2023-07-18', '2023-07-20', NULL),
+(26, 7, 34, 'rifki@gmail.com', '2023-07-17', '2023-07-17', NULL);
 
 -- --------------------------------------------------------
 
@@ -86,14 +86,10 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`id_nilai`, `leader_public_speaking`, `leader_tanya_jawab`, `leader_soal`, `hrd_public_speaking`, `hrd_tanya_jawab`, `hrd_soal`, `id_user`) VALUES
-(1, 2, 2, 2, 2, 1, 3, 22),
-(2, 2, 2, 3, 3, 3, 1, 23),
-(3, 2, 2, 2, 1, 2, 2, 24),
-(4, 3, 2, 2, 3, 3, 2, 25),
-(5, 2, 2, 2, 2, 2, 2, 26),
-(6, 1, 1, 1, 2, 2, 3, 27),
-(8, 1, 1, 1, 1, 1, 1, 29),
-(9, 1, 1, 1, 1, 1, 1, 30);
+(10, 3, 3, 3, 2, 2, 3, 31),
+(11, 2, 2, 1, 2, 1, 3, 32),
+(12, 2, 2, 2, 2, 3, 3, 33),
+(13, 3, 3, 3, 2, 2, 2, 34);
 
 -- --------------------------------------------------------
 
@@ -122,6 +118,8 @@ CREATE TABLE `rumah_sakit` (
   `nama_rumah_sakit` varchar(50) NOT NULL,
   `alamat_rumah_sakit` varchar(255) NOT NULL,
   `deskripsi_rumah_sakit` varchar(255) NOT NULL,
+  `tgl_mulai_kerjasama` date DEFAULT NULL,
+  `tgl_akhir_kerjasama` date DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,20 +127,21 @@ CREATE TABLE `rumah_sakit` (
 -- Dumping data for table `rumah_sakit`
 --
 
-INSERT INTO `rumah_sakit` (`id_rumah_sakit`, `nama_rumah_sakit`, `alamat_rumah_sakit`, `deskripsi_rumah_sakit`, `status`) VALUES
-(1, 'Sentosa', 'Subang, Ciereng', 'Rumah Sakit Umum', NULL),
-(2, 'Hospital', 'subangg', 'Rumah sakit terdekat dari kabupaten Cibogo', NULL),
-(3, 'RSUD Ciereng', 'Ciereng, Subang, Jawa Barat', 'Rumah Sakit Umum Buka 24 jam', NULL),
-(4, 'Oliva Tania Utami M.M.', 'Ds. Banal No. 812, Payakumbuh 34663, Sulsel', 'Prabumulih', NULL),
-(5, 'Kayun Prasasta', 'Gg. BKR No. 261, Probolinggo 16931, Sumut', 'Pangkal Pinang', NULL),
-(6, 'Margana Pangestu', 'Gg. Babah No. 269, Depok 40465, DKI', 'Tomohon', NULL),
-(7, 'Hesti Palastri', 'Ds. Sutami No. 252, Tidore Kepulauan 33308, Aceh', 'Kendari', NULL),
-(8, 'Bancar Simanjuntak', 'Kpg. Warga No. 341, Pematangsiantar 89115, Pabar', 'Tual', NULL),
-(9, 'Aditya Suryono M.Ak', 'Psr. Gatot Subroto No. 861, Yogyakarta 59152, Jatim', 'Depok', 'Cancle'),
-(10, 'Cinthia Nuraini M.M.', 'Jr. Baabur Royan No. 362, Bengkulu 40167, NTT', 'Tebing Tinggi', 'Cancle'),
-(11, 'Dalimin Budiman', 'Dk. Tambun No. 331, Tebing Tinggi 41492, Malut', 'Pekalongan', NULL),
-(12, 'Emil Megantara S.IP', 'Ki. Bakti No. 80, Parepare 63114, Gorontalo', 'Cilegon', 'Cancle'),
-(13, 'Zahra Suartini', 'Ki. Tubagus Ismail No. 810, Padang 42003, Papua', 'Subulussalam', NULL);
+INSERT INTO `rumah_sakit` (`id_rumah_sakit`, `nama_rumah_sakit`, `alamat_rumah_sakit`, `deskripsi_rumah_sakit`, `tgl_mulai_kerjasama`, `tgl_akhir_kerjasama`, `status`) VALUES
+(1, 'RSU Mamami', 'alan R. W. Monginsidi I No. 3, Pasir Panjang, Kec. Kota Lama, Kota Kupang, Nusa Tenggara Tim. 85228', 'Fasilitas Rumah Sakit Umum Mamami Kupang:\r\n\r\n1. INSTALASI GAWAT DARURAT (IGD)\r\n2. INSTALASI FARMASI\r\n3. LABORATORIUM\r\n4. Ruang Operasi\r\n5. Ruang VK\r\n6. Poliklinik Anak\r\n7. Poliklinik Obgyn\r\n8. Poliklinik Penyakit Dalam\r\n9. Poliklinik Bedah\r\n10. Ruang Pera', '2023-07-17', '2023-07-18', 'Cancle'),
+(2, 'RSUD A.M. Parikesit', 'Jalan Ratu Agung No. 1, Tenggarong Seberang 75572, Kutai Kartanegara Kalimantan Timur', 'Rumah sakit terdekat dari kabupaten Cibogo', '2023-07-18', '2023-07-20', NULL),
+(3, 'JHC Tasikmalaya', 'Kecamatan Cipedes, Tasikmalaya, Jawa Barat', 'Rumah Sakit Jantung dan Pembuluh Darah', NULL, NULL, NULL),
+(4, 'RS Samboja', 'Jl, Seluang River, Samboja, Kutai Kartanegara Regency, East Kalimantan 75274', 'Terdapat layanan unggulan yaitu Hemodialisis, CT Scan', NULL, NULL, NULL),
+(5, 'Kayun Prasasta', 'Gg. BKR No. 261, Probolinggo 16931, Sumut', 'Pangkal Pinang', NULL, NULL, NULL),
+(6, 'Kardia Eye Center', 'Jl. Matraman Raya No.61A, RW.4, Palmeriam, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13140', 'Rumah Sakit sebagai sebuah perusahaan yang bergerak di bidang kesehatan dengan spesialisasi jantung dan pembuluh darah serta penyakit kronis lainnya', NULL, NULL, NULL),
+(7, 'RS Harapan Jayakarta ', 'Blok KM No.18, Jl. Raya Bekasi No.7, RW.11, Jatinegara, Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13930', 'Rumah Sakit Poliklinik Paru dan Poliklinik Saraf\r\n', '2023-07-17', '2023-07-17', NULL),
+(8, 'RS Universitas Indonesia ', 'Jl. Prof. DR. Bahder Djohan, Pondok Cina, Kecamatan Beji, Kota Depok, Jawa Barat 16424', 'Rumah Sakit Universitas Indonesia atau disingkat RS UI adalah rumah sakit universitas tipe B yang terletak area Universitas Indonesia. RS UI yang dibangun sejak tahun 2009 dan direncanakan beroperasi pada Oktober 2016 memiliki pelayanan unggulan di bidang', NULL, NULL, NULL),
+(9, 'Rumah Sakit Husada', 'Jl. Raya Mangga Besar No.137-139, Mangga Dua Sel., Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10730', 'Rumah Sakit Husada, dahulu Jang Seng Ie, adalah sebuah rumah sakit umum di Jakarta Pusat, Indonesia. Didirikan sebagai poliklinik oleh Dr. Kwa Tjoan Sioe pada tahun 1924, dan diresmikan penggunaannya pada tahun berikutnya.', NULL, NULL, NULL),
+(10, 'RSIA Tambah', 'Jl. Tambak No.18, Pegangsaan, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10320', 'RSIA Tambak adalah Rumah Sakit Terbaik untuk Ibu dan Anak yang berada di Jakarta Pusat. Yang menerapkan program IMD.', NULL, NULL, NULL),
+(11, 'DRI CLINIC', 'Jl. Terogong Raya No.52 E, RT.9/RW.10, Cilandak Bar., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12430', 'Klinik Spesialis\r\n', NULL, NULL, NULL),
+(12, 'Klinik Sakti Medika', 'Jl. Tebet Barat I No.5, RT.1/RW.2, Tebet Bar., Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12810 ', 'Klinik Sakti Medika pertama kali didirikan pada tanggal 18 Desember 1996 sebagai Praktek Dokter Bersama Spesialis (PDBS)', NULL, NULL, NULL),
+(13, 'RSIA Tumbuh Kembang', 'Jl. Raya Bogor No.Km.31, Tugu, Kec. Cimanggis, Kabupaten Bogor, Jawa Barat 16951', 'RSIA Tumbuh Kembang adalah sebuah rumah sakit swasta yang berada di Kota Depok, Jawa Barat. Didirikan pada tanggal 13 Juni 2011 atas prakarsa PT. Endraz Medica. RSIA Tumbuh Kembang dibangun atas prakarsa PT. Endraz Medica. ', NULL, NULL, NULL),
+(18, 'RSUD M Yunus', 'Jl. Bhayangkara, Sido Mulyo, Kec. Gading Cemp., Kota Bengkulu, Bengkulu 38211', 'Rumah Sakit Dr. M.Yunus Bengkulu sebagai rumah sakit rujukan tertinggi di propinsi Bengkulu, telah melaksanakan berbagai upaya yang ditujukan guna membantu penyembuhan pasien yang datang berobat ke rumah sakit. Upaya tersebut meliputi promotif, preventif,', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -171,14 +170,10 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `email`, `password`, `nilai_leader`, `nilai_hrd`, `role`, `foto`, `send_email`, `status`) VALUES
 (1, 'Alexander', 'Laki-laki', 'leader@gmail.com', '123', NULL, NULL, 'Leader', NULL, NULL, NULL),
 (16, 'Putri', 'Perempuan', 'hrd@gmail.com', '123', NULL, NULL, 'HRD', NULL, NULL, NULL),
-(22, 'coba karyawan', 'Laki-laki', 'karyawancoba@gmail.com', '123', 6, 6, 'Karyawan', NULL, 1, 'Implementor'),
-(23, 'karyawan dua', 'Perempuan', 'karyawandua@gmail.com', '123', 7, 7, 'Karyawan', NULL, 1, 'Implementor'),
-(24, 'Antono', 'Laki-laki', 'antono@gmail.com', '123', 6, 5, 'Karyawan', NULL, 1, 'Implementor'),
-(25, 'Sumanto', 'Laki-laki', 'sumanto@gmail.com', '123', 7, 8, 'Karyawan', NULL, 1, 'Implementor'),
-(26, 'karyawan coba', 'Laki-laki', 'karyawancontoh@gmail.com', '123', 6, 6, 'Karyawan', NULL, NULL, 'Diterima'),
-(27, 'Putri', 'Perempuan', 'putri@gmail.com', '123', 3, 7, 'Karyawan', NULL, 1, 'Diterima'),
-(29, 'cobaaaa', 'Laki-laki', 'coba@gmail.com', '123', 3, 3, 'Karyawan', NULL, 1, 'Tidak Diterima'),
-(30, 'coba tidak diterima', 'Laki-laki', 'dfd@gmail.com', '123', 3, 3, 'Karyawan', NULL, 1, 'Tidak Diterima');
+(31, 'Putray', 'Perempuan', 'putray@gmail.com', '123', 9, 7, 'Karyawan', NULL, 1, 'Implementor'),
+(32, 'Fitriani', 'Perempuan', 'fitri@gmail.com', '123', 5, 6, 'Karyawan', NULL, 1, 'Implementor'),
+(33, 'Afdal Budiman', 'Perempuan', 'alfdal@gmail.com', '123', 6, 8, 'Karyawan', NULL, 1, 'Implementor'),
+(34, 'Rifki Mawardi', 'Perempuan', 'rifki@gmail.com', '123', 9, 6, 'Karyawan', NULL, 1, 'Implementor');
 
 --
 -- Indexes for dumped tables
@@ -233,37 +228,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `implementor`
 --
 ALTER TABLE `implementor`
-  MODIFY `id_implementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_implementor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `pekerjaan`
 --
 ALTER TABLE `pekerjaan`
-  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `rumah_sakit`
 --
 ALTER TABLE `rumah_sakit`
-  MODIFY `id_rumah_sakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_rumah_sakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
