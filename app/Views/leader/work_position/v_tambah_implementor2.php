@@ -38,14 +38,16 @@
 
                         <div class="col-12">
                             <label for="implementor" class="form-label">Implementor 2</label>
-                            <select name="id_user2" id="impelementor" class="form-select" aria-label="Default select example" required>
+                            <select name="id_user2" id="impelementor" class="form-select" aria-label="Default select example" required onchange="getEmail()">
                                 <option value="" selected>~ Choose ~</option>
                                 <?php foreach ($karyawan as $row) {
                                     if (date('Y-m-d') >= $row['tanggal_selesai'] || $row['status'] == null || $row['status_rumah_sakit'] == 'Cancle') {
                                         if ($row['id_user'] != $data_input['id_user']) {
+                                            if ($row['send_email'] == '1') {
                                 ?>
-                                            <option value="<?= $row['id_user'] ?>"><?= $row['nama_user'] ?></option>
+                                                <option value="<?= $row['id_user'] ?>"><?= $row['nama_user'] ?></option>
                                 <?php }
+                                        }
                                     }
                                 } ?>
                             </select>
@@ -102,3 +104,20 @@
     </section>
 
 </main><!-- End #main -->
+
+<script>
+    function getEmail() {
+        var id_user = $('#impelementor').val();
+        if (id_user != '') {
+            $.ajax({
+                url: "<?= base_url('m_work_position/getEmail/') ?>" + id_user,
+                success: function(result) {
+                    $("#email").val(result);
+                    // alert(result)
+                }
+            });
+        } else {
+            $("#email").val("");
+        }
+    }
+</script>

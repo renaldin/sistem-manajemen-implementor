@@ -51,11 +51,21 @@ class Login extends BaseController
 
             // cek user
             $cekEmail = $this->ModelUser->where('email', $email)->get()->getRowArray();
+
+
             // var_dump($cekEmail[0]['password']);
             if ($cekEmail) {
                 // jika username benar, cek password
                 // $cekPassword = $this->ModelUser->where('password', $password)->find();
                 if ($cekEmail['password'] == $password) {
+
+                    if ($cekEmail['role'] == 'Karyawan') {
+                        if ($cekEmail['status'] == null || $cekEmail['status'] == 'Tidak Diterima') {
+                            session()->setFlashdata('pesan', "Akun anda belum Diterima atau belum menjadi Implementor!.");
+                            return redirect()->back()->withInput();
+                        }
+                    }
+
                     session()->set('log', true);
                     session()->set('id', $cekEmail['id_user']);
                     session()->set('nama', $cekEmail['nama_user']);

@@ -45,6 +45,8 @@ $routes->post('/m_employe_assesment/(:num)', 'Leader::nilai_employe/$1');
 $routes->delete('/m_employe_assesment/(:num)', 'Leader::delete_employe/$1');
 $routes->get('/m_employe_assesment/hasil/(:num)', 'Leader::hasil/$1');
 $routes->post('/m_employe_assesment/kirim_email', 'Leader::kirim_email');
+$routes->post('/m_employe_assesment/konfirmasi_employe', 'Leader::konfirmasi_employe');
+$routes->get('/m_employe_assesment/history_employe', 'Leader::history_employe');
 
 $routes->get('/m_work_position', 'Leader::m_work_position');
 $routes->get('/m_work_position/(:num)', 'Leader::tambah_implementor_rs/$1');
@@ -56,11 +58,13 @@ $routes->post('/m_work_position/simpan_implementor/(:num)', 'Leader::simpan_impl
 $routes->get('/m_work_position/cancle_rumah_sakit/(:num)', 'Leader::cancle_rumah_sakit/$1');
 $routes->get('/m_work_position/riwayat_rumah_sakit', 'Leader::riwayat_rumah_sakit');
 $routes->get('/m_work_position/uncancle_rumah_sakit/(:num)', 'Leader::uncancle_rumah_sakit/$1');
+$routes->get('/m_work_position/getEmail/(:num)', 'Leader::getEmail/$1');
 
 $routes->get('/m_live_location', 'Leader::m_live_location');
 $routes->get('/m_live_location/(:num)', 'Leader::detail_absen/$1');
 $routes->get('/m_live_location/selesai/(:num)', 'Leader::selesaiAbsen/$1');
 $routes->get('/m_live_location/riwayat_live_location', 'Leader::riwayat_live_location');
+$routes->post('/m_live_location/finish_absen', 'Leader::finish_absen');
 
 $routes->get('/m_task_management', 'Leader::m_task_management');
 $routes->get('/m_task_management/getRS/(:num)', 'Leader::get_RS_ajax/$1');
@@ -69,12 +73,14 @@ $routes->get('/m_task_management/(:num)/(:any)', 'Leader::detail/$1/$2');
 $routes->post('/m_task_management/edit', 'Leader::ubah_batas_tgl_pekerjaan');
 $routes->get('/m_task_management/selesai/(:num)', 'Leader::selesai_task/$1');
 $routes->get('/m_task_management/riwayat_task', 'Leader::riwayat_task');
+$routes->post('/m_task_management/finish_task', 'Leader::finish_task');
 
 // Route Karyawan
 $routes->get('/liveLocation', 'Karyawan::live_location');
-$routes->get('/liveLocation/(:any)', 'Karyawan::absen/$1');
+$routes->get('/liveLocation/(:alpha)', 'Karyawan::absen/$1');
 $routes->post('/liveLocation/insert_hadir/', 'Karyawan::insert_hadir');
 $routes->post('/liveLocation/insert_tidakhadir/', 'Karyawan::insert_tidakhadir');
+$routes->get('/liveLocation/history_liveLocation', 'Karyawan::history_liveLocation');
 
 $routes->get('/task_management', 'Karyawan::task_management');
 $routes->get('/task_management/(:num)', 'Karyawan::detail_task_management/$1');
@@ -86,6 +92,8 @@ $routes->get('/hrd/(:num)', 'HRD::input_nilai/$1');
 $routes->post('/hrd/save_nilai', 'HRD::save_nilai');
 $routes->get('/hrd/detail/(:num)', 'HRD::detail/$1');
 $routes->get('/hrd/riwayat_employee', 'HRD::riwayat_employee');
+$routes->get('/hrd/approve/(:num)', 'HRD::approve/$1');
+$routes->post('/hrd/edit_nilai/(:num)', 'HRD::edit_nilai/$1');
 
 // Route Profile
 $routes->get('/profile', 'Profile::index');

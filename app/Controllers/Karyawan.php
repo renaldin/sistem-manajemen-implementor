@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ModelAbsen;
 use App\Models\ModelImplementor;
 use App\Models\ModelKaryawan;
 use App\Models\ModelPekerjaan;
@@ -11,7 +12,7 @@ use App\Models\ModelUser;
 class Karyawan extends BaseController
 {
 
-    private $ModelKaryawan, $ModelPekerjaan, $ModelImplementor, $ModelUser;
+    private $ModelKaryawan, $ModelPekerjaan, $ModelImplementor, $ModelUser, $ModelAbsen;
 
     public function __construct()
     {
@@ -19,6 +20,7 @@ class Karyawan extends BaseController
         $this->ModelPekerjaan = new ModelPekerjaan();
         $this->ModelImplementor = new ModelImplementor();
         $this->ModelUser = new ModelUser();
+        $this->ModelAbsen = new ModelAbsen();
     }
 
     public function live_location()
@@ -33,6 +35,15 @@ class Karyawan extends BaseController
             'user'      => $this->ModelUser->find(session()->get('id')),
             'waktu'     => $jam,
             'absen'     => $this->ModelKaryawan->cekAbsen(session()->get('id'), date('Y-m-d')),
+            'pekerjaan' => $this->ModelPekerjaan
+                // ->select([''])
+                ->join('implementor', 'implementor.id_implementor = pekerjaan.id_implementor', 'left')
+                // ->join('user', 'user.id_user = implementor.id_user', 'left')
+                ->where([
+                    'implementor.id_user' => session()->get('id'),
+                    'pekerjaan.status_pekerjaan' => 'On Progress'
+                ])
+                ->findAll(),
             'isi'       => 'karyawan/v_liveLocation'
         ];
 
@@ -214,5 +225,16 @@ class Karyawan extends BaseController
             session()->setFlashdata('errors', \config\Services::validation()->getErrors());
             return redirect()->back()->withInput();
         }
+    }
+
+    public function history_liveLocation()
+    {
+        $data = [
+            'title'     => 'History Live Location',
+            'user'      => $this->ModelUser->find(session()->get('id')),
+            'data'      => $this->ModelAbsen->where('id_user', session()->get('id'))->findAll(),
+            'isi'       => 'karyawan/v_history_livelocation'
+        ];
+        return view('layout/v_wrapper_admin', $data);
     }
 }

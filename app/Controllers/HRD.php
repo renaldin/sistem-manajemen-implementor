@@ -30,7 +30,7 @@ class HRD extends BaseController
         $data = [
             'title' => 'Manage Employee Assesment',
             'user'  => $this->ModelUser->find(session()->get('id')),
-            'data'  => $this->ModelLeader->getAll(),
+            'data'  => $this->ModelLeader->getAllForHRD(),
             'isi'   => 'hrd/v_index'
         ];
 
@@ -128,5 +128,23 @@ class HRD extends BaseController
         ];
 
         return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function approve($id_user)
+    {
+        $this->ModelUser->update($id_user, ['approve_hrd' => 'Approve']);
+        session()->setFlashdata('pesan', "Berhasil Melakukan Approve Penilaian!.");
+        return redirect()->to(base_url('hrd'));
+    }
+
+    public function edit_nilai($id_user)
+    {
+        $id_nilai = $this->ModelNilai->where('id_user', $id_user)->first();
+        $this->ModelNilai->update($id_nilai['id_nilai'], $this->request->getPost());
+        // update nilai hrd di tbl user
+        $total_nilai = $this->request->getPost('hrd_public_speaking') + $this->request->getPost('hrd_tanya_jawab') + $this->request->getPost('hrd_soal');
+        $this->ModelUser->update($id_user, ['nilai_hrd' => $total_nilai]);
+        session()->setFlashdata('pesan', "Berhasil Melakukan Update Penilaian!.");
+        return redirect()->to(base_url('hrd'));
     }
 }

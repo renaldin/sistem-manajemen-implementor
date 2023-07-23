@@ -35,27 +35,27 @@
                             <label for="public_speaking" class="form-label">Value Public Speaking</label>
                             <select name="public_speaking" id="public_speaking" class="form-select">
                                 <option value="">~ Choose ~</option>
-                                <option value="1">Less</option>
-                                <option value="2">Satisfactory</option>
-                                <option value="3">Good</option>
+                                <option value="1">Less (1)</option>
+                                <option value="2">Satisfactory (2)</option>
+                                <option value="3">Good (3)</option>
                             </select>
                         </div>
                         <div class="col-12">
                             <label for="tanya_jawab" class="form-label">Value Debriefing</label>
                             <select name="tanya_jawab" id="tanya_jawab" class="form-select">
                                 <option value="">~ Choose ~</option>
-                                <option value="1">Less</option>
-                                <option value="2">Satisfactory</option>
-                                <option value="3">Good</option>
+                                <option value="1">Less (1)</option>
+                                <option value="2">Satisfactory (2)</option>
+                                <option value="3">Good (3)</option>
                             </select>
                         </div>
                         <div class="col-12">
                             <label for="soal" class="form-label">Value Question</label>
                             <select name="soal" id="soal" class="form-select">
                                 <option value="">~ Choose ~</option>
-                                <option value="1">Less</option>
-                                <option value="2">Satisfactory</option>
-                                <option value="3">Good</option>
+                                <option value="1">Less (1)</option>
+                                <option value="2">Satisfactory (2)</option>
+                                <option value="3">Good (3)</option>
                             </select>
                         </div>
                         <div class="d-flex justify-content-between">

@@ -95,10 +95,22 @@
 
         <?php if (session()->get('role') == 'Karyawan') { ?>
             <li class="nav-item active ">
-                <a class="nav-link <?= ($title == 'Live Location') ? 'active' : 'collapsed' ?>" href="<?= base_url('liveLocation') ?>">
+                <a class="nav-link <?= ($title == 'Live Location') ? 'active' : 'collapsed' ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-camera"></i>
-                    <span>Live Location</span>
+                    <span>Live Location</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="icons-nav" class="nav-content collapse <?= ($title == 'Live Location' || $title == 'History Live Location') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class="<?= ($title == 'Live Location') ? 'active' : '' ?>" href="<?= base_url('liveLocation') ?>">
+                            <i class="bi bi-circle"></i><span>Live Location</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= ($title == 'History Live Location') ? 'active' : '' ?>" href="<?= base_url('liveLocation/history_liveLocation') ?>">
+                            <i class="bi bi-circle"></i><span>History Live Location</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link <?= ($title == 'Task Management' || $title == 'Detail Task Management') ? 'active' : 'collapsed' ?>" href="<?= base_url('task_management') ?>">
@@ -135,10 +147,22 @@
 
         <?php if (session()->get('role') == 'Leader') { ?>
             <li class="nav-item">
-                <a class="nav-link <?= ($title == 'Manage Employe Assesment') ? 'active' : 'collapsed' ?>" href="<?= base_url('m_employe_assesment') ?>">
+                <a class="nav-link <?= ($title == 'Manage Employe Assesment' || $title == 'Input Employe Values' || $title == 'Hasil Employe Assesment' || $title == 'History Employee') ? 'active' : 'collapsed' ?>" data-bs-target="#nav-m" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-clipboard2-check"></i>
-                    <span>Manage Employe Assessment</span>
+                    <span>Manage Employee Assessment</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="nav-m" class="nav-content collapse <?= ($title == 'Manage Employe Assesment' || $title == 'Input Employe Values' || $title == 'Hasil Employe Assesment' || $title == 'History Employee') ? 'show active' : '' ?>" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class="<?= ($title == 'Manage Employe Assesment' || $title == 'Input Employe Values' || $title == 'Hasil Employe Assesment') ? 'active' : '' ?>" href="<?= base_url('m_employe_assesment') ?>">
+                            <i class="bi bi-circle"></i><span>Manage Employee</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= ($title == 'History Employee') ? 'active' : '' ?>" href="<?= base_url('m_employe_assesment/history_employe') ?>">
+                            <i class="bi bi-circle"></i><span>History Employee</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <!-- End Profile Page Nav -->
 

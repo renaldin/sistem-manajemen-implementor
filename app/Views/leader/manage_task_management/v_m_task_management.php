@@ -53,7 +53,7 @@
                                     foreach ($data as $row) {
                                     ?>
                                         <tr>
-                                            <td><?= $no++; ?></td>
+                                            <td><input type="checkbox" class="me-1" id="cek-<?= $row['id_pekerjaan'] ?>" onclick="addInput(<?= $row['id_pekerjaan'] ?>)"><?= $no++; ?></td>
                                             <td><?= $row['nama_user'] ?></td>
                                             <td><?= $row['batas_tgl_pekerjaan'] ?></td>
                                             <td>
@@ -79,6 +79,11 @@
                                     <?php } ?>
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-end">
+                                <form action="<?= base_url('m_task_management/finish_task') ?>" method="post" id="finish" class="p-3">
+                                    <button type="submit" class="btn btn-warning btn-sm">All Finished</button>
+                                </form>
+                            </div>
                         </div>
                         <!-- End Table with stripped rows -->
 
@@ -106,9 +111,12 @@
                     <label for="nama_implementor" class="form-label">Implementor Name</label>
                     <select name="nama_implementor" id="nama_implementor" class="form-select" onchange="getRS()">
                         <option value="">~ Pilih ~</option>
-                        <?php foreach ($implementor as $row) { ?>
-                            <option value="<?= $row['id_implementor'] ?>"><?= $row['nama_user'] ?></option>
-                        <?php } ?>
+                        <?php foreach ($implementor as $row) {
+                            if (date('Y-m-d') >= $row['tanggal_mulai'] && date('Y-m-d') <= $row['tanggal_selesai']) {
+                        ?>
+                                <option value="<?= $row['id_implementor'] ?>"><?= $row['nama_user'] ?></option>
+                        <?php }
+                        } ?>
                     </select>
                 </div>
                 <div class="col-12">
@@ -167,6 +175,15 @@
             });
         } else {
             $("#rumah_sakit").val("");
+        }
+    }
+</script>
+<script>
+    function addInput(id_pekerjaan) {
+        if ($('#cek-' + id_pekerjaan).prop("checked")) {
+            $('#finish').append('<input type="hidden" value="' + id_pekerjaan + '" name="' + id_pekerjaan + '" id="' + id_pekerjaan + '">')
+        } else {
+            $('#' + id_pekerjaan).remove();
         }
     }
 </script>

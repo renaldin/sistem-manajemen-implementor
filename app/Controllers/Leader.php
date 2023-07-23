@@ -139,7 +139,7 @@ class Leader extends BaseController
             'id_user' => $id,
             'status' => $hasil
         ];
-        $this->ModelLeader->updateStatusEmploye($status);
+        // $this->ModelLeader->updateStatusEmploye($status);
 
         // get email employe
         $getEmploye = $this->ModelLeader->getEmployeById($id);
@@ -157,47 +157,225 @@ class Leader extends BaseController
         return view('layout/v_wrapper_admin', $data);
     }
 
+    public function konfirmasi_employe()
+    {
+        $employe = $this->ModelUser->find($this->request->getPost('id_user'));
+        if ($employe['approve_hrd'] == null) {
+            session()->setFlashdata('info', "HRD Belum melakukan Approve Penilaian!.");
+            return redirect()->back();
+        }
+        $this->ModelLeader->updateStatusEmploye(['id_user' => $this->request->getPost('id_user'), 'status' => $this->request->getPost('hasil')]);
+        session()->setFlashdata('pesan', "Konfirmasi Berhasil!.");
+        return redirect()->to(base_url('m_employe_assesment'));
+    }
+
     public function insert_employe()
     {
-        $validasi = [
-            'nama_user' => [
-                'label' => 'Nama',
-                'rules' => 'required|alpha_space',
-                'errors' => [
-                    'required'      => '{field} Wajib Diisi.',
-                    'alpha_space'   => '{field} Tidak Boleh Mengandung Angka.',
+        $cek_email_sama = $this->ModelUser->where('email', $this->request->getPost('email'))->first();
+        $duplikat_email = 'Gaboleh';
+        if ($cek_email_sama) {
+            if ($cek_email_sama['status'] == 'Tidak Diterima') {
+                $duplikat_email = 'Boleh';
+            }
+        }
+
+        // var_dump($duplikat_email);
+        // die();
+
+        if ($duplikat_email == 'Boleh') {
+            $validasi = [
+                'nama_user' => [
+                    'label' => 'Nama',
+                    'rules' => 'required|alpha_space',
+                    'errors' => [
+                        'required'      => '{field} Wajib Diisi.',
+                        'alpha_space'   => '{field} Tidak Boleh Mengandung Angka.',
+                    ],
                 ],
-            ],
-            'jenis_kelamin' => [
-                'label' => 'Jenis Kelamin',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} wajib diisi.'
+                'jenis_kelamin' => [
+                    'label' => 'Jenis Kelamin',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
                 ],
-            ],
-            'email' => [
-                'label' => 'Email',
-                'rules' => 'required|is_unique[user.email]',
-                'errors' => [
-                    'required' => '{field} wajib diisi.',
-                    'is_unique' => '{field} sudah terpakai. Silahkan gunakan yang lain!.'
+                'tempat_lahir' => [
+                    'label' => 'Tempat Lahir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
                 ],
-            ],
-            'password' => [
-                'label' => 'Password',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} wajib diisi.'
+                'tgl_lahir' => [
+                    'label' => 'Tanggal Lahir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
                 ],
-            ],
-        ];
+                'agama' => [
+                    'label' => 'Agama',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'no_telp' => [
+                    'label' => 'Nomor Telepon',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'pendidikan_terakhir' => [
+                    'label' => 'Pendidikan Terakhir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'pengalaman_kerja' => [
+                    'label' => 'Pengalaman Kerja',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'skill' => [
+                    'label' => 'Skill',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'alamat' => [
+                    'label' => 'Alamat',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.',
+                        'is_unique' => '{field} sudah terpakai. Silahkan gunakan yang lain!.'
+                    ],
+                ],
+                'password' => [
+                    'label' => 'Password',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+            ];
+        } else {
+            $validasi = [
+                'nama_user' => [
+                    'label' => 'Nama',
+                    'rules' => 'required|alpha_space',
+                    'errors' => [
+                        'required'      => '{field} Wajib Diisi.',
+                        'alpha_space'   => '{field} Tidak Boleh Mengandung Angka.',
+                    ],
+                ],
+                'jenis_kelamin' => [
+                    'label' => 'Jenis Kelamin',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'tempat_lahir' => [
+                    'label' => 'Tempat Lahir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'tgl_lahir' => [
+                    'label' => 'Tanggal Lahir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'agama' => [
+                    'label' => 'Agama',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'no_telp' => [
+                    'label' => 'Nomor Telepon',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'pendidikan_terakhir' => [
+                    'label' => 'Pendidikan Terakhir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'pengalaman_kerja' => [
+                    'label' => 'Pengalaman Kerja',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'skill' => [
+                    'label' => 'Skill',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'alamat' => [
+                    'label' => 'Alamat',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'rules' => 'required|is_unique[user.email]',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.',
+                        'is_unique' => '{field} sudah terpakai. Silahkan gunakan yang lain!.'
+                    ],
+                ],
+                'password' => [
+                    'label' => 'Password',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} wajib diisi.'
+                    ],
+                ],
+            ];
+        }
         if ($this->validate($validasi)) {
             $data = [
-                'nama_user' => $this->request->getPost('nama_user'),
-                'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
-                'email' => $this->request->getPost('email'),
-                'password' => $this->request->getPost('password'),
-                'role' => 'Karyawan',
+                'nama_user'             => $this->request->getPost('nama_user'),
+                'jenis_kelamin'         => $this->request->getPost('jenis_kelamin'),
+                'email'                 => $this->request->getPost('email'),
+                'password'              => $this->request->getPost('password'),
+                'role'                  => 'Karyawan',
+                'alamat'                => $this->request->getPost('alamat'),
+                'tempat_lahir'          => $this->request->getPost('tempat_lahir'),
+                'tgl_lahir'             => $this->request->getPost('tgl_lahir'),
+                'agama'                 => $this->request->getPost('agama'),
+                'no_telp'               => $this->request->getPost('no_telp'),
+                'pendidikan_terakhir'   => $this->request->getPost('pendidikan_terakhir'),
+                'pengalaman_kerja'      => $this->request->getPost('pengalaman_kerja'),
+                'skill'                 => $this->request->getPost('skill'),
             ];
             $this->ModelLeader->db->table('user')->insert($data);
             $data_terakhir = $this->ModelUser->orderBy('id_user', 'DESC')->first();
@@ -252,6 +430,18 @@ class Leader extends BaseController
         $this->ModelUser->delete($id);
         session()->setFlashdata('pesan', "Employe Berhasil Dihapus!.");
         return redirect()->to(base_url('m_employe_assesment'));
+    }
+
+    public function history_employe()
+    {
+        $data = [
+            'title' => 'History Employee',
+            'user'  => $this->ModelUser->find(session()->get('id')),
+            'data'  => $this->ModelLeader->getAll(),
+            'isi'   => 'leader/manage_employe/v_riwayat_employe'
+        ];
+
+        return view('layout/v_wrapper_admin', $data);
     }
 
     // menu manage work position
@@ -637,6 +827,12 @@ class Leader extends BaseController
         return redirect()->to(base_url('m_work_position/riwayat_rumah_sakit'));
     }
 
+    public function getEmail($id_user)
+    {
+        $user = $this->ModelUser->find($id_user);
+        echo $user['email'];
+    }
+
     // menu manage live location
 
     public function m_live_location()
@@ -704,6 +900,23 @@ class Leader extends BaseController
             'isi'   => 'leader/manage_live_location/v_riwayat'
         ];
         return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function finish_absen()
+    {
+        // var_dump($this->request->getPost());
+        // die();
+        if (!$this->request->getPost()) {
+            session()->setFlashdata('info', "Mohon Centang Pada Checkbox Implementor!.");
+            return redirect()->to(base_url('m_live_location'));
+        }
+
+        foreach ($this->request->getPost() as $row) {
+            $dt_absen = $this->ModelAbsen->where('id_user', $row)->first();
+            $this->ModelAbsen->update($dt_absen['id_absen'], ['status' => 'Selesai']);
+        }
+        session()->setFlashdata('pesan', "Berhasil Menyelesaikan Absensi!.");
+        return redirect()->to(base_url('m_live_location'));
     }
 
     // menu manage task management
@@ -842,5 +1055,19 @@ class Leader extends BaseController
             'isi'   => 'leader/manage_task_management/v_riwayat'
         ];
         return view('layout/v_wrapper_admin', $data);
+    }
+
+    public function finish_task()
+    {
+        if (!$this->request->getPost()) {
+            session()->setFlashdata('info', "Mohon Centang Pada Checkbox Implementor!.");
+            return redirect()->to(base_url('m_task_management'));
+        }
+
+        foreach ($this->request->getPost() as $row) {
+            $this->ModelPekerjaan->update($row, ['status_pekerjaan' => 'Done']);
+        }
+        session()->setFlashdata('pesan', "Berhasil Menyelesaikan Pekerjaan!.");
+        return redirect()->to(base_url('m_task_management'));
     }
 }

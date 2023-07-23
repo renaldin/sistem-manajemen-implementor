@@ -48,17 +48,19 @@
                                     <?php
                                     $no = 1;
                                     foreach ($data as $row) {
+                                        if ($row['status'] == 'Implementor' || $row['status'] == 'Tidak Diterima') {
                                     ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $row['nama_user'] ?></td>
-                                            <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
-                                            <td><?= $row['email'] ?></td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm bg-green" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                <td><?= $row['nama_user'] ?></td>
+                                                <td><?= $row['jenis_kelamin'] == 'Laki-laki' ? 'Male' : 'Female' ?></td>
+                                                <td><?= $row['email'] ?></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm bg-green" data-bs-toggle="modal" data-bs-target="#detail-<?= $row['id_user'] ?>">Detail</button>
+                                                </td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
                                 </tbody>
                             </table>
                         </div>

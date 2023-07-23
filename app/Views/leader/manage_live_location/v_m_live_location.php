@@ -51,7 +51,7 @@
                                     foreach ($data as $row) {
                                     ?>
                                         <tr>
-                                            <td><?= $no++; ?></td>
+                                            <td><input type="checkbox" class="me-1" id="cek-<?= $row['id_user'] ?>" onclick="addInput(<?= $row['id_user'] ?>)"><?= $no++; ?></td>
                                             <td><?= $row['nama_user'] ?></td>
                                             <td><?= $row['tgl_absen'] ?></td>
                                             <td><?= $row['keterangan'] == null ? 'Attend' : 'Not Attend' ?></td>
@@ -62,7 +62,14 @@
                                         </tr>
                                     <?php } ?>
                                 </tbody>
+                                <!-- <tfoot>
+                                    </tfoot> -->
                             </table>
+                            <div class="d-flex justify-content-end">
+                                <form action="<?= base_url('m_live_location/finish_absen') ?>" method="post" id="finish" class="p-3">
+                                    <button type="submit" class="btn btn-warning btn-sm">All Finished</button>
+                                </form>
+                            </div>
 
                         </div>
                         <!-- End Table with stripped rows -->
@@ -94,3 +101,13 @@
         </div>
     </div>
 <?php } ?>
+
+<script>
+    function addInput(id_user) {
+        if ($('#cek-' + id_user).prop("checked")) {
+            $('#finish').append('<input type="hidden" value="' + id_user + '" name="' + id_user + '" id="' + id_user + '">')
+        } else {
+            $('#' + id_user).remove();
+        }
+    }
+</script>

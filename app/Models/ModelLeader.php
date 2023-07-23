@@ -18,6 +18,31 @@ class ModelLeader extends Model
             ->get()->getResultArray();
     }
 
+    public function getAllHistory()
+    {
+        return $this->db->table('user')
+            ->join('nilai', 'nilai.id_user = user.id_user')
+            ->where([
+                'role' => 'Karyawan',
+                // 'status' => null
+            ])
+            ->orderBy('user.id_user', 'DESC')
+            ->get()->getResultArray();
+    }
+
+    public function getAllForHRD()
+    {
+        return $this->db->table('user')
+            ->join('nilai', 'nilai.id_user = user.id_user')
+            ->where([
+                'role' => 'Karyawan',
+                'nilai_leader !='  => null,
+                // 'status' => null
+            ])
+            ->orderBy('user.id_user', 'DESC')
+            ->get()->getResultArray();
+    }
+
     public function countRumahSakit()
     {
         return $this->db->table('rumah_sakit')->where('status', null)->countAllResults();
@@ -127,7 +152,7 @@ class ModelLeader extends Model
     public function getImplementor()
     {
         return $this->db->table('implementor')
-            ->select(['implementor.id_implementor', 'user.nama_user', 'rumah_sakit.status'])
+            ->select(['implementor.id_implementor', 'implementor.tanggal_mulai', 'implementor.tanggal_selesai', 'user.nama_user', 'rumah_sakit.status'])
             ->join('user', 'user.id_user = implementor.id_user')
             ->join('rumah_sakit', 'rumah_sakit.id_rumah_sakit = implementor.id_rumah_sakit')
             ->where([
